@@ -1,0 +1,221 @@
+{
+ "file": "9. CAPACITY DESIGNS/BUMP & SORT/MAX_CAPACITY_CONSTRAINT_PDH_COMMON.xlsx",
+ "sheets": [
+  "RES_CAPACITY_LOC_CORE"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "RES_CAPACITY_LOC_CORE": {
+   "blocks": [
+    {
+     "row": 144,
+     "text": "Fetch all the data from the Excel file uploaded by the planner.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_CAPACITY_LOCATION_METRIC_ROOT_UI",
+     "target_label": "Source Table",
+     "context": [],
+     "statements": [
+      "Fetch all the data from the Excel file uploaded by the planner."
+     ]
+    },
+    {
+     "row": 158,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM.V_BRD_RESOURCE_CAPACITY_LOCATION_METRIC_ROOT_UI",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 171,
+     "text": "Fetch the unique combination of the following columns to create the stage data: Resource, Description, Stage, Location_ID, and Resource_Type",
+     "target": "PDH_COMMON_XFRM.V_BRD_RESOURCE_CAPACITY_LOCATION_METRIC_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "Fetch the unique combination of the following columns to create the stage data: Resource, Description, Stage, Location_ID, and Resource_Type"
+     ]
+    },
+    {
+     "row": 184,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_CAPACITY_LOCATION_METRIC_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 197,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_CAPACITY_LOCATION_METRIC_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 210,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_RESOURCE_CAPACITY_LOCATION_METRIC_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 238,
+     "text": "Fetch all the data from the Excel file uploaded by the planner.",
+     "target": "PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_CONSTRAINT_ROOT_UI",
+     "target_label": "Source Table",
+     "context": [],
+     "statements": [
+      "Fetch all the data from the Excel file uploaded by the planner."
+     ]
+    },
+    {
+     "row": 251,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM.V_PRM_RESOURCE_CONSTRAINT_ROOT_UI",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 264,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 287,
+     "text": "1. Fetch the unique combinations of the following columns by mapping the RESOURCE and STAGE in V_PRM_RESOURCE_CONSTRAINT_ROOT with the RESOURCE and STAGE in V_BRD_RESOURCE_CAPACITY_LOCATION_METRIC_ROOT to generate the stage data: Resource, Stage, Location_ID, Parameter_NM, Quantity, and UOM.\n\n2A. Bring the FAB items to the Stage view if they exist in the V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_ROOT view. This can be done by mapping the 'RESOURCE' column (which contains both item and location information, so trim the item_id and location_id) from the V_PRM_RESOURCE_CONSTRAINT_ROOT_UI where the STAGE ='FAB' with the ITEM_ID and MANUFACTURING_LOCATION_CD in the V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_ROOT view. If the FAB item exists, include it in the Stage view and populate the corresponding location in the LOCATION_ID column.",
+     "target": "PDH_COMMON_XFRM.V_PRM_RESOURCE_CONSTRAINT_PARAMETER_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "1. Fetch the unique combinations of the following columns by mapping the RESOURCE and STAGE in V_PRM_RESOURCE_CONSTRAINT_ROOT with the RESOURCE and STAGE in V_BRD_RESOURCE_CAPACITY_LOCATION_METRIC_ROOT to generate the stage data: Resource, Stage, Location_ID, Parameter_NM, Quantity, and UOM.",
+      "2A. Bring the FAB items to the Stage view if they exist in the V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_ROOT view. This can be done by mapping the 'RESOURCE' column (which contains both item and location information, so trim the item_id and location_id) from the V_PRM_RESOURCE_CONSTRAINT_ROOT_UI where the STAGE ='FAB' with the ITEM_ID and MANUFACTURING_LOCATION_CD in the V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_ROOT view. If the FAB item exists, include it in the Stage view and populate the corresponding location in the LOCATION_ID column."
+     ]
+    },
+    {
+     "row": 300,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_CONSTRAINT_PARAMETER_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 313,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_CONSTRAINT_PARAMETER_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 326,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_PRM_RESOURCE_CONSTRAINT_PARAMETER_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 341,
+     "text": "Fetch only the metadata where SubjectAreaNm = 'Calendar', EntityNm = 'Planning_Calendar', BusinessRuleNm = 'Planning_Calendar_Token', and ColumnValueOnetxt = '9_Quarter_CurrentWW'. Pass the ColumnValueOnetxt into V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the RESOURCE_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW values as needed.",
+     "target": "PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT",
+     "target_label": "Metadata",
+     "context": [],
+     "statements": [
+      "Fetch only the metadata where SubjectAreaNm = 'Calendar', EntityNm = 'Planning_Calendar', BusinessRuleNm = 'Planning_Calendar_Token', and ColumnValueOnetxt = '9_Quarter_CurrentWW'. Pass the ColumnValueOnetxt into V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the RESOURCE_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW values as needed."
+     ]
+    },
+    {
+     "row": 348,
+     "text": "Bring the RESOURCE, STAGE,LOCATION_ID,PARAMETER_NM,FISCAL_YEAR_WORK_WEEK_NBR, PARAMETER_QTY and UOM.",
+     "target": "PDH_COMMON_XFRM.V_PRM_RESOURCE_CAPACITY_LOCATION_METRIC_PARAMETER_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "Bring the RESOURCE, STAGE,LOCATION_ID,PARAMETER_NM,FISCAL_YEAR_WORK_WEEK_NBR, PARAMETER_QTY and UOM."
+     ]
+    },
+    {
+     "row": 368,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_CAPACITY_LOCATION_METRIC_PARAMETER_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 388,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_CAPACITY_LOCATION_METRIC_PARAMETER_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 408,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_PRM_RESOURCE_CAPACITY_LOCATION_METRIC_PARAMETER_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 97,
+     "kind": "header-area requirement",
+     "text": "Assumptions Assuming we receive a full data load from the planners each week, we need to remove the master data combinations if no subsequent data is loaded by planners for future weeks."
+    },
+    {
+     "row": 130,
+     "kind": "note",
+     "text": "Note 1. UI Data Check: Ensure that the data uploaded by the planners in the UOM (Unit of Measure) column is updated as follows:\n                             - replace 'Wafers' or 'Wafer' with 'WAF', 'Hours' with 'HRS', and 'Hours per Wafer/Wafers' with 'HRS WAF'. Please provide the list of possible values that may appear in this column. Adi confirmed that these are the only possible values for now.\n2. For the 'STAGE' column, ensure that all data is entered in uppercase only (e.g., 'Bump' should be 'BUMP'). Please provide the list of possible values that may appear in this column.\n3. As part of the data quality (DQ) check, ensure that all 'SITE' column data entered by the planners matches the location master file.\n4. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.\n5. Apply all DQ checks before saving the data to the backend.\n6. If the numeric values exceed a length of 10, they should be rounded.\n7. If the planner enters a negative value, a valid error should be displayed in the UI.\n8. If the planner enters a decimal value, a valid alert should appear in the UI indicating that \"Decimal Values are not allowed\"."
+    },
+    {
+     "row": 146,
+     "kind": "note",
+     "text": "Note Ensure to include the change agents ID, specifically the actual employees data, and that we retain this data until the CORE PIT."
+    },
+    {
+     "row": 227,
+     "kind": "note",
+     "text": "Note 1. UI Data Check: Ensure that the data uploaded by the planners in the UOM (Unit of Measure) column is updated as follows:\n                             - replace 'Wafers' or 'Wafer' with 'WAF', 'Hours' with 'HRS', and 'Hours per Wafer/Wafers' with 'HRS WAF'. Please provide the list of possible values that may appear in this column. Adi/Charan needs to confirm with the business on this.\n2. For the 'STAGE' column, ensure that all data is entered in uppercase only (e.g., 'Bump' should be 'BUMP'). Please provide the list of possible values that may appear in this column.\n3. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.\n4. Apply all DQ checks before saving the data to the backend.\n5. Planners should be able to enter a decimal value.\n6. Here the UOM should be in WEEK only."
+    },
+    {
+     "row": 343,
+     "kind": "note",
+     "text": "Note If the user starts with WW 50, all work weeks prior to week 50 (i.e., up to WW 49) will be set to zero. For any missing work weeks between the listed weeks, enter the values from the previous week and extend those values forward, filling them across the origin until the last known value."
+    }
+   ]
+  }
+ }
+}

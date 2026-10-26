@@ -1,0 +1,71 @@
+{
+ "file": "9. CAPACITY DESIGNS/PRODUCTION METHOD/SWAP_RATIO_PDH_COMMON.xlsx",
+ "sheets": [
+  "SWAP_RATIO_CORE"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "SWAP_RATIO_CORE": {
+   "blocks": [
+    {
+     "row": 76,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 95,
+     "text": "1. This stage view has been projected for 9 quarters.\n2. Replace the MANUFACTURING_LOCATION_CD ='F11X' in PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_ROOT with the ColumnValueTwoTxt from metadata table where SubjectAreaNm ='ExtractsBY', EntityNm='Location', BusinessRuleNm= 'Location_Conversion' and ColumnValueOneTxt ='F11X'.",
+     "target": "PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. This stage view has been projected for 9 quarters.",
+      "2. Replace the MANUFACTURING_LOCATION_CD ='F11X' in PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_ROOT with the ColumnValueTwoTxt from metadata table where SubjectAreaNm ='ExtractsBY', EntityNm='Location', BusinessRuleNm= 'Location_Conversion' and ColumnValueOneTxt ='F11X'."
+     ]
+    },
+    {
+     "row": 109,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 123,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 137,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 152,
+     "kind": "scenario table",
+     "text": "Scenario CORE_CURRENT CORE_MEMORIES"
+    }
+   ]
+  }
+ }
+}

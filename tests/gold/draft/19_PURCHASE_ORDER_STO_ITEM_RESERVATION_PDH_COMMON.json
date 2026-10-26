@@ -1,0 +1,131 @@
+{
+ "file": "19. PURCHASE ORDER & STO/ITEM_RESERVATION_PDH_COMMON.xlsx",
+ "sheets": [
+  "ITEM_RESERVATION"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "ITEM_RESERVATION": {
+   "blocks": [
+    {
+     "row": 72,
+     "text": "We don't have any major transformation now.",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 86,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_ITEM_RESERVATION_ROOT",
+     "target_label": "RESB Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 100,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_TRN_ITEM_RESERVATION_ROOT",
+     "target_label": "RESB Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 115,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.ENHANCED_INVENTORY_ANALYSIS.ITEM_RESERVATION_LEGACY",
+     "target_label": "RESB LEGACY Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 128,
+     "text": "We don't have any major transformation now.\nmove the column to last source sys name",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_ITEM_RESERVATION_LEGACY_ROOT",
+     "target_label": "RESB LEGACY Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. move the column to last source sys name"
+     ]
+    },
+    {
+     "row": 140,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_TRN_ITEM_RESERVATION_LEGACY_ROOT",
+     "target_label": "RESB LEGACY Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 153,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT",
+     "target_label": "Mapping View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 164,
+     "text": "1. LEGACY_PLANT_CD mapping in legacy root view: Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_TRN_ITEM_RESERVATION_LEGACY_ROOT RESB_LEGACY with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT PLANT_MAPPING based on RESB_LEGACY.PLANT_CD and PLANT_MAPPING.LEGACY_PLANT_CD and get the PLANT_MAPPING.PLANT_CD as PLANT_CD in the dataset of view V_TRN_ITEM_RESERVATION_LEGACY_ROOT.\n2. From the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_TRN_ITEM_RESERVATION_ROOT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_TRN_ITEM_RESERVATION_LEGACY_ROOT, remove leading zeroes from ITEM_ID. \n3. Perform Union on the RESB root view and RESB_LEGACY root view to get the final stage view.",
+     "target": null,
+     "target_label": null,
+     "context": [
+      {
+       "label": "Key Columns",
+       "text": "ITEM_RESERVATION_NBR, ITEM_RESERVATION_LINE_NBR, PLANT_CD, ITEM_ID"
+      }
+     ],
+     "statements": [
+      "1. LEGACY_PLANT_CD mapping in legacy root view: Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_TRN_ITEM_RESERVATION_LEGACY_ROOT RESB_LEGACY with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT PLANT_MAPPING based on RESB_LEGACY.PLANT_CD and PLANT_MAPPING.LEGACY_PLANT_CD and get the PLANT_MAPPING.PLANT_CD as PLANT_CD in the dataset of view V_TRN_ITEM_RESERVATION_LEGACY_ROOT.",
+      "2. From the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_TRN_ITEM_RESERVATION_ROOT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_TRN_ITEM_RESERVATION_LEGACY_ROOT, remove leading zeroes from ITEM_ID.",
+      "3. Perform Union on the RESB root view and RESB_LEGACY root view to get the final stage view."
+     ]
+    },
+    {
+     "row": 178,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_ITEM_RESERVATION_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 191,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_ITEM_RESERVATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 204,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_TRN_ITEM_RESERVATION_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

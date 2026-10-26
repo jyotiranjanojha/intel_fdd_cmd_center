@@ -1,0 +1,222 @@
+{
+ "file": "5. ITEM TRANSPORTATION ROUTE/ITEM_TRANSPORTATION_ROUTE_PDH_COMMON.xlsx",
+ "sheets": [
+  "Priority_Split_Factor_Sourc_v1"
+ ],
+ "skipped": [
+  {
+   "sheet": "Item_Route_Core_v1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Item_Route_Core_Hybrid_v2",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Priority_Split_Factor_Sourcing",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "Priority_Split_Factor_Sourc_v1": {
+   "blocks": [
+    {
+     "row": 100,
+     "text": "Exclude Items which have PLANT_CD = 'VF' AND ITEM_LOCATION_TYPE_CD = 'C'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "Exclude Items which have PLANT_CD = 'VF' AND ITEM_LOCATION_TYPE_CD = 'C'"
+     ]
+    },
+    {
+     "row": 123,
+     "text": "For Data Projection: Fetch only the metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ItemInterplantRoute'. Pass the 'COLUMN_VALUE_FOURTEEN_TXT' into 'HORIZON_TOKEN_CD' in the view V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the RESOURCE_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW till the last week.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_CURRENT",
+     "target_label": "Metadata - Detail",
+     "context": [],
+     "statements": [
+      "For Data Projection: Fetch only the metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ItemInterplantRoute'. Pass the 'COLUMN_VALUE_FOURTEEN_TXT' into 'HORIZON_TOKEN_CD' in the view V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the RESOURCE_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW till the last week."
+     ]
+    },
+    {
+     "row": 199,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE",
+     "target_label": "Horizon_Core",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 216,
+     "text": "1. Create routes for all distinct ITEM_ID combinations if it has M & C type in ItemLocation. 'M' is Manufacturing and 'C' is Consumed. \n\n2. FROM_LOCATION_ID is 'M' type location and TO_LOCATION_ID is 'C' type location.\nUNION\nFetch FROM_LOCATION_ID As PLANT_CD with  'M' for type location and ITEM_ID  that have non null or non empty ITEM_CHARACTERISTIC_VALUE_TXT for  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT .CHARACTERISTIC_NM= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT .COLUMN_VALUE_ONE_TXT . Populate TO_LOCATION_ID=COLUMN_VALUE_TWO_TXT ( Metadata: IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT .COLUMN_VALUE_TWO_TXT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='ORDER_POINT_RULE')\n\n\n3. ROUTE_PRIORITY - \n                        - For all the Synergy Locations if the FROM_LOCATION_ID is equal to the TO_LOCATION_ID - We will not define any synergy routes.\n                        - For all the Non_Synergy Locations Join the ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT' and then populate the 'COLUMN_VALUE_FIVE_TXT' from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt' and COLUMN_VALUE_ONE_TXT ='ItemInterplantRoute' and COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY'. \n\n\n\n4. ROUTE_PRIORITY column that can be modified by the user. \n5. We did not scope any extra routes create when there is no \"C\" type location (Ex: for Order point item, VF is expected to present in ItemLocation).\n6. Planners can enable and disable Non Synergy Routes.\n7. Since planners can now enter priority values for upcoming work weeks, we are structuring this dataset in a time-phased format. This allows us to project the dataset over the 9 quarters using V_CRR_CALENDAR_HORIZON_CORE view.\n8. During the initial setup of PARAMETER_QTY, values are populated based on logic 3. In subsequent runs, PARAMETER_QTY will be updated based on the value entered in the UI.\n9. To fix the Circular Sourcing issue - Join the FROM_LOCATION_ID with the PLANT_CD in PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT where ITEM_LOCATION_TYPE_CD = 'M', then fetch the corresponding ITEM_LOCATION_TYPE_CD = 'C' by mapping them to the TO_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_TRANSPORTATION_ROUTE_STAGE_CORE to avoid the infinite loop and ensures a unidirectional flow.\n     Do self join of above results with itself based on Item_id and 1ST table's FROM_LOCATION_ID= 2nd Table's TO_LOCATION_ID and 1ST table's TO_LOCATION_ID= 2nd Table's FROM_LOCATION_ID. Exclude records from the above dataset if records are returned in this step .This is done to avoid the infinite loop and ensures a unidirectional flow.\n\n10. We are implementing a new parameter: 'SPLIT_FACTOR'. When exploding data for this parameter, we should not create records for backend item classes because this is applicable for frontend items. For that, we need to validate against the metadata - Join ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT' and create an entry for the SPLIT_FACTOR parameter for the respective Item and Location combination. Metadata condition - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt' and COLUMN_VALUE_ONE_TXT ='ItemInterplantRoute' and COLUMN_VALUE_TWO_TXT='SPLIT_FACTOR'. \n\nDon't create a parameter entry for SPLIT_FACTOR & ROUTE_PRIORITY: When TO_LOCATION_CD (if it is VF) matches COLUMN_VALUE_SIX_TXT for PARAMETER_NM = COLUMN_VALUE_TWO_TXT and ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT', and metadata conditions are met (Subject_Area_Nm='Item_Route', Entity_Nm='Item_Route', Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt', COLUMN_VALUE_ONE_TXT='ItemInterplantRoute', COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY','SPLIT_FACTOR').\n\n11.Whenever the ROUTE_PRIORITY's PARAMETER_QTY is the same for a given ITEM_ID, FROM_LOCATION_ID, and TO_LOCATION_ID combination, the PARAMETER_QTY value should be distributed equally as the SPLIT_FACTOR. For example, if an ITEM_ID has three ROUTE_PRIORITY values, then the SPLIT_FACTOR should be calculated as 1/3 = 0.33 and distributed equally across the respective item–route combinations.\n\n12. We need to derive the UOM column based on the PARAMETER_NM column and fetch the corresponding UOM values from the metadata.Metadata condition - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config', ColumnValueOneTxt='ItemInterplantRoute' when PARAMETER_NM = 'ColumnValueTwoTxt' then fetch the COLUMN_VALUE_NINE_TXT as UOM value.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_TRANSPORTATION_ROUTE_STAGE_CORE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. Create routes for all distinct ITEM_ID combinations if it has M & C type in ItemLocation. 'M' is Manufacturing and 'C' is Consumed.",
+      "2. FROM_LOCATION_ID is 'M' type location and TO_LOCATION_ID is 'C' type location. UNION Fetch FROM_LOCATION_ID As PLANT_CD with  'M' for type location and ITEM_ID  that have non null or non empty ITEM_CHARACTERISTIC_VALUE_TXT for  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT .CHARACTERISTIC_NM= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT .COLUMN_VALUE_ONE_TXT . Populate TO_LOCATION_ID=COLUMN_VALUE_TWO_TXT ( Metadata: IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT .COLUMN_VALUE_TWO_TXT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='ORDER_POINT_RULE')",
+      "3. ROUTE_PRIORITY -",
+      "- For all the Synergy Locations if the FROM_LOCATION_ID is equal to the TO_LOCATION_ID - We will not define any synergy routes.",
+      "- For all the Non_Synergy Locations Join the ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT' and then populate the 'COLUMN_VALUE_FIVE_TXT' from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt' and COLUMN_VALUE_ONE_TXT ='ItemInterplantRoute' and COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY'.",
+      "4. ROUTE_PRIORITY column that can be modified by the user.",
+      "5. We did not scope any extra routes create when there is no \"C\" type location (Ex: for Order point item, VF is expected to present in ItemLocation).",
+      "6. Planners can enable and disable Non Synergy Routes.",
+      "7. Since planners can now enter priority values for upcoming work weeks, we are structuring this dataset in a time-phased format. This allows us to project the dataset over the 9 quarters using V_CRR_CALENDAR_HORIZON_CORE view.",
+      "8. During the initial setup of PARAMETER_QTY, values are populated based on logic 3. In subsequent runs, PARAMETER_QTY will be updated based on the value entered in the UI.",
+      "9. To fix the Circular Sourcing issue - Join the FROM_LOCATION_ID with the PLANT_CD in PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT where ITEM_LOCATION_TYPE_CD = 'M', then fetch the corresponding ITEM_LOCATION_TYPE_CD = 'C' by mapping them to the TO_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_TRANSPORTATION_ROUTE_STAGE_CORE to avoid the infinite loop and ensures a unidirectional flow. Do self join of above results with itself based on Item_id and 1ST table's FROM_LOCATION_ID= 2nd Table's TO_LOCATION_ID and 1ST table's TO_LOCATION_ID= 2nd Table's FROM_LOCATION_ID. Exclude records from the above dataset if records are returned in this step .This is done to avoid the infinite loop and ensures a unidirectional flow.",
+      "10. We are implementing a new parameter: 'SPLIT_FACTOR'. When exploding data for this parameter, we should not create records for backend item classes because this is applicable for frontend items. For that, we need to validate against the metadata - Join ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT' and create an entry for the SPLIT_FACTOR parameter for the respective Item and Location combination. Metadata condition - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt' and COLUMN_VALUE_ONE_TXT ='ItemInterplantRoute' and COLUMN_VALUE_TWO_TXT='SPLIT_FACTOR'. Don't create a parameter entry for SPLIT_FACTOR & ROUTE_PRIORITY: When TO_LOCATION_CD (if it is VF) matches COLUMN_VALUE_SIX_TXT for PARAMETER_NM = COLUMN_VALUE_TWO_TXT and ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT', and metadata conditions are met (Subject_Area_Nm='Item_Route', Entity_Nm='Item_Route', Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt', COLUMN_VALUE_ONE_TXT='ItemInterplantRoute', COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY','SPLIT_FACTOR').",
+      "11.Whenever the ROUTE_PRIORITY's PARAMETER_QTY is the same for a given ITEM_ID, FROM_LOCATION_ID, and TO_LOCATION_ID combination, the PARAMETER_QTY value should be distributed equally as the SPLIT_FACTOR. For example, if an ITEM_ID has three ROUTE_PRIORITY values, then the SPLIT_FACTOR should be calculated as 1/3 = 0.33 and distributed equally across the respective item–route combinations.",
+      "12. We need to derive the UOM column based on the PARAMETER_NM column and fetch the corresponding UOM values from the metadata.Metadata condition - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config', ColumnValueOneTxt='ItemInterplantRoute' when PARAMETER_NM = 'ColumnValueTwoTxt' then fetch the COLUMN_VALUE_NINE_TXT as UOM value."
+     ]
+    },
+    {
+     "row": 242,
+     "text": "Exclude the rows in  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT which satisfy below condition  with metadata where SUBJECT_AREA_NM,\tENTITY_NM,\tBUSINESS_RULE_NM are 'Item_Location','Item_Location' and 'Exclude_Substrate_Item_Class' respectively. \na.  ITEM_CLASS_NM = COLUMN_VALUE_ONE_TXT \nb.  ITEM_LOCATION_TYPE_CD = COLUMN_VALUE_TWO_TXT  \nc. PLANT_CD <> COLUMN_VALUE_THREE_TXT  .\n\n1. Create routes for all distinct ITEM_ID combinations if it has M & C type in ItemLocation. 'M' is Manufacturing and 'C' is Consumed. \n\n2. FROM_LOCATION_ID is 'M' type location and TO_LOCATION_ID is 'C' type location.\nUNION\nFetch FROM_LOCATION_ID As PLANT_CD with  'M' for type location and ITEM_ID  that have non null or non empty ITEM_CHARACTERISTIC_VALUE_TXT for  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT .CHARACTERISTIC_NM= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT .COLUMN_VALUE_ONE_TXT . Populate TO_LOCATION_ID=COLUMN_VALUE_TWO_TXT ( Metadata: IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT .COLUMN_VALUE_TWO_TXT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='ORDER_POINT_RULE')\n\n3. To fix the Circular Sourcing issue -\n     Do self join of above results with itself based on Item_id and 1ST table's FROM_LOCATION_ID= 2nd Table's TO_LOCATION_ID and 1ST table's TO_LOCATION_ID= 2nd Table's FROM_LOCATION_ID. Exclude records from the above dataset if records are returned in this step .This is done to avoid the infinite loop and ensures a unidirectional flow.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_TRANSPORTATION_ROUTE_STAGE",
+     "target_label": "Master Stage View",
+     "context": [],
+     "statements": [
+      "Exclude the rows in  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT which satisfy below condition  with metadata where SUBJECT_AREA_NM,\tENTITY_NM,\tBUSINESS_RULE_NM are 'Item_Location','Item_Location' and 'Exclude_Substrate_Item_Class' respectively.",
+      "a.  ITEM_CLASS_NM = COLUMN_VALUE_ONE_TXT",
+      "b.  ITEM_LOCATION_TYPE_CD = COLUMN_VALUE_TWO_TXT",
+      "c. PLANT_CD <> COLUMN_VALUE_THREE_TXT  .",
+      "1. Create routes for all distinct ITEM_ID combinations if it has M & C type in ItemLocation. 'M' is Manufacturing and 'C' is Consumed.",
+      "2. FROM_LOCATION_ID is 'M' type location and TO_LOCATION_ID is 'C' type location. UNION Fetch FROM_LOCATION_ID As PLANT_CD with  'M' for type location and ITEM_ID  that have non null or non empty ITEM_CHARACTERISTIC_VALUE_TXT for  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT .CHARACTERISTIC_NM= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT .COLUMN_VALUE_ONE_TXT . Populate TO_LOCATION_ID=COLUMN_VALUE_TWO_TXT ( Metadata: IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT .COLUMN_VALUE_TWO_TXT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='ORDER_POINT_RULE')",
+      "3. To fix the Circular Sourcing issue - Do self join of above results with itself based on Item_id and 1ST table's FROM_LOCATION_ID= 2nd Table's TO_LOCATION_ID and 1ST table's TO_LOCATION_ID= 2nd Table's FROM_LOCATION_ID. Exclude records from the above dataset if records are returned in this step .This is done to avoid the infinite loop and ensures a unidirectional flow."
+     ]
+    },
+    {
+     "row": 257,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_TRANSPORTATION_ROUTE_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 271,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_TRANSPORTATION_ROUTE_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 285,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_TRANSPORTATION_ROUTE_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 299,
+     "text": "1. ROUTE_PRIORITY - \n                        - For all the Synergy Locations if the FROM_LOCATION_ID is equal to the TO_LOCATION_ID - We will not define any synergy routes.\n                        - For all the Non_Synergy Locations Join the ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT' and then populate the 'COLUMN_VALUE_FIVE_TXT' from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt' and COLUMN_VALUE_ONE_TXT ='ItemInterplantRoute' and COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY'. \n\n\n\n2. ROUTE_PRIORITY column that can be modified by the user. \n3. We did not scope any extra routes create when there is no \"C\" type location (Ex: for Order point item, VF is expected to present in ItemLocation).\n4. Planners can enable and disable Non Synergy Routes.\n5. Since planners can now enter priority values for upcoming work weeks, we are structuring this dataset in a time-phased format. This allows us to project the dataset over the 9 quarters using V_CRR_CALENDAR_HORIZON_CORE view.\n6. During the initial setup of PARAMETER_QTY, values are populated based on logic 3. In subsequent runs, PARAMETER_QTY will be updated based on the value entered in the UI.\n\n7. We are implementing a new parameter: 'SPLIT_FACTOR'. When exploding data for this parameter, we should not create records for backend item classes because this is applicable for frontend items. For that, we need to validate against the metadata - Join ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT' and create an entry for the SPLIT_FACTOR parameter for the respective Item and Location combination. Metadata condition - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt' and COLUMN_VALUE_ONE_TXT ='ItemInterplantRoute' and COLUMN_VALUE_TWO_TXT='SPLIT_FACTOR'. \n\nDon't create a parameter entry for SPLIT_FACTOR & ROUTE_PRIORITY: When TO_LOCATION_CD (if it is VF) matches COLUMN_VALUE_SIX_TXT for PARAMETER_NM = COLUMN_VALUE_TWO_TXT and ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT', and metadata conditions are met (Subject_Area_Nm='Item_Route', Entity_Nm='Item_Route', Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt', COLUMN_VALUE_ONE_TXT='ItemInterplantRoute', COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY','SPLIT_FACTOR').\n\n11i).Whenever the ROUTE_PRIORITY's PARAMETER_QTY is the same for a given ITEM_ID, FROM_LOCATION_ID, and TO_LOCATION_ID combination, the PARAMETER_QTY value should be distributed equally as the SPLIT_FACTOR. For example, if an ITEM_ID has three ROUTE_PRIORITY values, then the SPLIT_FACTOR should be calculated as 1/3 = 0.33 and distributed equally across the respective item–route combinations.\nii) When  the  ROUTE_PRIORITY's PARAMETER_QTY=0 for a given ITEM_ID, FROM_LOCATION_ID, and TO_LOCATION_ID combination, Revert SPLIT_FACTOR to the default value of the ITEM_CLASS the ITEM_ID belongs to from  metadata COLUMN_VALUE_EIGHT_TXT . [metadata: Subject_Area_Nm='Parameter', Entity_Nm='Parameter', Business_Rule_Nm='Parameter_Config', COLUMN_VALUE_ONE_TXT='ItemInterplantRoute', COLUMN_VALUE_FIVE_TXT='SPLIT_FACTOR']\n\n12. We need to derive the UOM column based on the PARAMETER_NM column and fetch the corresponding UOM values from the metadata.Metadata condition - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config', ColumnValueOneTxt='ItemInterplantRoute' when PARAMETER_NM = 'ColumnValueTwoTxt' then fetch the COLUMN_VALUE_NINE_TXT as UOM value.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_STAGE",
+     "target_label": "Parameter Stage View",
+     "context": [],
+     "statements": [
+      "1. ROUTE_PRIORITY -",
+      "- For all the Synergy Locations if the FROM_LOCATION_ID is equal to the TO_LOCATION_ID - We will not define any synergy routes.",
+      "- For all the Non_Synergy Locations Join the ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT' and then populate the 'COLUMN_VALUE_FIVE_TXT' from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt' and COLUMN_VALUE_ONE_TXT ='ItemInterplantRoute' and COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY'.",
+      "2. ROUTE_PRIORITY column that can be modified by the user.",
+      "3. We did not scope any extra routes create when there is no \"C\" type location (Ex: for Order point item, VF is expected to present in ItemLocation).",
+      "4. Planners can enable and disable Non Synergy Routes.",
+      "5. Since planners can now enter priority values for upcoming work weeks, we are structuring this dataset in a time-phased format. This allows us to project the dataset over the 9 quarters using V_CRR_CALENDAR_HORIZON_CORE view.",
+      "6. During the initial setup of PARAMETER_QTY, values are populated based on logic 3. In subsequent runs, PARAMETER_QTY will be updated based on the value entered in the UI.",
+      "7. We are implementing a new parameter: 'SPLIT_FACTOR'. When exploding data for this parameter, we should not create records for backend item classes because this is applicable for frontend items. For that, we need to validate against the metadata - Join ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT' and create an entry for the SPLIT_FACTOR parameter for the respective Item and Location combination. Metadata condition - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt' and COLUMN_VALUE_ONE_TXT ='ItemInterplantRoute' and COLUMN_VALUE_TWO_TXT='SPLIT_FACTOR'. Don't create a parameter entry for SPLIT_FACTOR & ROUTE_PRIORITY: When TO_LOCATION_CD (if it is VF) matches COLUMN_VALUE_SIX_TXT for PARAMETER_NM = COLUMN_VALUE_TWO_TXT and ITEM_CLASS_NM with 'COLUMN_VALUE_THREE_TXT', and metadata conditions are met (Subject_Area_Nm='Item_Route', Entity_Nm='Item_Route', Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt', COLUMN_VALUE_ONE_TXT='ItemInterplantRoute', COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY','SPLIT_FACTOR').",
+      "11i).Whenever the ROUTE_PRIORITY's PARAMETER_QTY is the same for a given ITEM_ID, FROM_LOCATION_ID, and TO_LOCATION_ID combination, the PARAMETER_QTY value should be distributed equally as the SPLIT_FACTOR. For example, if an ITEM_ID has three ROUTE_PRIORITY values, then the SPLIT_FACTOR should be calculated as 1/3 = 0.33 and distributed equally across the respective item–route combinations. ii) When  the  ROUTE_PRIORITY's PARAMETER_QTY=0 for a given ITEM_ID, FROM_LOCATION_ID, and TO_LOCATION_ID combination, Revert SPLIT_FACTOR to the default value of the ITEM_CLASS the ITEM_ID belongs to from  metadata COLUMN_VALUE_EIGHT_TXT . [metadata: Subject_Area_Nm='Parameter', Entity_Nm='Parameter', Business_Rule_Nm='Parameter_Config', COLUMN_VALUE_ONE_TXT='ItemInterplantRoute', COLUMN_VALUE_FIVE_TXT='SPLIT_FACTOR']",
+      "12. We need to derive the UOM column based on the PARAMETER_NM column and fetch the corresponding UOM values from the metadata.Metadata condition - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm='Item_Route' Entity_Nm='Item_Route' and Business_Rule_Nm='Parameter_Config', ColumnValueOneTxt='ItemInterplantRoute' when PARAMETER_NM = 'ColumnValueTwoTxt' then fetch the COLUMN_VALUE_NINE_TXT as UOM value."
+     ]
+    },
+    {
+     "row": 317,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 334,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 351,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 368,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 378,
+     "text": "To get DIE_CODE_NAME in UI View - Join table IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT with PDH_COMMON_ANALYSIS.V_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_PIT based on ITEM_ID.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_TRANSPORTATION_ROUTE_CORE_PIT_UI",
+     "target_label": "Input to UI",
+     "context": [],
+     "statements": [
+      "To get DIE_CODE_NAME in UI View - Join table IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT with PDH_COMMON_ANALYSIS.V_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_PIT based on ITEM_ID."
+     ]
+    },
+    {
+     "row": 415,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ROUTE_ENABLE_STAGE_UI",
+     "target_label": "UI Root View",
+     "context": [
+      {
+       "label": "Note",
+       "text": "If the planner updates only the PARAMETER_QTY column values, then we need to update those items corresponding PARAMETER_QTY in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_CURRENT."
+      }
+     ],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 85,
+     "kind": "header-area requirement",
+     "text": "Opens Can we populate null PV values using metadata?"
+    },
+    {
+     "row": 398,
+     "kind": "note",
+     "text": "Note 1. The PARAMETER_QTY field will display a dropdown list, with the highest ROUTE_PRIORITY value (as defined in the metadata) and the actual value from the initial setup. Planners will have the ability to modify this value.\n\n2. A unique identifier combining the timestamp and username has been added to the UI.\n\n3. Planners can disable any route by setting the PARAMETER_QTY value to ‘0’, which can be fetched from the metadata as the minimum value where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ItemInterplantRoute' and pass the 'COLUMN_VALUE_SEVEN_TXT' as minimum value.\n\n4. ROUTE_PRIORITY Parameter is editable both for backend & frontend item classes and SPLIT_FACTOR is applicable only to frontend item classes. Please use the metadata condition where Subject_Area_Nm='Item_Route', Entity_Nm='Item_Route', Business_Rule_Nm='Parameter_Config_ItemClassItemCharExt', COLUMN_VALUE_ONE_TXT='ItemInterplantRoute', COLUMN_VALUE_TWO_TXT='ROUTE_PRIORITY','SPLIT_FACTOR'), if COLUMN_VALUE_THIRTEEN_TXT='N', then make PARAMETER_QTY field non-editable in UI else if it is 'Y' then it should be editable in UI.\n\n5. Whenever a user modifies the ROUTE_PRIORITY for frontend item classes, the UI should display a warning indicating that the corresponding SPLIT_FACTOR value must also be updated."
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,210 @@
+{
+ "file": "9. CAPACITY DESIGNS/FAB/CAPACITY_CORRIDOR_LOCATION_PDH_COMMON.xlsx",
+ "sheets": [
+  "CC_LOC_METRIC_CORE"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "CC_LOC_METRIC_CORE": {
+   "blocks": [
+    {
+     "row": 148,
+     "text": "Since CAPACITY_CORRIDOR contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table.",
+     "target": "IF_SUPPLY_CHAIN.SUPPLY_ANALYSIS.WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_PLANT_METRIC_CURRENT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "Since CAPACITY_CORRIDOR contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table."
+     ]
+    },
+    {
+     "row": 162,
+     "text": "If there are any negative values in the CAPACITY_METRIC_QTY, they should be defaulted to 0.\n0",
+     "target": "PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "If there are any negative values in the CAPACITY_METRIC_QTY, they should be defaulted to 0. 0"
+     ]
+    },
+    {
+     "row": 181,
+     "text": "1. For the initial run (R0), we need to create a new record with the CAPACITY_METRIC_NM set to IFS_Dedicated_Commit_Capacity and the CAPACITY_METRIC_QTY set to 0 for all entries for all the 'COMMIT PROD CAPACITY' entries defined at the corresponding CAPACITY GROUP and CAPACITY CORRIDOR levels.\n\n2. Join the data from PDH_COMMON_XFRM.V_BRD_IFS_DEDICATED_COMMIT_CAPACITY_ROOT_UI to this stage view by mapping the fields CAPACITY_GROUP_NM, FABRICATION_PROCESS_CD, MANUFACTURING_LOCATION_CD ,CAPACITY_CORRIDOR_CD, CAPACITY_METRIC_NM, and FISCAL_YEAR_WORK_WEEK_NBR.\n\n        2A. If matching records are found, the CAPACITY_METRIC_QTY will be updated for the corresponding CAPACITY_METRIC_NM (IFS_Dedicated_Commit_Capacity) and CAPACITY_CORRIDOR combination in V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_STAGE. \n\n        2B. If no match is found, then a new record will be added to the V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_STAGE with the CAPACITY_METRIC_NM (IFS_Dedicated_Commit_Capacity) and CAPACITY_METRIC_QTY set to 0 for the respective CAPACITY CORRIDOR combination.\n       2C.  Add two new entries for Capacity_Metric_NM which are Prod Cap Corridor Max and Common Corridor Capacity. Value for Prod Cap Corridor Max is derived from Commit Prod Capacity (same value = 54). Common Corridor Capacity value is derived as the difference between Prod Cap Corridor Max and IFS_Dedicated_Commit_Capacity (54-20=24).\n\n3. Replace the MANUFACTURING_LOCATION_CD ='F11X' in PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_ROOT with the ColumnValueTwoTxt from metadata table where SubjectAreaNm ='ExtractsBY', EntityNm='Location', BusinessRuleNm= 'Location_Conversion' and ColumnValueOneTxt ='F11X'. 4. Derive two new columns with one column as difference between Commit Capacity minus IFS Dedicated capacity",
+     "target": "PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. For the initial run (R0), we need to create a new record with the CAPACITY_METRIC_NM set to IFS_Dedicated_Commit_Capacity and the CAPACITY_METRIC_QTY set to 0 for all entries for all the 'COMMIT PROD CAPACITY' entries defined at the corresponding CAPACITY GROUP and CAPACITY CORRIDOR levels.",
+      "2. Join the data from PDH_COMMON_XFRM.V_BRD_IFS_DEDICATED_COMMIT_CAPACITY_ROOT_UI to this stage view by mapping the fields CAPACITY_GROUP_NM, FABRICATION_PROCESS_CD, MANUFACTURING_LOCATION_CD ,CAPACITY_CORRIDOR_CD, CAPACITY_METRIC_NM, and FISCAL_YEAR_WORK_WEEK_NBR.",
+      "2A. If matching records are found, the CAPACITY_METRIC_QTY will be updated for the corresponding CAPACITY_METRIC_NM (IFS_Dedicated_Commit_Capacity) and CAPACITY_CORRIDOR combination in V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_STAGE.",
+      "2B. If no match is found, then a new record will be added to the V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_STAGE with the CAPACITY_METRIC_NM (IFS_Dedicated_Commit_Capacity) and CAPACITY_METRIC_QTY set to 0 for the respective CAPACITY CORRIDOR combination.",
+      "2C.  Add two new entries for Capacity_Metric_NM which are Prod Cap Corridor Max and Common Corridor Capacity. Value for Prod Cap Corridor Max is derived from Commit Prod Capacity (same value = 54). Common Corridor Capacity value is derived as the difference between Prod Cap Corridor Max and IFS_Dedicated_Commit_Capacity (54-20=24).",
+      "3. Replace the MANUFACTURING_LOCATION_CD ='F11X' in PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_ROOT with the ColumnValueTwoTxt from metadata table where SubjectAreaNm ='ExtractsBY', EntityNm='Location', BusinessRuleNm= 'Location_Conversion' and ColumnValueOneTxt ='F11X'. 4. Derive two new columns with one column as difference between Commit Capacity minus IFS Dedicated capacity"
+     ]
+    },
+    {
+     "row": 203,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 223,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 243,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 286,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_BRD_IFS_DEDICATED_COMMIT_CAPACITY_ROOT_UI",
+     "target_label": "Root View",
+     "context": [
+      {
+       "label": "Note",
+       "text": "Each time the user clicks the save button, the existing data in the table will be truncated, and the new batch data will be loaded."
+      }
+     ],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 306,
+     "text": "The 'GROUP CAPACITY' will be calculated based on the CAPACITY_GROUP_NM ,MANUFACTURING_LOCATION, where CAPACITY_METRIC_NM = 'Commit Prod Capacity' for the respective FISCAL_YEAR_WORK_WEEK_NBR. This is a time-phased value, so with each run, the Group Capacity value will be updated based on the CAPACITY_METRIC_QTY. If the values are not matching than we will be displayed as zero for  CAPACITY_METRIC_QTY.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_UTILIZATION_ROOT_UI",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "The 'GROUP CAPACITY' will be calculated based on the CAPACITY_GROUP_NM ,MANUFACTURING_LOCATION, where CAPACITY_METRIC_NM = 'Commit Prod Capacity' for the respective FISCAL_YEAR_WORK_WEEK_NBR. This is a time-phased value, so with each run, the Group Capacity value will be updated based on the CAPACITY_METRIC_QTY. If the values are not matching than we will be displayed as zero for  CAPACITY_METRIC_QTY."
+     ]
+    },
+    {
+     "row": 314,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_BRD_RESOURCE_UTILIZATION_ROOT_UI",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 322,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_UTILIZATION_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 330,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_UTILIZATION_CORE_MEMORIES",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 338,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_RESOURCE_UTILIZATION_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 348,
+     "text": "We will be fetching only the distinct pairs of CAPACITY_GROUP_NM and MANUFACTURING_LOCATION_CD from the V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_CORE_PIT table, and these will be shown in the UI for planners to input the Rank Value.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_CAPACITY_GROUP_RANK_UI",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We will be fetching only the distinct pairs of CAPACITY_GROUP_NM and MANUFACTURING_LOCATION_CD from the V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_LOCATION_METRIC_CURRENT_CORE_PIT table, and these will be shown in the UI for planners to input the Rank Value."
+     ]
+    },
+    {
+     "row": 356,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_BRD_CAPACITY_GROUP_RANK_UI",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 364,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_CAPACITY_GROUP_RANK_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 372,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_CAPACITY_GROUP_RANK_CORE_MEMORIES",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 380,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_CAPACITY_GROUP_RANK_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 183,
+     "kind": "note",
+     "text": "Note If the user starts with WW 50, all work weeks prior to week 50 (i.e., up to WW 49) will be set to zero. For any missing work weeks between the listed weeks, enter the values from the previous week and extend those values forward, filling them across the origin until the last known value."
+    },
+    {
+     "row": 263,
+     "kind": "note",
+     "text": "Note The COMMON CAPACITY value will be calculated by subtracting the IFS_Dedicated_Commit_Capacity METRIC QTY from the COMMIT PROD CAPACITY at a respective CAPACITY GROUP level."
+    },
+    {
+     "row": 278,
+     "kind": "note",
+     "text": "Note 1. Once the user clicks the SAVE button, the data from the PDH_COMMON_XFRM.V_BRD_IFS_DEDICATED_COMMIT_CAPACITY_ROOT_UI view should be appended to the stage. The updated data will then undergo time travel, and the changes should get reflected till the CORE_PIT view.\n\n2. Each time the user clicks the save button, the existing data in the table will be truncated, and the new batch data will be loaded.\n3. If the planner does not modify the IFS value for the corresponding week, extend the previous week’s entries to the current week and calculate the totals accordingly.\n4. If the planner enters a decimal value, a valid alert should appear in the UI indicating that \"Decimal Values are not allowed.\"\n5. The IFS dedicated value should not exceed the respective CAPACITY_CORRIDOR_MAX_QTY at the Corridor level. If a planner enters a value that surpasses the maximum limit, it should not be allowed, and an alert should be displayed to the planner."
+    }
+   ]
+  }
+ }
+}

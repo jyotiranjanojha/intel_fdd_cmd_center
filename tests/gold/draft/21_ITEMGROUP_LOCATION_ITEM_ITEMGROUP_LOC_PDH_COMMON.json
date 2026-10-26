@@ -1,0 +1,102 @@
+{
+ "file": "21. ITEMGROUP LOCATION/ITEM_ITEMGROUP_LOC_PDH_COMMON.xlsx",
+ "sheets": [
+  "PDH_COMMON_ITEM_ITMGRP_LOC"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "PDH_COMMON_ITEM_ITMGRP_LOC": {
+   "blocks": [
+    {
+     "row": 72,
+     "text": "We don't have any transformations as of now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 82,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 119,
+     "text": "1. ItemLocation Filter\nFilter to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.ITEM_LOCATION_TYPE_CD= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where  SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT IN ('AssyGrpNm','FabGrpNm') and COLUMN_VALUE_TWO_TXT='ItemLocationType_Filter'\n\nProduction Engineering Filter: Include records with OWNER_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT where  SUBJECT_AREA_NM='Item' , ENTITY_NM in ('Item'), BUSINESS_RULE_NM ='ProductionEngineeringFilter' \n\nNSB Filter\nFilter to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.NSB_FLAG= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where  SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT IN ('AssyGrpNm') and COLUMN_VALUE_TWO_TXT='NSBFlag_Filter'\n2.AssemblyItemGroup\na. Filter to item Classes: Filter  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.ITEM_CLASS_NM =IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT='AssyGrpNm' and COLUMN_VALUE_TWO_TXT='ITEM_CLASS_NM_Filter' .  \n\nb. ITEM ORDER POINT: Filter to only rows that have non null or non empty   ITEM_CHARACTERISTIC_VALUE_TXT  in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT where CHARACTERISTIC_NM=   V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT  where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM='ItemGroup', BUSINESS_RULE_NM = 'ItemGroup_Config' and COLUMN_VALUE_ONE_TXT='AssyGrpNm' and COLUMN_VALUE_TWO_TXT='CHARACTERISTIC_NM_Filter'\n\nc. Fetch the Item_Characteristic : Join the above results with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT based on ITEM_ID   and get the ITEM_CHARACTERISTIC_VALUE_TXT  where CHARACTERISTIC_NM=   V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT  where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM='ItemGroup', BUSINESS_RULE_NM = 'ItemGroup_Config'  and COLUMN_VALUE_ONE_TEXT='AssyGrpNm'  and COLUMN_VALUE_TWO_TEXT='CHARACTERISTIC_NM'\n\ne. ITEM_GROUP= Aggregate The Item_Characteristics into 1 line by Concatenating the ITEM_CHARACTERISTIC_VALUE_TXT seperated by COLUMN_VALUE_FIVE_TXT. If a certain CHARACTERISTIC_NM is unavailable, replace with V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_SIX_TXT in the order of COLUMN_VALUE_FOUR_TXT where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM='ItemGroup', BUSINESS_RULE_NM = 'ItemGroup_Config'  and COLUMN_VALUE_ONE_TEXT='AssyGrpNm'  and COLUMN_VALUE_TWO_TEXT='CHARACTERISTIC_NM' . [AssyGrpNm]\nNote: Use LISTGG() at an ITEM_ID level\n2.FabItemGroup\n\nFilter to item Classes: Filter  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.ITEM_CLASS_NM =IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT='FabGrpNm' and COLUMN_VALUE_TWO_TXT='ITEM_CLASS_NM_Filter' \n\nITEM_GROUP= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.ITEM_ID\nUnion results of AssemblyItemGroup and FabItemGroup\nKeep Distinct rows only\nGet Distinct ITEM_ID, ITEM_GROUP and LOCATION_ID combination \n\nSKU_GROUP=ITEM_GROUP +'_'+LOCATION_ID\nDQ: 1 Item cannot belong to more than 1 item_grp",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ITEMGROUP_LOC_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. ItemLocation Filter Filter to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.ITEM_LOCATION_TYPE_CD= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where  SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT IN ('AssyGrpNm','FabGrpNm') and COLUMN_VALUE_TWO_TXT='ItemLocationType_Filter' Production Engineering Filter: Include records with OWNER_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT where  SUBJECT_AREA_NM='Item' , ENTITY_NM in ('Item'), BUSINESS_RULE_NM ='ProductionEngineeringFilter' NSB Filter Filter to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.NSB_FLAG= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where  SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT IN ('AssyGrpNm') and COLUMN_VALUE_TWO_TXT='NSBFlag_Filter'",
+      "2.AssemblyItemGroup",
+      "a. Filter to item Classes: Filter  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.ITEM_CLASS_NM =IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT='AssyGrpNm' and COLUMN_VALUE_TWO_TXT='ITEM_CLASS_NM_Filter' .",
+      "b. ITEM ORDER POINT: Filter to only rows that have non null or non empty   ITEM_CHARACTERISTIC_VALUE_TXT  in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT where CHARACTERISTIC_NM=   V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT  where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM='ItemGroup', BUSINESS_RULE_NM = 'ItemGroup_Config' and COLUMN_VALUE_ONE_TXT='AssyGrpNm' and COLUMN_VALUE_TWO_TXT='CHARACTERISTIC_NM_Filter'",
+      "c. Fetch the Item_Characteristic : Join the above results with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT based on ITEM_ID   and get the ITEM_CHARACTERISTIC_VALUE_TXT  where CHARACTERISTIC_NM=   V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT  where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM='ItemGroup', BUSINESS_RULE_NM = 'ItemGroup_Config'  and COLUMN_VALUE_ONE_TEXT='AssyGrpNm'  and COLUMN_VALUE_TWO_TEXT='CHARACTERISTIC_NM'",
+      "e. ITEM_GROUP= Aggregate The Item_Characteristics into 1 line by Concatenating the ITEM_CHARACTERISTIC_VALUE_TXT seperated by COLUMN_VALUE_FIVE_TXT. If a certain CHARACTERISTIC_NM is unavailable, replace with V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_SIX_TXT in the order of COLUMN_VALUE_FOUR_TXT where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM='ItemGroup', BUSINESS_RULE_NM = 'ItemGroup_Config'  and COLUMN_VALUE_ONE_TEXT='AssyGrpNm'  and COLUMN_VALUE_TWO_TEXT='CHARACTERISTIC_NM' . [AssyGrpNm] Note: Use LISTGG() at an ITEM_ID level",
+      "2.FabItemGroup Filter to item Classes: Filter  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.ITEM_CLASS_NM =IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT='FabGrpNm' and COLUMN_VALUE_TWO_TXT='ITEM_CLASS_NM_Filter' ITEM_GROUP= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.ITEM_ID Union results of AssemblyItemGroup and FabItemGroup Keep Distinct rows only Get Distinct ITEM_ID, ITEM_GROUP and LOCATION_ID combination SKU_GROUP=ITEM_GROUP +'_'+LOCATION_ID DQ: 1 Item cannot belong to more than 1 item_grp"
+     ]
+    },
+    {
+     "row": 141,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ITEMGROUP_LOC_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 156,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ITEMGROUP_LOC_CORE_MEMORIES",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 168,
+     "text": "We don't have any major transformation now",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now"
+     ]
+    },
+    {
+     "row": 181,
+     "text": "1. NSB Filter\nFilter to NSB_FLAG= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where  SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT IN ('AssyGrpNm',) and COLUMN_VALUE_TWO_TXT='NSBFlag_Filter'\n\n2. Get Distinct LOCATION_ID and ITEM_GROUP",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEMGROUP_LOC_CORE_PIT",
+     "target_label": "RESULT",
+     "context": [],
+     "statements": [
+      "1. NSB Filter Filter to NSB_FLAG= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where  SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT IN ('AssyGrpNm',) and COLUMN_VALUE_TWO_TXT='NSBFlag_Filter'",
+      "2. Get Distinct LOCATION_ID and ITEM_GROUP"
+     ]
+    },
+    {
+     "row": 194,
+     "text": "1. NSB Filter\nFilter to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.NSB_FLAG= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where  SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT IN ('AssyGrpNm') and COLUMN_VALUE_TWO_TXT='NSBFlag_Filter'\n\n2. Get Distinct ITEM_ID and ITEM_GROUP",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_ITEMGROUP_CORE_PIT",
+     "target_label": "RESULT",
+     "context": [],
+     "statements": [
+      "1. NSB Filter Filter to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT.NSB_FLAG= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT where  SUBJECT_AREA_NM='ItemGroup' , ENTITY_NM in ('ItemGroup'), BUSINESS_RULE_NM ='ItemGroup_Config' and   COLUMN_VALUE_ONE_TXT IN ('AssyGrpNm') and COLUMN_VALUE_TWO_TXT='NSBFlag_Filter'",
+      "2. Get Distinct ITEM_ID and ITEM_GROUP"
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

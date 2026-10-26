@@ -1,0 +1,140 @@
+{
+ "file": "9. CAPACITY DESIGNS/BUMP & SORT/CAPACITY_CONSUMPTION_PDH_COMMON.xlsx",
+ "sheets": [
+  "RES_CAPACITY_ITEM_CORE"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "RES_CAPACITY_ITEM_CORE": {
+   "blocks": [
+    {
+     "row": 77,
+     "text": "Fetch all the data from the Excel file uploaded by the planner.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_CAPACITY_ITEM_METRIC_ROOT_UI",
+     "target_label": "Source Table",
+     "context": [],
+     "statements": [
+      "Fetch all the data from the Excel file uploaded by the planner."
+     ]
+    },
+    {
+     "row": 89,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM.V_BRD_RESOURCE_CAPACITY_ITEM_METRIC_ROOT_UI",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 100,
+     "text": "Fetch the unique combination of the following columns to create the stage data: Resource,  Stage, Location_ID, Item_ID,Primary_Resource and AltPriority.",
+     "target": "PDH_COMMON_XFRM.V_BRD_RESOURCE_CAPACITY_ITEM_METRIC_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "Fetch the unique combination of the following columns to create the stage data: Resource,  Stage, Location_ID, Item_ID,Primary_Resource and AltPriority."
+     ]
+    },
+    {
+     "row": 111,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_CAPACITY_ITEM_METRIC_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 122,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_CAPACITY_ITEM_METRIC_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 133,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_RESOURCE_CAPACITY_ITEM_METRIC_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 146,
+     "text": "Fetch only the metadata where SubjectAreaNm = 'Calendar', EntityNm = 'Planning_Calendar', BusinessRuleNm = 'Planning_Calendar_Token', and ColumnValueOnetxt = '9_Quarter_CurrentWW'. Pass the ColumnValueOnetxt into V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the RESOURCE_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW values as needed.",
+     "target": "PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT",
+     "target_label": "Metadata",
+     "context": [],
+     "statements": [
+      "Fetch only the metadata where SubjectAreaNm = 'Calendar', EntityNm = 'Planning_Calendar', BusinessRuleNm = 'Planning_Calendar_Token', and ColumnValueOnetxt = '9_Quarter_CurrentWW'. Pass the ColumnValueOnetxt into V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the RESOURCE_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW values as needed."
+     ]
+    },
+    {
+     "row": 153,
+     "text": "Fetch the master data columns along with the parameter values.",
+     "target": "PDH_COMMON_XFRM.V_PRM_RESOURCE_CAPACITY_ITEM_METRIC_PARAMETER_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "Fetch the master data columns along with the parameter values."
+     ]
+    },
+    {
+     "row": 166,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_CAPACITY_ITEM_METRIC_PARAMETER_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 179,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_CAPACITY_ITEM_METRIC_PARAMETER_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 192,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_PRM_RESOURCE_CAPACITY_ITEM_METRIC_PARAMETER_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 65,
+     "kind": "note",
+     "text": "Note 1. UI Data Check: Ensure that the data uploaded by the planners in the UOM (Unit of Measure) column is updated as follows:\n                             - replace 'Wafers' or 'Wafer' with 'WAF', 'Hours' with 'HRS', and 'Hours per Wafer/Wafers' with 'HRS WAF'. Please provide the list of possible values that may appear in this column. Adi confirmed that these are the only possible values for now.\n2. For the 'STAGE' column, ensure that all data is entered in uppercase only (e.g., 'Bump' should be 'BUMP'). Please provide the list of possible values that may appear in this column.\n3. As part of the data quality (DQ) check, ensure that all 'SITE' column data entered by the planners matches the location master file.\n4. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.\n5. Apply all DQ checks before saving the data to the backend.\n6. If the numeric values exceed a length of 10, they should be rounded.\n7. If the planner enters a negative value, a valid error should be displayed in the UI.\n8. Planners should be able to enter a decimal value.\n9. Make sure that each entry in this file has a corresponding entry in the Max Capacity file"
+    },
+    {
+     "row": 79,
+     "kind": "note",
+     "text": "Note Ensure to include the change agents ID, specifically the actual employees data, and that we retain this data until the CORE PIT."
+    },
+    {
+     "row": 148,
+     "kind": "note",
+     "text": "Note If the user starts with WW 50, all work weeks prior to week 50 (i.e., up to WW 49) will be set to zero. For any missing work weeks between the listed weeks, enter the values from the previous week and extend those values forward, filling them across the origin until the last known value."
+    }
+   ]
+  }
+ }
+}

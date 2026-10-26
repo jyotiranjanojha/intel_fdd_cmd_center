@@ -1,0 +1,231 @@
+{
+ "file": "8. PRODUCTION VERSION/PRODUCTION_VERSION_PDH_COMMON.xlsx",
+ "sheets": [
+  "Production_Version_Core_V1"
+ ],
+ "skipped": [
+  {
+   "sheet": "Production_Version_Core",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "Production_Version_Core_V1": {
+   "blocks": [
+    {
+     "row": 309,
+     "text": "Load only Active records from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_PRODUCTION_VERSION where DELETE_IND=FALSE to PDH_COMMON_XFRM_BASE.T_BRD_ITEM_PRODUCTION_VERSION_ROOT.\t\nIn Subsequent runs, the DELETE_IND in ROOT table needs to be updated to TRUE or FALSE based on the source records status.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_PRODUCTION_VERSION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load only Active records from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_PRODUCTION_VERSION where DELETE_IND=FALSE to PDH_COMMON_XFRM_BASE.T_BRD_ITEM_PRODUCTION_VERSION_ROOT. In Subsequent runs, the DELETE_IND in ROOT table needs to be updated to TRUE or FALSE based on the source records status."
+     ]
+    },
+    {
+     "row": 317,
+     "text": "Load only active records from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_ROUTING where SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE to PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROUTING_ROOT.\tSet ACTIVE_IND= 'TRUE'\n\nIn subsequent runs, update the ACTIVE_IND value based on below conditions.\n1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.\n2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.\n3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.\n4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROUTING_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load only active records from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_ROUTING where SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE to PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROUTING_ROOT.\tSet ACTIVE_IND= 'TRUE' In subsequent runs, update the ACTIVE_IND value based on below conditions.",
+      "1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.",
+      "2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.",
+      "3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.",
+      "4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive."
+     ]
+    },
+    {
+     "row": 325,
+     "text": "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ROUTING_HEADER  where  SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE to PDH_COMMON_XFRM_BASE.T_BRD_ROUTING_HEADER_ROOT. Set ACTIVE_IND= 'TRUE'\n\nIn subsequent runs, update the ACTIVE_IND value based on below conditions.\n1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.\n2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.\n3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.\n4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ROUTING_HEADER_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ROUTING_HEADER  where  SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE to PDH_COMMON_XFRM_BASE.T_BRD_ROUTING_HEADER_ROOT. Set ACTIVE_IND= 'TRUE' In subsequent runs, update the ACTIVE_IND value based on below conditions.",
+      "1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.",
+      "2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.",
+      "3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.",
+      "4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive."
+     ]
+    },
+    {
+     "row": 333,
+     "text": "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ROUTING_OPERATION  SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE to PDH_COMMON_XFRM_BASE.T_BRD_ROUTING_OPERATION_ROOT. Set ACTIVE_IND= 'TRUE'\n\nIn subsequent runs, update the ACTIVE_IND value based on below conditions.\n1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.\n2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.\n3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.\n4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ROUTING_OPERATION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ROUTING_OPERATION  SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE to PDH_COMMON_XFRM_BASE.T_BRD_ROUTING_OPERATION_ROOT. Set ACTIVE_IND= 'TRUE' In subsequent runs, update the ACTIVE_IND value based on below conditions.",
+      "1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.",
+      "2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.",
+      "3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.",
+      "4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive."
+     ]
+    },
+    {
+     "row": 354,
+     "text": "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_WORK_CENTER_HEADER where SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE to PDH_COMMON_XFRM_BASE.T_BRD_WORK_CENTER_HEADER_ROOT.\tSet ACTIVE_IND= 'TRUE'\n\nIn subsequent runs, update the ACTIVE_IND value based on below conditions\n1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.\n2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.\n3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.\n4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_WORK_CENTER_HEADER_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_WORK_CENTER_HEADER where SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE to PDH_COMMON_XFRM_BASE.T_BRD_WORK_CENTER_HEADER_ROOT.\tSet ACTIVE_IND= 'TRUE' In subsequent runs, update the ACTIVE_IND value based on below conditions",
+      "1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.",
+      "2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.",
+      "3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.",
+      "4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive."
+     ]
+    },
+    {
+     "row": 375,
+     "text": "Bring only the active records to this view. i.e., DELETE_IND='FALSE'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Bring only the active records to this view. i.e., DELETE_IND='FALSE'"
+     ]
+    },
+    {
+     "row": 382,
+     "text": "Bring only the active records to this view. i.e., ACTIVE_IND='TRUE'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROUTING_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Bring only the active records to this view. i.e., ACTIVE_IND='TRUE'"
+     ]
+    },
+    {
+     "row": 389,
+     "text": "Bring only the active records to this view. i.e.,ACTIVE_IND='TRUE'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_BRD_ROUTING_HEADER_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Bring only the active records to this view. i.e.,ACTIVE_IND='TRUE'"
+     ]
+    },
+    {
+     "row": 396,
+     "text": "Bring only the active records to this view. i.e., ACTIVE_IND='TRUE'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_BRD_ROUTING_OPERATION_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Bring only the active records to this view. i.e., ACTIVE_IND='TRUE'"
+     ]
+    },
+    {
+     "row": 416,
+     "text": "Bring only the active records to this view. i.e., ACTIVE_IND='TRUE'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.V_BRD_WORK_CENTER_HEADER_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Bring only the active records to this view. i.e., ACTIVE_IND='TRUE'"
+     ]
+    },
+    {
+     "row": 435,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 444,
+     "text": "1. We get TASK_LIST_TYPE_CD from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_PRODUCTION_VERSION, IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_ROUTING, IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ROUTING_HEADER and IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ROUTING_OPERATION.",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "1. We get TASK_LIST_TYPE_CD from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_PRODUCTION_VERSION, IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_ROUTING, IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ROUTING_HEADER and IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ROUTING_OPERATION."
+     ]
+    },
+    {
+     "row": 446,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_CRR_BUSINESS_RULE_METADATA_HEADER_CORE_CURRENT",
+     "target_label": "Metadata-Header",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 465,
+     "text": "1.  Join ITEM_ID, PLANT_CD, TASK_LIST_TYPE_CODE, TASK_LIST_GROUP_CODE, GROUP_COUNTER_CODE from PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOT with  ITEM_ID, PLANT_CD, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ITEM_ROUTING_ROOT.  The purpose of this Join condition is to link the production version to the specific routing that is used to make it. \n2. Join CLIENT_ID, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ITEM_ROUTING_ROOT with CLIENT_ID, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ROUTING_HEADER_ROOT. The purpose of this Join condition is to connect routing to its metadata. \n3. Join  CLIENT_ID, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ROUTING_HEADER_ROOT with  CLIENT_ID, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ROUTING_OPERATION_ROOT. The purpose of this Join condition is to retrieve the step by step operations under that routing.  \n4. Join CLIENT_ID, WORK_CENTER_ID from  PDH_COMMON_XFRM.V_BRD_ROUTING_OPERATION_ROOT with CLIENT_ID, WORK_CENTER_ID from PDH_COMMON_XFRM.V_BRD_WORK_CENTER_HEADER_ROOT. The purpose of this Join condition is to identify where each operation is performed. \n5. Set PLANT_CD from   PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOTN as IPV_PLANT_CD.\n6. Set EFFECTIVE_START_DATE from  PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOT as IPV_START_DATE.\n7. Set EFFECTIVE_END_DATE from  PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOT as IPV_END_DATE.\n8. TASK_LIST_TYPE_CD = 'N'\n9. Derive the PV_ROUTE_CD - Concatenate the \"ROUTE_CD\" + \"-\" + \"PRODUCTION_VERSION_ID\".\n10. Rename the column name - TASK_LIST_GROUP_CD to ROUTE_CD.\n11. We need to remove the leading zeros from the ITEM_ID and OPERATION_NBR. For example, if ITEM_ID = 0000010000007, it should be stored as ITEM_ID = 10000007.\n12. Derive the PV_CROSS_SITE_IND using the following logic: For each unique combination of ITEM_ID, IPV_PLANT_CD, and PV_ROUTE_CD, define the PV_CROSS_SITE_IND by comparing IPV_PLANT_CD with WCH_PLANT_CD across all operations within that combination.\nA. If IPV_PLANT_CD = WCH_PLANT_CD for all OPERATION_NBR records within the ITEM_ID, IPV_PLANT_CD, and PV_ROUTE_CD combination, populate PV_CROSS_SITE_IND as 'N'\nB. If IPV_PLANT_CD does not equal WCH_PLANT_CD for any single OPERATION_NBR within the ITEM_ID, IPV_PLANT_CD, and PV_ROUTE_CD combination, populate PV_CROSS_SITE_IND as 'Y'\n\n13. Get all operations for Substages and 1st Operation for others\nFetch the ITEM_CLASS_NM by joining above reults with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT . Determine if the ITEM_CLASS_NM has substages from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_HEADER_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT when SUBJECT_AREA_NM='Item' and ENTITY_NM='Item' and BUSINESS_RULE_NM='PV_OPR_Substage'. Fetch all OPERATION_NBR for such item classes .Else  Fetch records OPERATION_NBR=   IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_HEADER_DETAIL_CORE_PIT.COLUMN_VALUE_TWO_TXT when SUBJECT_AREA_NM='Item_production_version' and ENTITY_NM='Item_production_version' and BUSINESS_RULE_NM='Item_production_version_Config'\n\n14. OWNER_CD:\nJoin the identified items with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT based on ITEM_ID to get the OWNER_CD",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PRODUCTION_VERSION_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "1.  Join ITEM_ID, PLANT_CD, TASK_LIST_TYPE_CODE, TASK_LIST_GROUP_CODE, GROUP_COUNTER_CODE from PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOT with  ITEM_ID, PLANT_CD, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ITEM_ROUTING_ROOT.  The purpose of this Join condition is to link the production version to the specific routing that is used to make it.",
+      "2. Join CLIENT_ID, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ITEM_ROUTING_ROOT with CLIENT_ID, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ROUTING_HEADER_ROOT. The purpose of this Join condition is to connect routing to its metadata.",
+      "3. Join  CLIENT_ID, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ROUTING_HEADER_ROOT with  CLIENT_ID, TASK_LIST_TYPE_CD, TASK_LIST_GROUP_CD, GROUP_COUNTER_CD from PDH_COMMON_XFRM.V_BRD_ROUTING_OPERATION_ROOT. The purpose of this Join condition is to retrieve the step by step operations under that routing.",
+      "4. Join CLIENT_ID, WORK_CENTER_ID from  PDH_COMMON_XFRM.V_BRD_ROUTING_OPERATION_ROOT with CLIENT_ID, WORK_CENTER_ID from PDH_COMMON_XFRM.V_BRD_WORK_CENTER_HEADER_ROOT. The purpose of this Join condition is to identify where each operation is performed.",
+      "5. Set PLANT_CD from   PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOTN as IPV_PLANT_CD.",
+      "6. Set EFFECTIVE_START_DATE from  PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOT as IPV_START_DATE.",
+      "7. Set EFFECTIVE_END_DATE from  PDH_COMMON_XFRM.V_BRD_ITEM_PRODUCTION_VERSION_ROOT as IPV_END_DATE.",
+      "8. TASK_LIST_TYPE_CD = 'N'",
+      "9. Derive the PV_ROUTE_CD - Concatenate the \"ROUTE_CD\" + \"-\" + \"PRODUCTION_VERSION_ID\".",
+      "10. Rename the column name - TASK_LIST_GROUP_CD to ROUTE_CD.",
+      "11. We need to remove the leading zeros from the ITEM_ID and OPERATION_NBR. For example, if ITEM_ID = 0000010000007, it should be stored as ITEM_ID = 10000007.",
+      "12. Derive the PV_CROSS_SITE_IND using the following logic: For each unique combination of ITEM_ID, IPV_PLANT_CD, and PV_ROUTE_CD, define the PV_CROSS_SITE_IND by comparing IPV_PLANT_CD with WCH_PLANT_CD across all operations within that combination.",
+      "A. If IPV_PLANT_CD = WCH_PLANT_CD for all OPERATION_NBR records within the ITEM_ID, IPV_PLANT_CD, and PV_ROUTE_CD combination, populate PV_CROSS_SITE_IND as 'N'",
+      "B. If IPV_PLANT_CD does not equal WCH_PLANT_CD for any single OPERATION_NBR within the ITEM_ID, IPV_PLANT_CD, and PV_ROUTE_CD combination, populate PV_CROSS_SITE_IND as 'Y'",
+      "13. Get all operations for Substages and 1st Operation for others Fetch the ITEM_CLASS_NM by joining above reults with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT . Determine if the ITEM_CLASS_NM has substages from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_HEADER_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT when SUBJECT_AREA_NM='Item' and ENTITY_NM='Item' and BUSINESS_RULE_NM='PV_OPR_Substage'. Fetch all OPERATION_NBR for such item classes .Else  Fetch records OPERATION_NBR=   IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_HEADER_DETAIL_CORE_PIT.COLUMN_VALUE_TWO_TXT when SUBJECT_AREA_NM='Item_production_version' and ENTITY_NM='Item_production_version' and BUSINESS_RULE_NM='Item_production_version_Config'",
+      "14. OWNER_CD: Join the identified items with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT based on ITEM_ID to get the OWNER_CD"
+     ]
+    },
+    {
+     "row": 486,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PRODUCTION_VERSION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 505,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PRODUCTION_VERSION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 525,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 442,
+     "kind": "open",
+     "text": "Open We need to do Referential Integrity Check with Item_Location(SKU)."
+    },
+    {
+     "row": 443,
+     "kind": "note",
+     "text": "Note If we need \"Shop Floor Product\" then we will bring it in the metadata for the Task_LIst_Type_Cd ='S'"
+    }
+   ]
+  }
+ }
+}

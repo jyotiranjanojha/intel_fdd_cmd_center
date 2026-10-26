@@ -1,0 +1,621 @@
+{
+ "file": "16. FSCO_FFS_APPS/FSCO_FFS_APPS.xlsx",
+ "sheets": [
+  "FSCO_BALANCE_WAFER_STARTS",
+  "FSCO_WIP_PROJECTION_V2",
+  "FFS_V2",
+  "XEUS",
+  "FSCO_BALANCE_WAFER_OUT",
+  "SCHEDULE_START",
+  "SCHEDULE_WIP"
+ ],
+ "skipped": [
+  {
+   "sheet": "FSCO_WIP_PROJECTION",
+   "why": "hidden"
+  },
+  {
+   "sheet": "FFS_V1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "FFS_V2 (2)",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "FSCO_BALANCE_WAFER_STARTS": {
+   "blocks": [
+    {
+     "row": 115,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FSCO_BALANCE_WAFER_STARTS",
+     "target_label": "Source Base - Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 127,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FSCO_BALANCE_WAFER_STARTS",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 139,
+     "text": "1. Delete and load for every site and every shift for the day\n2. Map PLANNINGOWNERSITE to SITE_CODE\n3. For SOURCE_FILE_NM - Concatinate FFS_BATCH_IND_SITE_CODE_CURRENTDATETIME separated by underscore(_). Take BATCH_IND and SITE_CODE from IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.(view name).\n(For Example - FSCO_BAL_SHIFT2_S09_23032026_125400)",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_FSCO_BALANCE_WAFER_STARTS_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "1. Delete and load for every site and every shift for the day",
+      "2. Map PLANNINGOWNERSITE to SITE_CODE",
+      "3. For SOURCE_FILE_NM - Concatinate FFS_BATCH_IND_SITE_CODE_CURRENTDATETIME separated by underscore(_). Take BATCH_IND and SITE_CODE from IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.(view name). (For Example - FSCO_BAL_SHIFT2_S09_23032026_125400)"
+     ]
+    },
+    {
+     "row": 151,
+     "text": "1. Bring only the records where QTY > 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_FSCO_BALANCE_WAFER_STARTS_ROOT and latest MAX of INGEST_TS for the same shift (BATCH_IND = SHIFT1/SHIF2/WEEK) and same SITE_CODE ='YY' (SITE_CODE = 'F32').\n2. Delete the older data set if 2 data sets are received for the same SITE_CODE ='YY' (for eg. SITE_CODE = 'F32') in same shift (for eg. SHIFT1/SHIF2/WEEK) for the day from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "1. Bring only the records where QTY > 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_FSCO_BALANCE_WAFER_STARTS_ROOT and latest MAX of INGEST_TS for the same shift (BATCH_IND = SHIFT1/SHIF2/WEEK) and same SITE_CODE ='YY' (SITE_CODE = 'F32').",
+      "2. Delete the older data set if 2 data sets are received for the same SITE_CODE ='YY' (for eg. SITE_CODE = 'F32') in same shift (for eg. SHIFT1/SHIF2/WEEK) for the day from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_ROOT."
+     ]
+    },
+    {
+     "row": 160,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 194,
+     "text": "1. Derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='Balance_Starts' and pass the Column_Value_Two_Txt as column value.\n2. Derive the SOURCE_SYSTEM_NM using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='Balance_Starts' and pass the Column_Value_Three_Txt as column value.\n3. Define LOCATION_ID = MANUFACTURING_LOCATION_CD\n4. For defining SCHEDULE_DATE\nFetch the CALENDAR_DT as per below logic from V_CRR_FINANCE_CALENDAR by mapping the FISCAL_YEAR_WORK_WEEK_NBR and  DAY_OF_WEEK_NBR with WAFER_START_WW -\nIf BATCH_IND = 'SHIFT1'/'SHIFT2 then by mapping the COLUMN_VALUE_ELEVEN_TXT as Current_Date() where  and Business_Rule_Nm ='Schedule_Config',  Entity_Nm ='Schedule', Subject_Area_Nm ='FSCO_Sch' and COLUMN_VALUE_TWELVE_TXT ='7'.\nIF BATCH_IND = 'WEEK' then Saturday of the work week by mapping the COLUMN_VALUE_TWELVE_TXT in metadata where  and Business_Rule_Nm ='Schedule_Config',  Entity_Nm ='Schedule', Subject_Area_Nm ='FSCO_Sch' and  COLUMN_VALUE_TWELVE_TXT ='7'.\n5. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_ROOT to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. Derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='Balance_Starts' and pass the Column_Value_Two_Txt as column value.",
+      "2. Derive the SOURCE_SYSTEM_NM using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='Balance_Starts' and pass the Column_Value_Three_Txt as column value.",
+      "3. Define LOCATION_ID = MANUFACTURING_LOCATION_CD",
+      "4. For defining SCHEDULE_DATE Fetch the CALENDAR_DT as per below logic from V_CRR_FINANCE_CALENDAR by mapping the FISCAL_YEAR_WORK_WEEK_NBR and  DAY_OF_WEEK_NBR with WAFER_START_WW - If BATCH_IND = 'SHIFT1'/'SHIFT2 then by mapping the COLUMN_VALUE_ELEVEN_TXT as Current_Date() where  and Business_Rule_Nm ='Schedule_Config',  Entity_Nm ='Schedule', Subject_Area_Nm ='FSCO_Sch' and COLUMN_VALUE_TWELVE_TXT ='7'. IF BATCH_IND = 'WEEK' then Saturday of the work week by mapping the COLUMN_VALUE_TWELVE_TXT in metadata where  and Business_Rule_Nm ='Schedule_Config',  Entity_Nm ='Schedule', Subject_Area_Nm ='FSCO_Sch' and  COLUMN_VALUE_TWELVE_TXT ='7'.",
+      "5. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_ROOT to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 77,
+     "kind": "header-area requirement",
+     "text": "Open List of Site code need to be finalised"
+    }
+   ]
+  },
+  "FSCO_WIP_PROJECTION_V2": {
+   "blocks": [
+    {
+     "row": 124,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FSCO_WIP_PROJECTION",
+     "target_label": "Source Base - Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 136,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FSCO_WIP_PROJECTION",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 147,
+     "text": "1. Delete and load for every site and every shift for the day\n2. Map PLANNINGOWNERSITE to SITE_CODE\n3. For BATCH_IND - Concatinate BATCH_IND and  SHIFTNO\n4. For SOURCE_FILE_NM - Concatinate FFS_BATCH_IND_SITE_CODE_CURRENTDATETIME separated by underscore(_). Take BATCH_IND and SITE_CODE from IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.(view name).\n(For Example - FSCO_WIP_SHIFT1_F021-F21_23032026_125400)",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_FSCO_WIP_PROJECTION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "1. Delete and load for every site and every shift for the day",
+      "2. Map PLANNINGOWNERSITE to SITE_CODE",
+      "3. For BATCH_IND - Concatinate BATCH_IND and  SHIFTNO",
+      "4. For SOURCE_FILE_NM - Concatinate FFS_BATCH_IND_SITE_CODE_CURRENTDATETIME separated by underscore(_). Take BATCH_IND and SITE_CODE from IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.(view name). (For Example - FSCO_WIP_SHIFT1_F021-F21_23032026_125400)"
+     ]
+    },
+    {
+     "row": 158,
+     "text": "1. Bring only the records where QTY > 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_FSCO_WIP_PROJECTION_ROOT and latest MAX of INGEST_TS for the same shift (BATCH_IND = SHIFT1/SHIF2/WEEK) and same SITE_CODE ='YY' (SITE_CODE = 'F32').\n2. Delete the older data set if 2 data sets are received for the same SITE_CODE ='YY' (for eg. SITE_CODE = 'F32') in same shift (for eg. SHIFT1/SHIF2/WEEK) for the day from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "1. Bring only the records where QTY > 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_FSCO_WIP_PROJECTION_ROOT and latest MAX of INGEST_TS for the same shift (BATCH_IND = SHIFT1/SHIF2/WEEK) and same SITE_CODE ='YY' (SITE_CODE = 'F32').",
+      "2. Delete the older data set if 2 data sets are received for the same SITE_CODE ='YY' (for eg. SITE_CODE = 'F32') in same shift (for eg. SHIFT1/SHIF2/WEEK) for the day from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT."
+     ]
+    },
+    {
+     "row": 169,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 204,
+     "text": "1. Derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='WIP_Projection' and pass the Column_Value_Two_Txt as column value.\n2. Derive th SOURCE_SYSTEM_NM using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='WIP_Projection', Column_Value_Two_Txt='WIP_Projection' and pass the Column_Value_Three_Txt as column value.\n3. For defining SCHEDULE_DATE\nFetch the CALENDAR_DT as per below logic from V_CRR_FINANCE_CALENDAR by mapping the FISCAL_YEAR_WORK_WEEK_NBR and DAY_OF_WEEK_NBR with SCHEDULE_DATE -\nIf BATCH_IND = 'SHIFT1'/'SHIFT2 then by mapping the COLUMN_VALUE_ELEVEN_TXT as Current_Date() where  Business_Rule_Nm ='FinanceCalendar',  Entity_Nm ='Calendar', Subject_Area_Nm ='FSCO_Cal' and  COLUMN_VALUE_ONE_TXT ='Saturday'. \nIF BATCH_IND = 'WEEK' then Saturday of the work week by mapping the COLUMN_VALUE_TWELVE_TXT in metadata where  and Business_Rule_Nm ='FinanceCalendar',  Entity_Nm ='Calendar', Subject_Area_Nm ='FSCO_Cal' and  COLUMN_VALUE_ONE_TXT ='Saturday'. \n4. For defining PRODUCTION_ID we need below column from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT\n4.1. LOCATION_ID\n4.2. FISCAL_YEAR_NBR||WORK_WEEK_NM  - Join FISCAL_YEAR_WORK_WEEK_NBR from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT with FISCAL_YEAR_WORK_WEEK_NBR\nfrom IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR to get FISCAL_YEAR_NBR and WORK_WEEK_NM\n4.3. DAY_OF_WEEK_NBR (Monday = 2) - Join FISCAL_YEAR_WORK_WEEK_NBR, WORK_WEEK_NM and DAY_OF_WORK_WEEK_NM from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT with FISCAL_YEAR_WORK_WEEK_NBR, WORK_WEEK_NM and DAY_OF_WORK_WEEK_NM\nfrom IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR to get DAY_OF_WEEK_NBR\n4.4. BATCH_IND - If BATCH_IND = SHIFT1 then 'D' and if BATCH_IND = SHIFT2 then 'N' and BATCH_IND = WEEK then 'W'\n4.5. PUBLISHEDDATE - only Time - to get the time extract the time part from PUBLISHEDDATE in HHMMSS format\nNow combine the above fields in below format\n<LOCATION_ID>_<FISCAL_YEAR_NBR||WORK_WEEK_NM>.<DAY_OF_WORK_WEEK_NBR><SHIFTNO><PUBLISHEDDATE(HHMMSS)> (1011_2024WW48.2N043134)\n5. OPERATION_NBR = MES_OPERATION to be converted to OPERATION_NBR (Jyoti to help with conversion). For now default it to \"10\"\n6. Define LOCATION_ID = MANUFACTURING_LOCATION_CD\n7. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_STAGE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. Derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='WIP_Projection' and pass the Column_Value_Two_Txt as column value.",
+      "2. Derive th SOURCE_SYSTEM_NM using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='WIP_Projection', Column_Value_Two_Txt='WIP_Projection' and pass the Column_Value_Three_Txt as column value.",
+      "3. For defining SCHEDULE_DATE Fetch the CALENDAR_DT as per below logic from V_CRR_FINANCE_CALENDAR by mapping the FISCAL_YEAR_WORK_WEEK_NBR and DAY_OF_WEEK_NBR with SCHEDULE_DATE - If BATCH_IND = 'SHIFT1'/'SHIFT2 then by mapping the COLUMN_VALUE_ELEVEN_TXT as Current_Date() where  Business_Rule_Nm ='FinanceCalendar',  Entity_Nm ='Calendar', Subject_Area_Nm ='FSCO_Cal' and  COLUMN_VALUE_ONE_TXT ='Saturday'. IF BATCH_IND = 'WEEK' then Saturday of the work week by mapping the COLUMN_VALUE_TWELVE_TXT in metadata where  and Business_Rule_Nm ='FinanceCalendar',  Entity_Nm ='Calendar', Subject_Area_Nm ='FSCO_Cal' and  COLUMN_VALUE_ONE_TXT ='Saturday'.",
+      "4. For defining PRODUCTION_ID we need below column from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT",
+      "4.1. LOCATION_ID",
+      "4.2. FISCAL_YEAR_NBR||WORK_WEEK_NM  - Join FISCAL_YEAR_WORK_WEEK_NBR from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT with FISCAL_YEAR_WORK_WEEK_NBR from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR to get FISCAL_YEAR_NBR and WORK_WEEK_NM",
+      "4.3. DAY_OF_WEEK_NBR (Monday = 2) - Join FISCAL_YEAR_WORK_WEEK_NBR, WORK_WEEK_NM and DAY_OF_WORK_WEEK_NM from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT with FISCAL_YEAR_WORK_WEEK_NBR, WORK_WEEK_NM and DAY_OF_WORK_WEEK_NM from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR to get DAY_OF_WEEK_NBR",
+      "4.4. BATCH_IND - If BATCH_IND = SHIFT1 then 'D' and if BATCH_IND = SHIFT2 then 'N' and BATCH_IND = WEEK then 'W'",
+      "4.5. PUBLISHEDDATE - only Time - to get the time extract the time part from PUBLISHEDDATE in HHMMSS format Now combine the above fields in below format <LOCATION_ID>_<FISCAL_YEAR_NBR||WORK_WEEK_NM>.<DAY_OF_WORK_WEEK_NBR><SHIFTNO><PUBLISHEDDATE(HHMMSS)> (1011_2024WW48.2N043134)",
+      "5. OPERATION_NBR = MES_OPERATION to be converted to OPERATION_NBR (Jyoti to help with conversion). For now default it to \"10\"",
+      "6. Define LOCATION_ID = MANUFACTURING_LOCATION_CD",
+      "7. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_ROOT to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_STAGE."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 77,
+     "kind": "header-area requirement",
+     "text": "Open List of Site code need to be finalised"
+    }
+   ]
+  },
+  "FFS_V2": {
+   "blocks": [
+    {
+     "row": 214,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_ATD",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 282,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_PG",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 350,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_KM",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 418,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_KM8",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 486,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_VN",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 554,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_CR",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 623,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_CD",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 646,
+     "text": "1. Delete and load for every site and every shift for the day\n2. Unioin all the above source view and load the data to the root table along with below steps\n2.1. While loading the source file hadcode the SITE_CODE coulm as per the sorce view name.\n(For Example - if the view name is IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_CD then the SITE_CODE would be \"CD\")\n2.2. In FFS, if the  BATCH_IND  is 'S' and PRODUCTION_ID is having 'D' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as SHIFT1.\n(For Example - 1011_2024WW48.2D101512 - SHIFT1 )\n2.3. In FFS, if the  BATCH_IND  is 'S' and PRODUCTION_ID is having 'N' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as SHIFT2.\n(For Example - 1011_2024WW48.2N043134 - SHIFT2)\n2.4. In FFS, if the  BATCH_IND  is 'W' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as WEEK.\n2.5. for SOURCE_FILE_NM - Concatinate FFS_BATCH_IND_SITE_CODE_CURRENTDATETIME separated by underscore(_). Take BATCH_IND and SITE_CODE from IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.(view name).\n(For Example - FFS_SHIFT2_CD_24102025_100500)",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_FFS_WIP_PROJECTION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "1. Delete and load for every site and every shift for the day",
+      "2. Unioin all the above source view and load the data to the root table along with below steps",
+      "2.1. While loading the source file hadcode the SITE_CODE coulm as per the sorce view name. (For Example - if the view name is IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_CD then the SITE_CODE would be \"CD\")",
+      "2.2. In FFS, if the  BATCH_IND  is 'S' and PRODUCTION_ID is having 'D' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as SHIFT1. (For Example - 1011_2024WW48.2D101512 - SHIFT1 )",
+      "2.3. In FFS, if the  BATCH_IND  is 'S' and PRODUCTION_ID is having 'N' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as SHIFT2. (For Example - 1011_2024WW48.2N043134 - SHIFT2)",
+      "2.4. In FFS, if the  BATCH_IND  is 'W' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as WEEK.",
+      "2.5. for SOURCE_FILE_NM - Concatinate FFS_BATCH_IND_SITE_CODE_CURRENTDATETIME separated by underscore(_). Take BATCH_IND and SITE_CODE from IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.(view name). (For Example - FFS_SHIFT2_CD_24102025_100500)"
+     ]
+    },
+    {
+     "row": 670,
+     "text": "1. Bring only the records where QTY > 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_FFS_ROOT and latest MAX of INGEST_TS for the same shift (BATCH_IND = SHIFT1/SHIF2/WEEK) and same SITE_CODE ='YY' (SITE_CODE = 'F32').\n2. Delete the older data set if 2 data sets are received for the same SITE_CODE ='YY' (for eg. SITE_CODE = 'F32') in same shift (for eg. SHIFT1/SHIF2/WEEK) for the day from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "1. Bring only the records where QTY > 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_FFS_ROOT and latest MAX of INGEST_TS for the same shift (BATCH_IND = SHIFT1/SHIF2/WEEK) and same SITE_CODE ='YY' (SITE_CODE = 'F32').",
+      "2. Delete the older data set if 2 data sets are received for the same SITE_CODE ='YY' (for eg. SITE_CODE = 'F32') in same shift (for eg. SHIFT1/SHIF2/WEEK) for the day from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_ROOT."
+     ]
+    },
+    {
+     "row": 705,
+     "text": "1. For the items where WIP_SW=0, derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='FFS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='FFS', COLUMN_VALUE_FIVE_TXT='0' and pass the Column_Value_Two_Txt as column value\n2. For the items where WIP_SW=1, derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='FFS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='FFS', COLUMN_VALUE_FIVE_TXT='1' and pass the Column_Value_Two_Txt as column value\n3. Derive th SOURCE_SYSTEM_NM using metadata where Subject_Area_Nm='Schedule', Entity_Nm='FFS_Sch', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='FFS', Column_Value_Two_Txt='Balance Starts' and pass the Column_Value_Three_Txt as column value.\n4. For the items where WIP_SW=0, Map the LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE with the START_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT.\n5. For the items where WIP_SW=1, Map the LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE with the OUT_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT.\n6. For the items where WIP_SW=0, Map the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_SATAGE with the START_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT.\n7. For the items where WIP_SW=1, Map the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_SATAGE with the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT.\n8. OPERATION = OPERATION to be converted to OPERATION_NBR (Jyoti to help with conversion). For now default it to \"10\"\n9. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE.\n10. To define SALES_ORDER_REF - Concatenate SALES_ORDER_ID, SALES_ORDER_LINE_ID and SALES_ORDER_SCHEDULE_LINE separated by underscore(_) for example 1020000510_10_1.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. For the items where WIP_SW=0, derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='FFS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='FFS', COLUMN_VALUE_FIVE_TXT='0' and pass the Column_Value_Two_Txt as column value",
+      "2. For the items where WIP_SW=1, derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='FFS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='FFS', COLUMN_VALUE_FIVE_TXT='1' and pass the Column_Value_Two_Txt as column value",
+      "3. Derive th SOURCE_SYSTEM_NM using metadata where Subject_Area_Nm='Schedule', Entity_Nm='FFS_Sch', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='FFS', Column_Value_Two_Txt='Balance Starts' and pass the Column_Value_Three_Txt as column value.",
+      "4. For the items where WIP_SW=0, Map the LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE with the START_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT.",
+      "5. For the items where WIP_SW=1, Map the LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE with the OUT_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT.",
+      "6. For the items where WIP_SW=0, Map the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_SATAGE with the START_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT.",
+      "7. For the items where WIP_SW=1, Map the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_SATAGE with the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT.",
+      "8. OPERATION = OPERATION to be converted to OPERATION_NBR (Jyoti to help with conversion). For now default it to \"10\"",
+      "9. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_ROOT to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE.",
+      "10. To define SALES_ORDER_REF - Concatenate SALES_ORDER_ID, SALES_ORDER_LINE_ID and SALES_ORDER_SCHEDULE_LINE separated by underscore(_) for example 1020000510_10_1."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 131,
+     "kind": "header-area requirement",
+     "text": "Open List of Site code need to be finalised"
+    },
+    {
+     "row": 135,
+     "kind": "header-area requirement",
+     "text": "Assumption FFS - For Projected WIP they will populate the Out Location, but if it is a Balance wafer starts then they will populate the Start Location."
+    }
+   ]
+  },
+  "XEUS": {
+   "blocks": [
+    {
+     "row": 149,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.XEUS_WIP_PROJECTION",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 172,
+     "text": "1. Delete and load for every site and every shift for the day\n2. Unioin all the above source view and load the data to the root table along with below steps\n2.1. While loading the source file hadcode the SITE_CODE (YY) coulm as per the sorce view name.\n(For Example - if the view name is IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_CD then the SITE_CODE would be \"CD\")\n2.2. In FFS, if the  BATCH_IND  is 'S' and PRODUCTION_ID is having 'D' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as SHIFT1.\n(For Example - 1011_2024WW48.2D101512 - SHIFT1 )\n2.3. In FFS, if the  BATCH_IND  is 'S' and PRODUCTION_ID is having 'N' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as SHIFT2.\n(For Example - 1011_2024WW48.2N043134 - SHIFT2)\n2.4. In FFS, if the  BATCH_IND  is 'W' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as WEEK.\n2.5. for SOURCE_FILE_NM - Concatinate FFS_BATCH_IND_SITE_CODE_CURRENTDATETIME separated by underscore(_). Take BATCH_IND and SITE_CODE from IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.(view name).\n(For Example - XEUS_SHIFT2_CD_24102025_100500)",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_XEUS_WIP_PROJECTION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "1. Delete and load for every site and every shift for the day",
+      "2. Unioin all the above source view and load the data to the root table along with below steps",
+      "2.1. While loading the source file hadcode the SITE_CODE (YY) coulm as per the sorce view name. (For Example - if the view name is IF_SUPPLY_CHAIN.PDH_COMMON_SRC.FFS_WIP_PROJECTION_CD then the SITE_CODE would be \"CD\")",
+      "2.2. In FFS, if the  BATCH_IND  is 'S' and PRODUCTION_ID is having 'D' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as SHIFT1. (For Example - 1011_2024WW48.2D101512 - SHIFT1 )",
+      "2.3. In FFS, if the  BATCH_IND  is 'S' and PRODUCTION_ID is having 'N' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as SHIFT2. (For Example - 1011_2024WW48.2N043134 - SHIFT2)",
+      "2.4. In FFS, if the  BATCH_IND  is 'W' then update BATCH_IND in IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.FFS as WEEK.",
+      "2.5. for SOURCE_FILE_NM - Concatinate FFS_BATCH_IND_SITE_CODE_CURRENTDATETIME separated by underscore(_). Take BATCH_IND and SITE_CODE from IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.(view name). (For Example - XEUS_SHIFT2_CD_24102025_100500)"
+     ]
+    },
+    {
+     "row": 196,
+     "text": "1. Bring only the records where QTY > 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_XEUS_ROOT and latest MAX of INGEST_TS for the same shift (BATCH_IND = SHIFT1/SHIF2/WEEK) and same SITE_CODE ='YY' (SITE_CODE = 'F32').\n2. Delete the older data set if 2 data sets are received for the same SITE_CODE ='YY' (for eg. SITE_CODE = 'F32') in same shift (for eg. SHIFT1/SHIF2/WEEK) for the day from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "1. Bring only the records where QTY > 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_XEUS_ROOT and latest MAX of INGEST_TS for the same shift (BATCH_IND = SHIFT1/SHIF2/WEEK) and same SITE_CODE ='YY' (SITE_CODE = 'F32').",
+      "2. Delete the older data set if 2 data sets are received for the same SITE_CODE ='YY' (for eg. SITE_CODE = 'F32') in same shift (for eg. SHIFT1/SHIF2/WEEK) for the day from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_ROOT."
+     ]
+    },
+    {
+     "row": 231,
+     "text": "1. For the items where WIP_SW=0, derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='XEUS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='XEUS', COLUMN_VALUE_FIVE_TXT='0' and pass the Column_Value_Two_Txt as column value\n2. For the items where WIP_SW=1, derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='XEUS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='XEUS', COLUMN_VALUE_FIVE_TXT='1' and pass the Column_Value_Two_Txt as column value\n3. Derive th SOURCE_SYSTEM_NM using metadata where Subject_Area_Nm='XEUS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='XEUS' and pass the Column_Value_Three_Txt as column value.\n4. For items where WIP_SW=0, Map the LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE with the START_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT.\n5. For items where WIP_SW=1, Map the LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE with the OUT_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT.\n6. For items where WIP_SW=0, Map the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_SATAGE with the START_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT.\n7. For the items where WIP_SW=1, Map the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_SATAGE with the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT.\n8. OPERATION = OPERATION to be converted to OPERATION_NBR (Jyoti to help with conversion). For now default it to \"10\"\n9. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE.\n10. To define SALES_ORDER_REF - Concatenate SALES_ORDER_ID, SALES_ORDER_LINE_ID and SALES_ORDER_SCHEDULE_LINE separated by underscore(_) for example 1020000510_10_1.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. For the items where WIP_SW=0, derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='XEUS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='XEUS', COLUMN_VALUE_FIVE_TXT='0' and pass the Column_Value_Two_Txt as column value",
+      "2. For the items where WIP_SW=1, derive the PROJECTION_TYPE using metadata where Subject_Area_Nm='XEUS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='XEUS', COLUMN_VALUE_FIVE_TXT='1' and pass the Column_Value_Two_Txt as column value",
+      "3. Derive th SOURCE_SYSTEM_NM using metadata where Subject_Area_Nm='XEUS_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='XEUS' and pass the Column_Value_Three_Txt as column value.",
+      "4. For items where WIP_SW=0, Map the LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE with the START_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT.",
+      "5. For items where WIP_SW=1, Map the LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE with the OUT_LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT.",
+      "6. For items where WIP_SW=0, Map the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_SATAGE with the START_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT.",
+      "7. For the items where WIP_SW=1, Map the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_SATAGE with the SCHEDULE_DATE in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT.",
+      "8. OPERATION = OPERATION to be converted to OPERATION_NBR (Jyoti to help with conversion). For now default it to \"10\"",
+      "9. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_ROOT to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE.",
+      "10. To define SALES_ORDER_REF - Concatenate SALES_ORDER_ID, SALES_ORDER_LINE_ID and SALES_ORDER_SCHEDULE_LINE separated by underscore(_) for example 1020000510_10_1."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 66,
+     "kind": "header-area requirement",
+     "text": "Open List of Site code need to be finalised"
+    },
+    {
+     "row": 70,
+     "kind": "header-area requirement",
+     "text": "Assumption FFS - For Projected WIP they will populate the Out Location, but if it is a Balance wafer starts then they will populate the Start Location."
+    }
+   ]
+  },
+  "FSCO_BALANCE_WAFER_OUT": {
+   "blocks": [
+    {
+     "row": 104,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 121,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 159,
+     "text": "1. Derive the 'PROJECTION_TYPE' using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='WIP_Projection_PDH' and pass the Column_Value_Two_Txt as column value.\n2. Derive the 'SOURCE_SYSTEM_NM' using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='WIP_Projection_PDH', Column_Value_Two_Txt='WIP Projection' and pass the Column_Value_Three_Txt as column value.\n3. Join the ITEM_ID, LOCATION_ID and SCHEDULE_DATE ( convert it to FISCAL_YEAR_WORK_WEEK_NBR using calander ) column in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE with ITEM_ID, PLANT_CD and FISCAL_YEAR_WORK_WEEK_NBR  column in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT and bring the relevant items to this core view.\n4. For defining PROJECTED_QTY:\nTo calculate the 'PROJECTED_QTY' for the respective item, get the PARAMETER_QTY from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT where PARAMETER_NM = COLUMN_VALUE_TWO_TXT from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where SUBJECT_AREA_NM='FSCO_Prm' and ENTITY_NM='Parameter' and BUSINESS_RULE_NM='Parameter_Config' and COLUMN_VALUE_ONE_TXT='YIELD_Parameter' by mapping the 'ITEM_ID' and 'LOCATION_ID' form IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE with the Parameter view. Then calculate the percentage of the QTY with the PARAMETER_QTY value. \ni.e., (QTY * PARAMETER_QTY)/100\n5. For defining 'PROJECTED_SCHEDULE_DATE' - Join the FISCAL_YEAR_WORK_WEEK_NBR of V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT with V_CRR_FINANCE_CALENDAR to fetch the CALENDAR_DT. \nThen, add the PARAMETER_QTY (which is in days) to the calander date of the current WW. Fetch the PARAMETER_QTY value from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT where PARAMETER_NM = COLUMN_VALUE_TWO_TXT from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where SUBJECT_AREA_NM='FSCO_Prm' and ENTITY_NM='Parameter' and BUSINESS_RULE_NM='Parameter_Config' and COLUMN_VALUE_ONE_TXT='TPT_Parameter', by mapping the ITEM_ID and LOCATION_ID form IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE with the Parameter view. \n(Eg: If the calander date is 04-11-2025, then add 5 days to it, which will result in 09-11-2025)\n6. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. Derive the 'PROJECTION_TYPE' using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='WIP_Projection_PDH' and pass the Column_Value_Two_Txt as column value.",
+      "2. Derive the 'SOURCE_SYSTEM_NM' using metadata where Subject_Area_Nm='FSCO_Sch', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config', Column_Value_One_Txt='WIP_Projection_PDH', Column_Value_Two_Txt='WIP Projection' and pass the Column_Value_Three_Txt as column value.",
+      "3. Join the ITEM_ID, LOCATION_ID and SCHEDULE_DATE ( convert it to FISCAL_YEAR_WORK_WEEK_NBR using calander ) column in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE with ITEM_ID, PLANT_CD and FISCAL_YEAR_WORK_WEEK_NBR  column in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT and bring the relevant items to this core view.",
+      "4. For defining PROJECTED_QTY: To calculate the 'PROJECTED_QTY' for the respective item, get the PARAMETER_QTY from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT where PARAMETER_NM = COLUMN_VALUE_TWO_TXT from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where SUBJECT_AREA_NM='FSCO_Prm' and ENTITY_NM='Parameter' and BUSINESS_RULE_NM='Parameter_Config' and COLUMN_VALUE_ONE_TXT='YIELD_Parameter' by mapping the 'ITEM_ID' and 'LOCATION_ID' form IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE with the Parameter view. Then calculate the percentage of the QTY with the PARAMETER_QTY value. i.e., (QTY * PARAMETER_QTY)/100",
+      "5. For defining 'PROJECTED_SCHEDULE_DATE' - Join the FISCAL_YEAR_WORK_WEEK_NBR of V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT with V_CRR_FINANCE_CALENDAR to fetch the CALENDAR_DT. Then, add the PARAMETER_QTY (which is in days) to the calander date of the current WW. Fetch the PARAMETER_QTY value from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT where PARAMETER_NM = COLUMN_VALUE_TWO_TXT from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where SUBJECT_AREA_NM='FSCO_Prm' and ENTITY_NM='Parameter' and BUSINESS_RULE_NM='Parameter_Config' and COLUMN_VALUE_ONE_TXT='TPT_Parameter', by mapping the ITEM_ID and LOCATION_ID form IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE with the Parameter view. (Eg: If the calander date is 04-11-2025, then add 5 days to it, which will result in 09-11-2025)",
+      "6. Bring rest of the column as its from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_WAFER_STARTS_STAGE to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 77,
+     "kind": "header-area requirement",
+     "text": "Open List of Site code need to be finalised"
+    }
+   ]
+  },
+  "SCHEDULE_START": {
+   "blocks": [
+    {
+     "row": 62,
+     "text": "1. Bring only the records where WIP_SW = 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_STAGE",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "1. Bring only the records where WIP_SW = 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_STAGE"
+     ]
+    },
+    {
+     "row": 78,
+     "text": "1. Bring only the records where WIP_SW = 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_STAGE",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "1. Bring only the records where WIP_SW = 0 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_STAGE"
+     ]
+    },
+    {
+     "row": 94,
+     "text": "1. Union the following stage view to create a View IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_START_CORE\nStage View - \t\nIF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE\nIF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE\n2. While doing union create common colum for 'SCHEDULE_TYPE_NM', 'ITEM_ID', 'QTY', 'SCHEDULE_DATE' 'LOCATION_ID', 'PLANNING_OWNER_SITE', 'INGEST_TS', 'BATCH_IND', 'SOURCE_SYSTEM_NM', 'SOURCE_FILE_NM' as thet are common across all the 3 views.\n3. While doing union rename 'STAGE' to 'PLANNING_STAGE'.\n4. While doing union remove  'LOAD_DATE'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_BALANCE_START_CORE",
+     "target_label": "Target View",
+     "context": [],
+     "statements": [
+      "1. Union the following stage view to create a View IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_START_CORE Stage View - IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE",
+      "2. While doing union create common colum for 'SCHEDULE_TYPE_NM', 'ITEM_ID', 'QTY', 'SCHEDULE_DATE' 'LOCATION_ID', 'PLANNING_OWNER_SITE', 'INGEST_TS', 'BATCH_IND', 'SOURCE_SYSTEM_NM', 'SOURCE_FILE_NM' as thet are common across all the 3 views.",
+      "3. While doing union rename 'STAGE' to 'PLANNING_STAGE'.",
+      "4. While doing union remove  'LOAD_DATE'."
+     ]
+    },
+    {
+     "row": 121,
+     "text": "Timetravel only the Weekly data i.e. BATCH_IND = 'WEEKLY' for Saturday snapshort (Saturday|| ''23:59:59.000'')",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_BALANCE_START_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "Timetravel only the Weekly data i.e. BATCH_IND = 'WEEKLY' for Saturday snapshort (Saturday|| ''23:59:59.000'')"
+     ]
+    },
+    {
+     "row": 133,
+     "text": "Timetravel only the Weekly data i.e. BATCH_IND = 'WEEKLY' for Saturday snapshort (Saturday|| ''23:59:59.000'')",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_BALANCE_START_CORE_MEMORIES",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "Timetravel only the Weekly data i.e. BATCH_IND = 'WEEKLY' for Saturday snapshort (Saturday|| ''23:59:59.000'')"
+     ]
+    },
+    {
+     "row": 145,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_BALANCE_START_CORE_PIT",
+     "target_label": "Core Pit",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 44,
+     "kind": "header-area requirement",
+     "text": "Open List of Site code need to be finalised"
+    },
+    {
+     "row": 49,
+     "kind": "header-area requirement",
+     "text": "FFS - For Projected WIP they will populate the Out Location, but if it is a Balance wafer starts then they will populate the Start Location."
+    }
+   ]
+  },
+  "SCHEDULE_WIP": {
+   "blocks": [
+    {
+     "row": 65,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_WIP_PROJECTION_STAGE",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 76,
+     "text": "1. Bring only the records where WIP_SW = 1 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_STAGE",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "1. Bring only the records where WIP_SW = 1 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_STAGE"
+     ]
+    },
+    {
+     "row": 88,
+     "text": "1. Bring only the records where WIP_SW = 1 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_STAGE",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "1. Bring only the records where WIP_SW = 1 from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_STAGE"
+     ]
+    },
+    {
+     "row": 100,
+     "text": "",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE",
+     "target_label": "Source View",
+     "context": [],
+     "statements": []
+    },
+    {
+     "row": 109,
+     "text": "1. Union the following stage view to create a View IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE\nStage View - \t\nIF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_FSCO_WIP_PROJECTION_STAGE\nIF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE\nIF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE\nIF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE\n2. While doing union create common colum for 'SCHEDULE_TYPE_NM', 'ITEM_ID', 'LOCATION_ID', 'LOT_ID', 'PRODUCTION_ID', 'SALES_ORDER_REF', 'SCHEDULED_DATE', 'QTY', 'PLANNING_OWNER_SITE', 'PLANNING_STAGE', 'PV_ROUTE_CD', OPERATION_NBR', 'INGEST_TS', 'BATCH_IND', 'SOURCE_SYSTEM_NM', 'SOURCE_FILE_NM' as thet are common across all the 4 views.\n3. While doing union merge  'PROJECTED_QTY' from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE to 'QTY' in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE.\n4. While doing union ignore 'QTY' in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE.\n5. While doing union remove 'PUBLISHED_DATE', 'LOAD_DATE', 'BATCH_ START_DATETIME', 'PUBLISHEDDATE', 'FISCAL_YEAR_WORK_WEEK_NBR' and 'DAY_OF_WORK_WEEK_NBR'.\n6. Bring the 'PROJECTED_QTY' and 'PROJECTED_SCHEDULE_DATE' column from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE in 'QTY' and 'SCHEDULE_DATE' respectively.\n7. While doing union merge  'LOT_OWNER_CODE' from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE to 'LOT_OWNER' in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE",
+     "target_label": "Traget View",
+     "context": [],
+     "statements": [
+      "1. Union the following stage view to create a View IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE Stage View - IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_FSCO_WIP_PROJECTION_STAGE IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_FFS_WIP_PROJECTION_STAGE IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_XEUS_WIP_PROJECTION_STAGE IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE",
+      "2. While doing union create common colum for 'SCHEDULE_TYPE_NM', 'ITEM_ID', 'LOCATION_ID', 'LOT_ID', 'PRODUCTION_ID', 'SALES_ORDER_REF', 'SCHEDULED_DATE', 'QTY', 'PLANNING_OWNER_SITE', 'PLANNING_STAGE', 'PV_ROUTE_CD', OPERATION_NBR', 'INGEST_TS', 'BATCH_IND', 'SOURCE_SYSTEM_NM', 'SOURCE_FILE_NM' as thet are common across all the 4 views.",
+      "3. While doing union merge  'PROJECTED_QTY' from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE to 'QTY' in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE.",
+      "4. While doing union ignore 'QTY' in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE.",
+      "5. While doing union remove 'PUBLISHED_DATE', 'LOAD_DATE', 'BATCH_ START_DATETIME', 'PUBLISHEDDATE', 'FISCAL_YEAR_WORK_WEEK_NBR' and 'DAY_OF_WORK_WEEK_NBR'.",
+      "6. Bring the 'PROJECTED_QTY' and 'PROJECTED_SCHEDULE_DATE' column from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE in 'QTY' and 'SCHEDULE_DATE' respectively.",
+      "7. While doing union merge  'LOT_OWNER_CODE' from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_FSCO_BALANCE_OUT_STAGE to 'LOT_OWNER' in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE."
+     ]
+    },
+    {
+     "row": 139,
+     "text": "Timetravel only the Weekly data i.e. BATCH_IND = 'WEEKLY' for Saturday snapshort (Saturday|| ''23:59:59.000'')",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_WORK_IN_PROCESS_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "Timetravel only the Weekly data i.e. BATCH_IND = 'WEEKLY' for Saturday snapshort (Saturday|| ''23:59:59.000'')"
+     ]
+    },
+    {
+     "row": 157,
+     "text": "Timetravel only the Weekly data i.e. BATCH_IND = 'WEEKLY' for Saturday snapshort (Saturday|| ''23:59:59.000'')",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_WORK_IN_PROCESS_CORE_MEMORIES",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "Timetravel only the Weekly data i.e. BATCH_IND = 'WEEKLY' for Saturday snapshort (Saturday|| ''23:59:59.000'')"
+     ]
+    },
+    {
+     "row": 175,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_WORK_IN_PROCESS_CORE_PIT",
+     "target_label": "Core Pit",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 48,
+     "kind": "header-area requirement",
+     "text": "Open List of Site code need to be finalised"
+    },
+    {
+     "row": 53,
+     "kind": "header-area requirement",
+     "text": "FFS - For Projected WIP they will populate the Out Location, but if it is a Balance wafer starts then they will populate the Start Location."
+    }
+   ]
+  }
+ }
+}

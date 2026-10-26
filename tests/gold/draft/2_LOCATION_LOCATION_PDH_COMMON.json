@@ -1,0 +1,391 @@
+{
+ "file": "2. LOCATION/LOCATION_PDH_COMMON.xlsx",
+ "sheets": [
+  "Plant_Core_v2",
+  "Storage_Location_Core",
+  "Plant_CD_Mapping_v2"
+ ],
+ "skipped": [
+  {
+   "sheet": "Plant_Core_v1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Plant_Core",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Plant_CD_Mapping",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Plant_CD_Mapping_v1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Sheet1",
+   "why": "SheetN duplicate of a named design sheet"
+  }
+ ],
+ "by_sheet": {
+  "Plant_Core_v2": {
+   "blocks": [
+    {
+     "row": 144,
+     "text": "Get only active locations from the source LOCATION_IF_ANALYSIS.INTELFOUNDRY_PLANT by filtering on the column PLANT_STATUS_CD='ACT'. \nInclude filter for SOURCE_SYSTEM_NM = 'S4 MDG'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Get only active locations from the source LOCATION_IF_ANALYSIS.INTELFOUNDRY_PLANT by filtering on the column PLANT_STATUS_CD='ACT'. Include filter for SOURCE_SYSTEM_NM = 'S4 MDG'"
+     ]
+    },
+    {
+     "row": 159,
+     "text": "Bring only the active records to this view. i.e., PLANT_STATUS_CD='ACT'. \nJoin with Metadata to filter only PLANT_TYPE_CD mentioned as per COLUMN_VALUE_FIVE_TXT. where subject_area_nm = 'Location' ,  entity_nm='Location' and  Business_Rule_Nm = 'LocationType'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT",
+     "target_label": "Root View",
+     "context": [
+      {
+       "label": "Open",
+       "text": "Do we need to apply any filtering to the PLANT_TYPE_CD column as well? (MFG,ATM,FSM,TST) Confirmed with Jyoti: These locations are required. ATM, IF_CRO, IF_SUBCON, MFG, MFG_WH, IF_VIRTUAL"
+      }
+     ],
+     "statements": [
+      "Bring only the active records to this view. i.e., PLANT_STATUS_CD='ACT'. Join with Metadata to filter only PLANT_TYPE_CD mentioned as per COLUMN_VALUE_FIVE_TXT. where subject_area_nm = 'Location' ,  entity_nm='Location' and  Business_Rule_Nm = 'LocationType'."
+     ]
+    },
+    {
+     "row": 182,
+     "text": "Load the data from the source INTELFOUNDRY_SUPPLIER_BUSINESS_ORGANIZATION_NAME with a filter of BUSINESS_NAME_TYPE_NM= 'Trade Style Name'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_SUPPLIER_BUSINESS_ORGANIZATION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load the data from the source INTELFOUNDRY_SUPPLIER_BUSINESS_ORGANIZATION_NAME with a filter of BUSINESS_NAME_TYPE_NM= 'Trade Style Name'"
+     ]
+    },
+    {
+     "row": 190,
+     "text": "Load only EFFECTIVE_END_DTM = '9999/12/31'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_SUPPLIER_BUSINESS_ORGANIZATION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load only EFFECTIVE_END_DTM = '9999/12/31'"
+     ]
+    },
+    {
+     "row": 219,
+     "text": "1. Join the SUPPLIER_ID column in V_BRD_SUPPLIER_BUSINESS_ORGANIZATION_ROOT with the corresponding SUPPLIER_NBR column value in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT and get the list of PLANT_CD's from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT. For the virtual location VF_S we have to get the SUPPLIER_ID it from metadata.\n2. Use the metadata to fetch the Virtual Location ID from 'Column_Value_One_Txt' , LOCATION_TYPE_NM from 'Column_Value_Three_Txt' , INTERNAL_EXTERNAL_IND from 'Column_Value_Four_Txt', LOCATION_TYPE_CD from 'Column_Value_Five_Txt' and LOCATION_DSC from from 'Column_Value_Two_Txt' where Subject_Area_Nm='Location', Entity_Nm='Location' and Business_Rule_Nm='LocationType'.\n\nNote: For now, use metadata to include virtual location data and leave other columns blank in the stage view.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_CORE_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. Join the SUPPLIER_ID column in V_BRD_SUPPLIER_BUSINESS_ORGANIZATION_ROOT with the corresponding SUPPLIER_NBR column value in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT and get the list of PLANT_CD's from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT. For the virtual location VF_S we have to get the SUPPLIER_ID it from metadata.",
+      "2. Use the metadata to fetch the Virtual Location ID from 'Column_Value_One_Txt' , LOCATION_TYPE_NM from 'Column_Value_Three_Txt' , INTERNAL_EXTERNAL_IND from 'Column_Value_Four_Txt', LOCATION_TYPE_CD from 'Column_Value_Five_Txt' and LOCATION_DSC from from 'Column_Value_Two_Txt' where Subject_Area_Nm='Location', Entity_Nm='Location' and Business_Rule_Nm='LocationType'. Note: For now, use metadata to include virtual location data and leave other columns blank in the stage view."
+     ]
+    },
+    {
+     "row": 254,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 264,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 275,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 130,
+     "kind": "open",
+     "text": "Open Do we need to apply any filtering to the SOURCE_SYSTEM_NM column as well? (MDG/S4 MDG). Resolved: S4 MDG is required."
+    },
+    {
+     "row": 162,
+     "kind": "free text",
+     "text": "Open: why we see multiple chengdu location e..g. we need to understand what is the definition of these type codes."
+    },
+    {
+     "row": 221,
+     "kind": "opens",
+     "text": "Opens Need to get confirmation on whether the following columns are needed in the Stage View"
+    },
+    {
+     "row": 227,
+     "kind": "column mapping",
+     "column": "LOCATION_TYPE_NM",
+     "text": "Fetch from source PLANT_TYPE_NM. Use metadata to fetch this value from 'Column_Value_Three_Txt' in case of VIRTUAL"
+    },
+    {
+     "row": 228,
+     "kind": "column mapping",
+     "column": "LOCATION_TYPE_CD",
+     "text": "PLANT_TYPE_CD/Use metadata to fetch this value from 'Column_Value_Five_Txt' Get the location type cd from root view."
+    },
+    {
+     "row": 229,
+     "kind": "column mapping",
+     "column": "INTERNAL_EXTERNAL_IND",
+     "text": "> If Source SUBCONTRACTOR_IND=Y then 'E' ELSE 'I'\n\n> For Virtual locations map the LOCATION_ID with  'Column_Value_One_Txt' from metadata where Subject_Area_Nm='Location', Entity_Nm='Location' and Business_Rule_Nm='Virtual_Location' and get the corresponding 'Column_Value_Four_Txt' value."
+    },
+    {
+     "row": 233,
+     "kind": "column mapping",
+     "column": "VENDOR_ID",
+     "text": "If SUBCONTRACTOR_IND = 'Y' Then SUPPLIER_NBR from ROOT ELSE NULL\nFor the virtual location VF_S we have to get the SUPPLIER_ID from metadata."
+    },
+    {
+     "row": 234,
+     "kind": "column mapping",
+     "column": "VENDOR_NM",
+     "text": "IF SUBCONTRACTOR_IND = 'Y' Then put PLANT_NM from V_BRD_PLANT_ROOT else NULL"
+    },
+    {
+     "row": 235,
+     "kind": "column mapping",
+     "column": "VENDOR_SHORT_NM",
+     "text": "IF SUBCONTRACTOR_IND = 'Y' Then Join SUPPLIER_NBR with SUPPLIER_ID from SUPPLIER_BUSINESS_ORGANIZATION_NAME_ROOT and Take SUPPLIER_NM ELSE default to INTEL CORPORATION"
+    },
+    {
+     "row": 229,
+     "kind": "free text",
+     "text": "INTERNAL_EXTERNAL_IND > If Source SUBCONTRACTOR_IND=Y then 'E' ELSE 'I'\n\n> For Virtual locations map the LOCATION_ID with  'Column_Value_One_Txt' from metadata where Subject_Area_Nm='Location', Entity_Nm='Location' and Business_Rule_Nm='Virtual_Location' and get the corresponding 'Column_Value_Four_Txt' value."
+    },
+    {
+     "row": 233,
+     "kind": "free text",
+     "text": "VENDOR_ID If SUBCONTRACTOR_IND = 'Y' Then SUPPLIER_NBR from ROOT ELSE NULL\nFor the virtual location VF_S we have to get the SUPPLIER_ID from metadata."
+    },
+    {
+     "row": 234,
+     "kind": "free text",
+     "text": "VENDOR_NM IF SUBCONTRACTOR_IND = 'Y' Then put PLANT_NM from V_BRD_PLANT_ROOT else NULL"
+    },
+    {
+     "row": 235,
+     "kind": "free text",
+     "text": "VENDOR_SHORT_NM IF SUBCONTRACTOR_IND = 'Y' Then Join SUPPLIER_NBR with SUPPLIER_ID from SUPPLIER_BUSINESS_ORGANIZATION_NAME_ROOT and Take SUPPLIER_NM ELSE default to INTEL CORPORATION"
+    }
+   ]
+  },
+  "Storage_Location_Core": {
+   "blocks": [
+    {
+     "row": 111,
+     "text": "Get only the ACTIVE Locations from INTELFOUNDRY_STORAGE_LOCATION using the filter STORAGE_LOCATION_STATUS_CD =  'ACT'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_STORAGE_LOCATION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Get only the ACTIVE Locations from INTELFOUNDRY_STORAGE_LOCATION using the filter STORAGE_LOCATION_STATUS_CD =  'ACT'"
+     ]
+    },
+    {
+     "row": 125,
+     "text": "Bring only the active records to this view. i.e., STORAGE_LOCATION_STATUS_CD =  'ACT'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_STORAGE_LOCATION_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Bring only the active records to this view. i.e., STORAGE_LOCATION_STATUS_CD =  'ACT'"
+     ]
+    },
+    {
+     "row": 138,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_SUPPLIER_BUSINESS_ORGANIZATION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 145,
+     "text": "Join the SUPPLIER_ID column in V_BRD_SUPPLIER_BUSINESS_ORGANIZATION_ROOT with the corresponding SUPPLIER_ID column value in V_BRD_STORAGE_LOCATION_ROOT and get the list of PLANT_CD's from V_BRD_STORAGE_LOCATION_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_STORAGE_LOCATION_CORE_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "Join the SUPPLIER_ID column in V_BRD_SUPPLIER_BUSINESS_ORGANIZATION_ROOT with the corresponding SUPPLIER_ID column value in V_BRD_STORAGE_LOCATION_ROOT and get the list of PLANT_CD's from V_BRD_STORAGE_LOCATION_ROOT."
+     ]
+    },
+    {
+     "row": 160,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_STORAGE_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 173,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_STORAGE_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 186,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_STORAGE_LOCATION_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 147,
+     "kind": "opens",
+     "text": "Opens Need to get confirmation on whether the following columns are needed in the Stage View"
+    }
+   ]
+  },
+  "Plant_CD_Mapping_v2": {
+   "blocks": [
+    {
+     "row": 130,
+     "text": "We don't have any major transformation now. Just adding the new source columns to the root view.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_CODE_MAPPING_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Just adding the new source columns to the root view."
+     ]
+    },
+    {
+     "row": 141,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_CODE_MAPPING_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 163,
+     "text": "Get only active locations from the source LOCATION_IF_ANALYSIS.INTELFOUNDRY_PLANT_MANUFACTURING_LOCATION_MAPPING by filtering on the column ACTIVE_SCHEDULE_STATUS_IND='Y'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_MANUFACTURING_LOCATION_MAPPING_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Get only active locations from the source LOCATION_IF_ANALYSIS.INTELFOUNDRY_PLANT_MANUFACTURING_LOCATION_MAPPING by filtering on the column ACTIVE_SCHEDULE_STATUS_IND='Y'."
+     ]
+    },
+    {
+     "row": 175,
+     "text": "Get only active locations from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_MANUFACTURING_LOCATION_MAPPING_ROOT  by filtering on the column ACTIVE_SCHEDULE_STATUS_IND='Y'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_MANUFACTURING_LOCATION_MAPPING_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Get only active locations from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_MANUFACTURING_LOCATION_MAPPING_ROOT  by filtering on the column ACTIVE_SCHEDULE_STATUS_IND='Y'."
+     ]
+    },
+    {
+     "row": 187,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 219,
+     "text": "Rename the IP_PLANT_CD column from IF_MASTER_DATA.LOCATION_IF_ANALYSIS.INTELFOUNDRY_FOUNDRY_TO_PRODUCT_PLANT_MAPPING to CUSTOMER_PLANT_CD",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_IF_TO_IP_PLANT_MAPPING_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Rename the IP_PLANT_CD column from IF_MASTER_DATA.LOCATION_IF_ANALYSIS.INTELFOUNDRY_FOUNDRY_TO_PRODUCT_PLANT_MAPPING to CUSTOMER_PLANT_CD"
+     ]
+    },
+    {
+     "row": 242,
+     "text": "No transformation",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_IF_TO_IP_PLANT_MAPPING_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "No transformation"
+     ]
+    },
+    {
+     "row": 275,
+     "text": "Left join the PLANT_CD in V_BRD_PLANT_ROOT with V_BRD_PLANT_MANUFACTURING_LOCATION_MAPPING_ROOT, V_BRD_IF_TO_IP_PLANT_MAPPING_ROOT and V_BRD_PLANT_CODE_MAPPING_ROOT and get the corresponding MANUFACTURING_LOCATION_CD from V_BRD_PLANT_MANUFACTURING_LOCATION_MAPPING_ROOT and LEGACY_PLANT_CD, LEGACY_STORAGE_LOCATION_CD from V_BRD_PLANT_CODE_MAPPING_ROOT and CUSTOMER_PLANT_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_IF_TO_IP_PLANT_MAPPING_ROOT where CATEGORY_CD <> 'COLUMN_VALUE_ONE_TXT'. (fetch COLUMN_VALUE_ONE_TXT from metadata)\n\nAlso bring the CATEGORY_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_IF_TO_IP_PLANT_MAPPING_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_CODE_MAPPING_CORE_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "Left join the PLANT_CD in V_BRD_PLANT_ROOT with V_BRD_PLANT_MANUFACTURING_LOCATION_MAPPING_ROOT, V_BRD_IF_TO_IP_PLANT_MAPPING_ROOT and V_BRD_PLANT_CODE_MAPPING_ROOT and get the corresponding MANUFACTURING_LOCATION_CD from V_BRD_PLANT_MANUFACTURING_LOCATION_MAPPING_ROOT and LEGACY_PLANT_CD, LEGACY_STORAGE_LOCATION_CD from V_BRD_PLANT_CODE_MAPPING_ROOT and CUSTOMER_PLANT_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_IF_TO_IP_PLANT_MAPPING_ROOT where CATEGORY_CD <> 'COLUMN_VALUE_ONE_TXT'. (fetch COLUMN_VALUE_ONE_TXT from metadata) Also bring the CATEGORY_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_IF_TO_IP_PLANT_MAPPING_ROOT."
+     ]
+    },
+    {
+     "row": 293,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_CODE_MAPPING_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 307,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANT_CODE_MAPPING_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 321,
+     "text": "We don't have any major transformation now.",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

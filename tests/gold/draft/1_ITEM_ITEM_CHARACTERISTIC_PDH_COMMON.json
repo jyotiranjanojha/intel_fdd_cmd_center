@@ -1,0 +1,167 @@
+{
+ "file": "1. ITEM/ITEM_CHARACTERISTIC_PDH_COMMON.xlsx",
+ "sheets": [
+  "Item_Characteristic_Core_v2"
+ ],
+ "skipped": [
+  {
+   "sheet": "Item_Characteristic_Core_v1",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "Item_Characteristic_Core_v2": {
+   "blocks": [
+    {
+     "row": 411,
+     "text": "1. Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_MATERIAL_CHARACTERISTIC_VALUE if DELETE_IND=FALSE and SOURCE_SYSTEM_NM='S4 MDG' to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "1. Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_MATERIAL_CHARACTERISTIC_VALUE if DELETE_IND=FALSE and SOURCE_SYSTEM_NM='S4 MDG' to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_ROOT."
+     ]
+    },
+    {
+     "row": 421,
+     "text": "1. Bring only the active records to this view. i.e., DELETE_IND ='FALSE'\n2. for Referential Integrity , join with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT based on ITEM_ID and include only matching rows in ITEM characteristic root view.\n3. Fetch only the characteristics in Metdata by mapping the CHARACTERISTIC_NM in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_ROOT with the Column_Value_One_Txt in V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm = 'Item_Characteristic', Entity_Nm ='Item_Characteristic' and Business_Rule_Nm='Item_Characteristic Inclusion List'.\n4. For each item where CHARACTERISTIC_NM = 'INTERNAL_REVISION', we need to insert a derived characteristic called 'INTERNAL_REVISION_NUMBER' using metadata where Subject_Area_Nm = 'Item_Characteristic', Entity_Nm = 'Item_Characteristic' and Business_Rule_Nm = 'Derived Characteristic'. Create a new record and populate Column_Value_One_Txt with the CHARACTERISTIC_NM value and fetch the corresponding CHARACTERISTIC_VALUE_TXT from Column_Value_Four_Txt. Compare the CHARACTERISTIC_VALUE_TXT of the INTERNAL_REVISION characteristic found in Column_Value_Three_Txt and Populate the corresponding Column_Value_Four_Txt for the new characteristic based on this comparison. For any numeric characteristic values, populate them as-is without modification.\n5. If CHARACTERISTIC_VALUE_TXT is empty pull data from FLOATING_POINT_VALUE_FROM_NBR (only if nonzero) into CHARACTERISTIC_VALUE_TXT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "1. Bring only the active records to this view. i.e., DELETE_IND ='FALSE'",
+      "2. for Referential Integrity , join with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT based on ITEM_ID and include only matching rows in ITEM characteristic root view.",
+      "3. Fetch only the characteristics in Metdata by mapping the CHARACTERISTIC_NM in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_ROOT with the Column_Value_One_Txt in V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm = 'Item_Characteristic', Entity_Nm ='Item_Characteristic' and Business_Rule_Nm='Item_Characteristic Inclusion List'.",
+      "4. For each item where CHARACTERISTIC_NM = 'INTERNAL_REVISION', we need to insert a derived characteristic called 'INTERNAL_REVISION_NUMBER' using metadata where Subject_Area_Nm = 'Item_Characteristic', Entity_Nm = 'Item_Characteristic' and Business_Rule_Nm = 'Derived Characteristic'. Create a new record and populate Column_Value_One_Txt with the CHARACTERISTIC_NM value and fetch the corresponding CHARACTERISTIC_VALUE_TXT from Column_Value_Four_Txt. Compare the CHARACTERISTIC_VALUE_TXT of the INTERNAL_REVISION characteristic found in Column_Value_Three_Txt and Populate the corresponding Column_Value_Four_Txt for the new characteristic based on this comparison. For any numeric characteristic values, populate them as-is without modification.",
+      "5. If CHARACTERISTIC_VALUE_TXT is empty pull data from FLOATING_POINT_VALUE_FROM_NBR (only if nonzero) into CHARACTERISTIC_VALUE_TXT."
+     ]
+    },
+    {
+     "row": 438,
+     "text": "1. Join IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_TPBBID_CORE_PIT with the Root.\n2. For the ITEM_ID, ITEM_CLASS_NM and the values of MARKET_CODE_NAME,INTERNAL_STEPPING,INTERNAL_REVISION,MFG_PKG_CODE and MANUFACTURING_DEVICE_NAME from V_BRD_ITEM_TPBBID_CORE_PIT find the respective ITEM_ID,ITEM_CLASS_NM and compare the above columns in the CHARACTERISTICS_VALUE_NAME of the ITEM_CHARACTERISITIC_ROOT.\n3. Compare the column values from V_BRD_ITEM_TPBBID_CORE_PIT with the values of the ITEM_ID under CHARACTERTISTIC_VALUE_TXT in ITEM_CHARACTERISITIC_ROOT.\n4. Introduce a CHARACTERTISTIC_VALUE_TXT called \"TPBBID_TYPE _CD\" in the stage , and map the TPBBID_TYPE_CD  from V_BRD_ITEM_TPBBID_CORE_PIT , whenever an ITEM_ID has the combination of the given MARKET_CODE_NAME,INTERNAL_STEPPING,INTERNAL_REVISION,MFG_PKG_CODE and MANUFACTURING_DEVICE_NAME",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_TPBBID_CORE_PIT",
+     "target_label": "View Source",
+     "context": [],
+     "statements": [
+      "1. Join IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_TPBBID_CORE_PIT with the Root.",
+      "2. For the ITEM_ID, ITEM_CLASS_NM and the values of MARKET_CODE_NAME,INTERNAL_STEPPING,INTERNAL_REVISION,MFG_PKG_CODE and MANUFACTURING_DEVICE_NAME from V_BRD_ITEM_TPBBID_CORE_PIT find the respective ITEM_ID,ITEM_CLASS_NM and compare the above columns in the CHARACTERISTICS_VALUE_NAME of the ITEM_CHARACTERISITIC_ROOT.",
+      "3. Compare the column values from V_BRD_ITEM_TPBBID_CORE_PIT with the values of the ITEM_ID under CHARACTERTISTIC_VALUE_TXT in ITEM_CHARACTERISITIC_ROOT.",
+      "4. Introduce a CHARACTERTISTIC_VALUE_TXT called \"TPBBID_TYPE _CD\" in the stage , and map the TPBBID_TYPE_CD  from V_BRD_ITEM_TPBBID_CORE_PIT , whenever an ITEM_ID has the combination of the given MARKET_CODE_NAME,INTERNAL_STEPPING,INTERNAL_REVISION,MFG_PKG_CODE and MANUFACTURING_DEVICE_NAME"
+     ]
+    },
+    {
+     "row": 457,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 466,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 475,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 486,
+     "text": "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_PRODUCT_HIERARCHY if DELETE_IND = FALSE to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PRODUCT_HIERARCHY_ROOT",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PRODUCT_HIERARCHY_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_PRODUCT_HIERARCHY if DELETE_IND = FALSE to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PRODUCT_HIERARCHY_ROOT"
+     ]
+    },
+    {
+     "row": 498,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 509,
+     "text": "Bring the item attributes by joining ITEM_ID from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PRODUCT_HIERARCHY_ROOT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_STAGE with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "Bring the item attributes by joining ITEM_ID from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PRODUCT_HIERARCHY_ROOT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_STAGE with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT."
+     ]
+    },
+    {
+     "row": 519,
+     "text": "The CHARACTERISTIC_NM columns will be pivoted based on the ITEM_CHARACTERISTIC_VALUE_TXT from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_STAGE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "The CHARACTERISTIC_NM columns will be pivoted based on the ITEM_CHARACTERISTIC_VALUE_TXT from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_STAGE."
+     ]
+    },
+    {
+     "row": 528,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_CURRENT",
+     "target_label": "Denormalized - Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 538,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 549,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 447,
+     "kind": "note",
+     "text": "Note If a single item has multiple associated characteristics, we need to generate a sequence number."
+    },
+    {
+     "row": 561,
+     "kind": "scenario table",
+     "text": "Scenario ITEM_CHARACTERISTIC_CORE_CURRENT ITEM_CHARACTERISTIC_CORE_MEMORIES"
+    }
+   ]
+  }
+ }
+}

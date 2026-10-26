@@ -1,0 +1,301 @@
+{
+ "file": "4. ITEM LOCATION (SKU)/ITEM_LOCATION_PDH_COMMON.xlsx",
+ "sheets": [
+  "Item_Location_Core_v4"
+ ],
+ "skipped": [
+  {
+   "sheet": "Item_Location_Core_v1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Substrate_Item_Location_Core",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Item_Location_Core_v3",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Item_Location_Core_v2",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Sheet1",
+   "why": "SheetN duplicate of a named design sheet"
+  }
+ ],
+ "by_sheet": {
+  "Item_Location_Core_v4": {
+   "blocks": [
+    {
+     "row": 235,
+     "text": "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_MATERIAL_PLANT if DELETE_IND = FALSE and SOURCE_SYSTEM_NM = 'S4 MDG' to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_LOCATION_ROOT",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_LOCATION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load the data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_MATERIAL_PLANT if DELETE_IND = FALSE and SOURCE_SYSTEM_NM = 'S4 MDG' to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_LOCATION_ROOT"
+     ]
+    },
+    {
+     "row": 248,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 258,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 268,
+     "text": "1. Bring only the active records to this view. i.e., DELETE_IND ='FALSE'\n2. Bring only the items that are valid by joining the ITEM_ID with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT and get the ITEM_CLASS_NM all the items.\n3. Bring only the plant_cd's that are valid by joining the PLANT_CD with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_LOCATION_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "1. Bring only the active records to this view. i.e., DELETE_IND ='FALSE'",
+      "2. Bring only the items that are valid by joining the ITEM_ID with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT and get the ITEM_CLASS_NM all the items.",
+      "3. Bring only the plant_cd's that are valid by joining the PLANT_CD with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANT_ROOT."
+     ]
+    },
+    {
+     "row": 280,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 290,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 349,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 359,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_BILL_OF_MATERIAL_TRAVERSAL_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 372,
+     "text": "NOTE FYI :  ITEM_LOCATION_TYPE_CD - This column will have M or C, where M stands for Manufacturing and C stands for Consumed i.e., in which location Item is consumed after manufactuing process is completed. \n\n1. We need to remove the leading zeros from the ITEM_ID. For example, if ITEM_ID = 0000010000007, it should be stored as ITEM_ID = 10000007.This does not apply to the Dummy Item derived in the PDH layer.\n\n2. Join the COMPONENT_ITEM_ID , PARENT_ITEM_PLANT_CD  in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH where ACTIVE_IND= TRUE ,  with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view. Assign the ITEM_LOCATION_TYPE_CD as 'C'\n\n-Join the PARENT_ITEM_ID , PARENT_ITEM_PLANT_CD in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH  with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.Assign the  ITEM_LOCATION_TYPE_CD as M .\n3. ITEM_ORDER_POINT: To derive the ITEM_ORDER_POINT column value, map the ITEM_ID in ITEM_LOCATION root View to the corresponding items in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT. If the matched item is having values in the 'ITEM_ORDER_POINT' Characteristic column matching with the metadata for ITEM_ORDER_POINT mentioned in COLUMN_VALUE_TWO_TXT -mark the value as 'Y' otherwise, mark it as 'N'.\n\n4. Check if ITEM is an ITEM_ORDER_POINT and loc type cd = M , if yes, then needa new record of that item with loaction as ' VF ' and 'C'  as ITEM_LOCATION_TYPE_CD . rest all other cols from parent.\n5. TURNKEY_IND:\ncheck IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT.MATERIAL_TYPE_CD this colum\nIf item is UNBW (BAILED) item→ TURNKEY_IND = 'Y'\nIf item is UNBW (BAILED) then→ TURNKEY_IND = 'N'\n9.  NSB_FLAG\n use IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH where ACTIVE_IND= TRUE , and get the hierarchy fr the items and respective plant cd. then compare the plantcd and come up with synergy and non synergy \nreference : R3_Jyoti_get_BOM_hierarchy\n\n> Assign NSB_FLAG:   If at least one cross‑location transition exists → NSB_FLAG = 'Y' Else → NSB_FLAG = 'N'\n\nFor C itemlocation cd , make the nsb flag  similar to it's respective parent id's nsb flag. For VF_S items NSB flag = default from metadata.\n10. OWNER_CD:\nJoin the identified items with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT based on ITEM_ID to get the OWNER_CD\n\n11. For the VF_S locations available in BOM view, join BOM view with metadata based on PARENT_ITEM_CLASS_NM = 'COLUMN_VALUE_ONE_TXT '  where SUBJECT_AREA_NM = 'Item_location', ENTITY_NM = 'Item_Location', and BUSINESS_RULE_NM = 'ItemClass'. We should populate the following fields:  COLUMN_VALUE_TWO_TXT as PLANT_CD and COLUMN_VALUE_THREE_TXT as LOCATION_TYPE_CD and COLUMN_VALUE_FOUR_TXT as MATERIAL_CONSUMPTION_INDICATION_CD,\tCOLUMN_VALUE_FIVE_TXT as NSB_FLAG, COLUMN_VALUE_SIX_TXT as ITEM_ORDER_POINT,\tCOLUMN_VALUE_SEVEN_TXT as TURNKEY_IND,\tCOLUMN_VALUE_EIGHT_TXT as OWNER_CD, COLUMN_VALUE_NINE_TXT as SOURCE_SYSTEM_NM.\n\n12. Only for ITEM_CLASS_NM='F_FAB',  available in BOM view, join BOM view with metadata based on PARENT_ITEM_CLASS_NM = 'COLUMN_VALUE_ONE_TXT '  where SUBJECT_AREA_NM = 'Item_location', ENTITY_NM = 'Item_Location', and BUSINESS_RULE_NM = 'ItemClass'. We should populate the following fields:  PARENT_ITEM_PLANT_CD as PLANT_CD and COLUMN_VALUE_THREE_TXT as LOCATION_TYPE_CD and COLUMN_VALUE_FOUR_TXT as MATERIAL_CONSUMPTION_INDICATION_CD,\tCOLUMN_VALUE_FIVE_TXT as NSB_FLAG, COLUMN_VALUE_SIX_TXT as ITEM_ORDER_POINT,\tCOLUMN_VALUE_SEVEN_TXT as TURNKEY_IND,\tCOLUMN_VALUE_EIGHT_TXT as OWNER_CD, COLUMN_VALUE_NINE_TXT as SOURCE_SYSTEM_NM.\n\nThe existing PLANT_CD for these classes should remain as C only in case these classes are available in COMPONENT_ITEM_CLASS_NM, but the M locations can only be VF_S and no other PLANT_CD.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_LOCATION_STAGE",
+     "target_label": "Stage",
+     "context": [
+      {
+       "label": "Opens",
+       "text": "The PLANT_CD for virtual location is currently unknown, so VF has been hardcoded for now."
+      }
+     ],
+     "statements": [
+      "NOTE FYI :  ITEM_LOCATION_TYPE_CD - This column will have M or C, where M stands for Manufacturing and C stands for Consumed i.e., in which location Item is consumed after manufactuing process is completed.",
+      "1. We need to remove the leading zeros from the ITEM_ID. For example, if ITEM_ID = 0000010000007, it should be stored as ITEM_ID = 10000007.This does not apply to the Dummy Item derived in the PDH layer.",
+      "2. Join the COMPONENT_ITEM_ID , PARENT_ITEM_PLANT_CD  in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH where ACTIVE_IND= TRUE ,  with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view. Assign the ITEM_LOCATION_TYPE_CD as 'C'",
+      "-Join the PARENT_ITEM_ID , PARENT_ITEM_PLANT_CD in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH  with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.Assign the  ITEM_LOCATION_TYPE_CD as M .",
+      "3. ITEM_ORDER_POINT: To derive the ITEM_ORDER_POINT column value, map the ITEM_ID in ITEM_LOCATION root View to the corresponding items in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT. If the matched item is having values in the 'ITEM_ORDER_POINT' Characteristic column matching with the metadata for ITEM_ORDER_POINT mentioned in COLUMN_VALUE_TWO_TXT -mark the value as 'Y' otherwise, mark it as 'N'.",
+      "4. Check if ITEM is an ITEM_ORDER_POINT and loc type cd = M , if yes, then needa new record of that item with loaction as ' VF ' and 'C'  as ITEM_LOCATION_TYPE_CD . rest all other cols from parent.",
+      "5. TURNKEY_IND: check IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT.MATERIAL_TYPE_CD this colum If item is UNBW (BAILED) item→ TURNKEY_IND = 'Y' If item is UNBW (BAILED) then→ TURNKEY_IND = 'N'",
+      "9.  NSB_FLAG use IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH where ACTIVE_IND= TRUE , and get the hierarchy fr the items and respective plant cd. then compare the plantcd and come up with synergy and non synergy reference : R3_Jyoti_get_BOM_hierarchy",
+      "> Assign NSB_FLAG:   If at least one cross‑location transition exists → NSB_FLAG = 'Y' Else → NSB_FLAG = 'N' For C itemlocation cd , make the nsb flag  similar to it's respective parent id's nsb flag. For VF_S items NSB flag = default from metadata.",
+      "10. OWNER_CD: Join the identified items with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT based on ITEM_ID to get the OWNER_CD",
+      "11. For the VF_S locations available in BOM view, join BOM view with metadata based on PARENT_ITEM_CLASS_NM = 'COLUMN_VALUE_ONE_TXT '  where SUBJECT_AREA_NM = 'Item_location', ENTITY_NM = 'Item_Location', and BUSINESS_RULE_NM = 'ItemClass'. We should populate the following fields:  COLUMN_VALUE_TWO_TXT as PLANT_CD and COLUMN_VALUE_THREE_TXT as LOCATION_TYPE_CD and COLUMN_VALUE_FOUR_TXT as MATERIAL_CONSUMPTION_INDICATION_CD,\tCOLUMN_VALUE_FIVE_TXT as NSB_FLAG, COLUMN_VALUE_SIX_TXT as ITEM_ORDER_POINT,\tCOLUMN_VALUE_SEVEN_TXT as TURNKEY_IND,\tCOLUMN_VALUE_EIGHT_TXT as OWNER_CD, COLUMN_VALUE_NINE_TXT as SOURCE_SYSTEM_NM.",
+      "12. Only for ITEM_CLASS_NM='F_FAB',  available in BOM view, join BOM view with metadata based on PARENT_ITEM_CLASS_NM = 'COLUMN_VALUE_ONE_TXT '  where SUBJECT_AREA_NM = 'Item_location', ENTITY_NM = 'Item_Location', and BUSINESS_RULE_NM = 'ItemClass'. We should populate the following fields:  PARENT_ITEM_PLANT_CD as PLANT_CD and COLUMN_VALUE_THREE_TXT as LOCATION_TYPE_CD and COLUMN_VALUE_FOUR_TXT as MATERIAL_CONSUMPTION_INDICATION_CD,\tCOLUMN_VALUE_FIVE_TXT as NSB_FLAG, COLUMN_VALUE_SIX_TXT as ITEM_ORDER_POINT,\tCOLUMN_VALUE_SEVEN_TXT as TURNKEY_IND,\tCOLUMN_VALUE_EIGHT_TXT as OWNER_CD, COLUMN_VALUE_NINE_TXT as SOURCE_SYSTEM_NM. The existing PLANT_CD for these classes should remain as C only in case these classes are available in COMPONENT_ITEM_CLASS_NM, but the M locations can only be VF_S and no other PLANT_CD."
+     ]
+    },
+    {
+     "row": 408,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 439,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 470,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 507,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 518,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 525,
+     "text": "\"Join the COMPONENT_ITEM_ID , PARENT_ITEM_PLANT_CD  in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.\n-Join the PARENT_ITEM_ID , PARENT_ITEM_PLANT_CD in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.\n-Make the  ITEM_LOCATION_TYPE_CD as C if the item is component, else M if the item is Parent.\n-Deduplication and get the final list of items.\n\n-Check if ITEM is an ITEM_ORDER_POINT, union the row with VF location and C type.\n\n-NSB_FLAG\n use IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH where ACTIVE_IND= TRUE , and get the hierarchy fr the items and respective plant cd. then compare the plantcd and come up with synergy and non synergy \nreference : R3_Jyoti_get_BOM_hierarchy\n> Assign NSB_FLAG:   If at least one cross‑location transition exists → NSB_FLAG = 'Y' Else → NSB_FLAG = 'N'\nFor C itemlocation cd , make the nsb flag  similar to it's respective parent id's nsb flag. For VF_S items NSB flag = default from metadata. \"",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_UPI_ITEM_LOCATION_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "\"Join the COMPONENT_ITEM_ID , PARENT_ITEM_PLANT_CD  in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.",
+      "-Join the PARENT_ITEM_ID , PARENT_ITEM_PLANT_CD in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.",
+      "-Make the  ITEM_LOCATION_TYPE_CD as C if the item is component, else M if the item is Parent.",
+      "-Deduplication and get the final list of items.",
+      "-Check if ITEM is an ITEM_ORDER_POINT, union the row with VF location and C type.",
+      "-NSB_FLAG use IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH where ACTIVE_IND= TRUE , and get the hierarchy fr the items and respective plant cd. then compare the plantcd and come up with synergy and non synergy reference : R3_Jyoti_get_BOM_hierarchy",
+      "> Assign NSB_FLAG:   If at least one cross‑location transition exists → NSB_FLAG = 'Y' Else → NSB_FLAG = 'N' For C itemlocation cd , make the nsb flag  similar to it's respective parent id's nsb flag. For VF_S items NSB flag = default from metadata. \""
+     ]
+    },
+    {
+     "row": 536,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_UPI_ITEM_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 548,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_UPI_ITEM_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 559,
+     "text": "No transformation needed here.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_ITEM_LOCATION_CORE_PIT",
+     "target_label": "UPI Core PIT",
+     "context": [],
+     "statements": [
+      "No transformation needed here."
+     ]
+    },
+    {
+     "row": 570,
+     "text": "Join the COMPONENT_ITEM_ID , PARENT_ITEM_PLANT_CD  in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.\n-Join the PARENT_ITEM_ID , PARENT_ITEM_PLANT_CD in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.\n-Make the  ITEM_LOCATION_TYPE_CD as C if the item is component, else M if the item is Parent.\n-Deduplication and get the final list of items.\n\n-Check if ITEM is an ITEM_ORDER_POINT, union the row with VF location and C type.\n\n-NSB_FLAG\n use IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH where ACTIVE_IND= TRUE , and get the hierarchy fr the items and respective plant cd. then compare the plantcd and come up with synergy and non synergy \nreference : R3_Jyoti_get_BOM_hierarchy\n> Assign NSB_FLAG:   If at least one cross‑location transition exists → NSB_FLAG = 'Y' Else → NSB_FLAG = 'N'\nFor C itemlocation cd , make the nsb flag  similar to it's respective parent id's nsb flag. For VF_S items NSB flag = default from metadata.\nSubstrate locations from source for MP team: As part of Substrate CR we will be getting the supplier locations for Substrates materials.\n1. Join V_BRD_ITEM_LOCATION_ROOT with V_BRD_ITEM_CORE_PIT and get records only when MATERIAL_TYPE_CD<>UNBW\n2. Get the ITEM_ID, PLANT_CD from source view.\n3. Join with V_BRD_PLANT_CORE_PIT and get records only when PLANT_TYPE_CD = 'COLUMN_VALUE_TWO_TXT'\n4. It is applicable for only substrate items that are M location type.\n5. Join with metadata based on ITEM_CLASS_NM = 'COLUMN_VALUE_ONE_TXT '  where SUBJECT_AREA_NM = 'Item_location', ENTITY_NM = 'Substrate_Item_Location', and BUSINESS_RULE_NM = 'ItemClass'. We should populate the following fields:  COLUMN_VALUE_THREE_TXT as LOCATION_TYPE_CD and COLUMN_VALUE_FOUR_TXT as MATERIAL_CONSUMPTION_INDICATION_CD,\tCOLUMN_VALUE_FIVE_TXT as NSB_FLAG, COLUMN_VALUE_SIX_TXT as ITEM_ORDER_POINT,\tCOLUMN_VALUE_SEVEN_TXT as TURNKEY_IND,\tCOLUMN_VALUE_EIGHT_TXT as OWNER_CD, COLUMN_VALUE_NINE_TXT as SOURCE_SYSTEM_NM.\n\nUnion this row with the dataset created till previous row.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HYBRID_ITEM_LOCATION_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "Join the COMPONENT_ITEM_ID , PARENT_ITEM_PLANT_CD  in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.",
+      "-Join the PARENT_ITEM_ID , PARENT_ITEM_PLANT_CD in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID, PLANT_CD in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT include only the matching items in this view.",
+      "-Make the  ITEM_LOCATION_TYPE_CD as C if the item is component, else M if the item is Parent.",
+      "-Deduplication and get the final list of items.",
+      "-Check if ITEM is an ITEM_ORDER_POINT, union the row with VF location and C type.",
+      "-NSB_FLAG use IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BILL_OF_MATERIAL_LOCATION_HASH where ACTIVE_IND= TRUE , and get the hierarchy fr the items and respective plant cd. then compare the plantcd and come up with synergy and non synergy reference : R3_Jyoti_get_BOM_hierarchy",
+      "> Assign NSB_FLAG:   If at least one cross‑location transition exists → NSB_FLAG = 'Y' Else → NSB_FLAG = 'N' For C itemlocation cd , make the nsb flag  similar to it's respective parent id's nsb flag. For VF_S items NSB flag = default from metadata. Substrate locations from source for MP team: As part of Substrate CR we will be getting the supplier locations for Substrates materials.",
+      "1. Join V_BRD_ITEM_LOCATION_ROOT with V_BRD_ITEM_CORE_PIT and get records only when MATERIAL_TYPE_CD<>UNBW",
+      "2. Get the ITEM_ID, PLANT_CD from source view.",
+      "3. Join with V_BRD_PLANT_CORE_PIT and get records only when PLANT_TYPE_CD = 'COLUMN_VALUE_TWO_TXT'",
+      "4. It is applicable for only substrate items that are M location type.",
+      "5. Join with metadata based on ITEM_CLASS_NM = 'COLUMN_VALUE_ONE_TXT '  where SUBJECT_AREA_NM = 'Item_location', ENTITY_NM = 'Substrate_Item_Location', and BUSINESS_RULE_NM = 'ItemClass'. We should populate the following fields:  COLUMN_VALUE_THREE_TXT as LOCATION_TYPE_CD and COLUMN_VALUE_FOUR_TXT as MATERIAL_CONSUMPTION_INDICATION_CD,\tCOLUMN_VALUE_FIVE_TXT as NSB_FLAG, COLUMN_VALUE_SIX_TXT as ITEM_ORDER_POINT,\tCOLUMN_VALUE_SEVEN_TXT as TURNKEY_IND,\tCOLUMN_VALUE_EIGHT_TXT as OWNER_CD, COLUMN_VALUE_NINE_TXT as SOURCE_SYSTEM_NM. Union this row with the dataset created till previous row."
+     ]
+    },
+    {
+     "row": 592,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_HYBRID_ITEM_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 614,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_HYBRID_ITEM_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 635,
+     "text": "No Major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT",
+     "target_label": "HYBRID Core PIT",
+     "context": [],
+     "statements": [
+      "No Major transformations"
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 79,
+     "kind": "header-area requirement",
+     "text": "Open Note: Need to add a VF_M location where there is no SKU available, but it is there in BOM"
+    },
+    {
+     "row": 348,
+     "kind": "free text",
+     "text": "Note: Need to add a VF_M location where there is no SKU available, but it is there in BOM"
+    }
+   ]
+  }
+ }
+}

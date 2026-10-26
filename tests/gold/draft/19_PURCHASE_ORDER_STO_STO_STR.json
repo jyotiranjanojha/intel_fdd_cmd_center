@@ -1,0 +1,289 @@
+{
+ "file": "19. PURCHASE ORDER & STO/STO&STR.xlsx",
+ "sheets": [
+  "STR",
+  "STO"
+ ],
+ "skipped": [
+  {
+   "sheet": "Sheet1",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "STR": {
+   "blocks": [
+    {
+     "row": 108,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.PURCHASE_REQUISITION_HEADER_LINE",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 118,
+     "text": "Alias PURCHASE_REQUISITION_LINE_CATEGORY_CD to PURCHASE_REQUISITION_LINE_CATEGORY_ID \nExclude rows with PURCHASE_REQUISITION_LINE_DELETION_STATUS_CD that are not empty (moving from transformation to here). Keep records with ACTIVE_IND='Y'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_PURCHASE_REQUISITION_HEADER_LINE_ROOT",
+     "target_label": "Table",
+     "context": [],
+     "statements": [
+      "Alias PURCHASE_REQUISITION_LINE_CATEGORY_CD to PURCHASE_REQUISITION_LINE_CATEGORY_ID Exclude rows with PURCHASE_REQUISITION_LINE_DELETION_STATUS_CD that are not empty (moving from transformation to here). Keep records with ACTIVE_IND='Y'"
+     ]
+    },
+    {
+     "row": 125,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_PURCHASE_REQUISITION_HEADER_LINE_ROOT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 134,
+     "text": "We don't have any major transformations.",
+     "target": "V_BRD_ITEM_TRANSPORTATION_ROUTE_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 156,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.PURCHASE_REQUISITION_PURCHASE_ORDER_ASSOCIATION",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 187,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_STOCK_TRANSFER_REQUEST_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 192,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_STOCK_TRANSFER_REQUEST_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 197,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_INV_STOCK_TRANSFER_REQUEST_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    }
+   ],
+   "extras": []
+  },
+  "STO": {
+   "blocks": [
+    {
+     "row": 149,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 158,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_SCHEDULE_LINE",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 169,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 176,
+     "text": "Load only Active records where \n1) STOCK_TRANSFER_ORDER_HEADER_ACTIVE_IND &  STOCK_TRANSFER_ORDER_LINE_ACTIVE_IND = Y\n\n2)  STOCK_TRANSFER_ORDER_HEADER_DELETION_STATUS_CD='' or STOCK_TRANSFER_ORDER_LINE_DELETION_STATUS_CD=''\n\n3) STOCK_TRANSFER_ORDER_INCOMPLETE_IND='N'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_STOCK_TRANSFER_ORDER_HEADER_LINE_ROOT",
+     "target_label": "Table",
+     "context": [],
+     "statements": [
+      "Load only Active records where",
+      "1) STOCK_TRANSFER_ORDER_HEADER_ACTIVE_IND &  STOCK_TRANSFER_ORDER_LINE_ACTIVE_IND = Y",
+      "2)  STOCK_TRANSFER_ORDER_HEADER_DELETION_STATUS_CD='' or STOCK_TRANSFER_ORDER_LINE_DELETION_STATUS_CD=''",
+      "3) STOCK_TRANSFER_ORDER_INCOMPLETE_IND='N'"
+     ]
+    },
+    {
+     "row": 184,
+     "text": "Load only Active records where \n1) STOCK_TRANSFER_ORDER_SCHEDULE_LINE_ACTIVE_IND= Y\n\n2)  STOCK_TRANSFER_ORDER_HEADER_DELETION_STATUS_CD='' or STOCK_TRANSFER_ORDER_LINE_DELETION_STATUS_CD=''\n\n3) Get STOCK_TRANSFER_ORDER_NBR & STOCK_TRANSFER_ORDER_LINE_NBR that are present in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_STOCK_TRANSFER_ORDER_HEADER_LINE_ROOT",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_STOCK_TRANSFER_ORDER_SCHEDULE_LINE_ROOT",
+     "target_label": "Table",
+     "context": [],
+     "statements": [
+      "Load only Active records where",
+      "1) STOCK_TRANSFER_ORDER_SCHEDULE_LINE_ACTIVE_IND= Y",
+      "2)  STOCK_TRANSFER_ORDER_HEADER_DELETION_STATUS_CD='' or STOCK_TRANSFER_ORDER_LINE_DELETION_STATUS_CD=''",
+      "3) Get STOCK_TRANSFER_ORDER_NBR & STOCK_TRANSFER_ORDER_LINE_NBR that are present in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_STOCK_TRANSFER_ORDER_HEADER_LINE_ROOT"
+     ]
+    },
+    {
+     "row": 195,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_STOCK_TRANSFER_ORDER_HEADER_LINE_ROOT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 204,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_STOCK_TRANSFER_ORDER_SCHEDULE_LINE_ROOT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 215,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 223,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 251,
+     "text": "1. Get Data for relevant time lines: Filter to the required timehorizon by filtering \n REQUESTED_DELIVERY_DT between dates  that are returned  (IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.CALENDAR_DT WHERE IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.HORIZON_CORE_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT WHERE SUBJECT_AREA_NM='PURCHASE DOCUMENT' and ENTITY_NM='STOCK TRANSFER ORDER' AND BUSINESS_RULE_NM='STO_Config' )\n2. Document Types: Filter  IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE.STOCK_TRANSFER_ORDER_TYPE_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_TWO_TXT WHERE STOCK_TRANSFER_ORDER_TYPE_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_TWO_TXT WHERE SUBJECT_AREA_NM='PURCHASE DOCUMENT' and ENTITY_NM='STOCK TRANSFER ORDER' AND BUSINESS_RULE_NM='STO_Config'  for the coresponding SOURCE_SYSTEM_NM IN COLUMN_VALUE_ONE_TXT\n3. Exclude Marked to Delete: Exclude rows that have IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE.STOCK_TRANSFER_ORDER_HEADER_DELETION_STATUS_CD!= ''\nand\n Exclude rows that have IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE.STOCK_TRANSFER_ORDER_LINE_DELETION_STATUS_CD !=''\n4. Delivery Complete Indicator: Include rows  with IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE.DELIVERY_COMPLETE_IND='N'\n5. Join above results with IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.PURCHASE_REQUISITION_PURCHASE_ORDER_ASSOCIATION based on  PURCHASE_ORDER_NBR=STOCK_TRANSFER_ORDER_NBR and STOCK_TRANSFER_ORDER_LINE_NBR=PURCHASE_ORDER_LINE_NBR to get the corresponding PURCHASE REQUISITION AND PURCHASE REQUISITION LINE NBR for the STOCK_TRANSFER_ORDER_NBR\n6. Join IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE and IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_SCHEDULE_LINE based on  STOCK_TRANSFER_ORDER_NBR\tand  STOCK_TRANSFER_ORDER_LINE_NBR. Aggregate GOODS_ISSUED_QTY and GOODS_RECEIVED_QTY\n7a. SUPPLYING_PLANT_CODE: Join IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT based on SUPPLYING_PLANT_CODE=LEGACY_PLANT_CD. Use  V_BRD_PLANT_CODE_MAPPING_CORE_PIT.PLANT_CD. If null continue to use the SUPPLYING_PLANT_CODE\n\n7b. RECEIVING_PLANT_CD & PLANT_CD: :Join IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT based on RECEIVING_PLANT_CD / PLANT_CD=LEGACY_PLANT_CD. Use  V_BRD_PLANT_CODE_MAPPING_CORE_PIT.PLANT_CD. If null continue to use the SUPPLYING_PLANT_CODE/PLANT_CD\n7. DESTSTATUS: IF GOODS_RECEIVED_QTY =0 THEN 'OPEN' (1)\nELSEIF STOCK_TRANSFER_ORDER_LINE_QTY-GOODS_RECEIVED_QTY >0 THEN 'PARTIAL' (2)\nELSE 'COMPLETE' (3)\n\nSOURCESTATUS: IF GOODS_ISSUED_QTY =0 THEN 'OPEN' (1)\nELSEIF STOCK_TRANSFER_ORDER_LINE_QTY-GOODS_ISSUED_QTY >0 THEN 'PARTIAL' (2)\nELSE 'COMPLETE' (3)\nDQ: Join Above results with IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_PIT based on ITEM_ID, FROM_LOCATION_ID=SUPPLYING_PLANT_CD , TO_LOCATION_ID=RECEIVING_PLANT_CD to get Valid Item and routes only",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_STOCK_TRANSFER_ORDER_DETAIL_CORE",
+     "target_label": "STAGE",
+     "context": [],
+     "statements": [
+      "1. Get Data for relevant time lines: Filter to the required timehorizon by filtering REQUESTED_DELIVERY_DT between dates  that are returned  (IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.CALENDAR_DT WHERE IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.HORIZON_CORE_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT WHERE SUBJECT_AREA_NM='PURCHASE DOCUMENT' and ENTITY_NM='STOCK TRANSFER ORDER' AND BUSINESS_RULE_NM='STO_Config' )",
+      "2. Document Types: Filter  IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE.STOCK_TRANSFER_ORDER_TYPE_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_TWO_TXT WHERE STOCK_TRANSFER_ORDER_TYPE_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_TWO_TXT WHERE SUBJECT_AREA_NM='PURCHASE DOCUMENT' and ENTITY_NM='STOCK TRANSFER ORDER' AND BUSINESS_RULE_NM='STO_Config'  for the coresponding SOURCE_SYSTEM_NM IN COLUMN_VALUE_ONE_TXT",
+      "3. Exclude Marked to Delete: Exclude rows that have IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE.STOCK_TRANSFER_ORDER_HEADER_DELETION_STATUS_CD!= '' and Exclude rows that have IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE.STOCK_TRANSFER_ORDER_LINE_DELETION_STATUS_CD !=''",
+      "4. Delivery Complete Indicator: Include rows  with IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE.DELIVERY_COMPLETE_IND='N'",
+      "5. Join above results with IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.PURCHASE_REQUISITION_PURCHASE_ORDER_ASSOCIATION based on  PURCHASE_ORDER_NBR=STOCK_TRANSFER_ORDER_NBR and STOCK_TRANSFER_ORDER_LINE_NBR=PURCHASE_ORDER_LINE_NBR to get the corresponding PURCHASE REQUISITION AND PURCHASE REQUISITION LINE NBR for the STOCK_TRANSFER_ORDER_NBR",
+      "6. Join IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE and IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_SCHEDULE_LINE based on  STOCK_TRANSFER_ORDER_NBR\tand  STOCK_TRANSFER_ORDER_LINE_NBR. Aggregate GOODS_ISSUED_QTY and GOODS_RECEIVED_QTY",
+      "7a. SUPPLYING_PLANT_CODE: Join IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT based on SUPPLYING_PLANT_CODE=LEGACY_PLANT_CD. Use  V_BRD_PLANT_CODE_MAPPING_CORE_PIT.PLANT_CD. If null continue to use the SUPPLYING_PLANT_CODE",
+      "7b. RECEIVING_PLANT_CD & PLANT_CD: :Join IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_HEADER_LINE with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT based on RECEIVING_PLANT_CD / PLANT_CD=LEGACY_PLANT_CD. Use  V_BRD_PLANT_CODE_MAPPING_CORE_PIT.PLANT_CD. If null continue to use the SUPPLYING_PLANT_CODE/PLANT_CD",
+      "7. DESTSTATUS: IF GOODS_RECEIVED_QTY =0 THEN 'OPEN' (1) ELSEIF STOCK_TRANSFER_ORDER_LINE_QTY-GOODS_RECEIVED_QTY >0 THEN 'PARTIAL' (2) ELSE 'COMPLETE' (3) SOURCESTATUS: IF GOODS_ISSUED_QTY =0 THEN 'OPEN' (1) ELSEIF STOCK_TRANSFER_ORDER_LINE_QTY-GOODS_ISSUED_QTY >0 THEN 'PARTIAL' (2) ELSE 'COMPLETE' (3) DQ: Join Above results with IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_PRM_ITEM_TRANSPORTATION_ROUTE_PARAMETER_CORE_PIT based on ITEM_ID, FROM_LOCATION_ID=SUPPLYING_PLANT_CD , TO_LOCATION_ID=RECEIVING_PLANT_CD to get Valid Item and routes only"
+     ]
+    },
+    {
+     "row": 265,
+     "text": "Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_STOCK_TRANSFER_ORDER_DETAIL_CORE and IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_SCHEDULE_LINE based on  STOCK_TRANSFER_ORDER_NBR\tand  STOCK_TRANSFER_ORDER_LINE_NBR",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_STOCK_TRANSFER_ORDER_SHIPMENT_CORE",
+     "target_label": "STAGE",
+     "context": [],
+     "statements": [
+      "Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_STOCK_TRANSFER_ORDER_DETAIL_CORE and IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.STOCK_TRANSFER_ORDER_SCHEDULE_LINE based on  STOCK_TRANSFER_ORDER_NBR\tand  STOCK_TRANSFER_ORDER_LINE_NBR"
+     ]
+    },
+    {
+     "row": 271,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_STOCK_TRANSFER_ORDER_DETAIL_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 276,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.\n50\n50",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_STOCK_TRANSFER_ORDER_DETAIL_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table. 50 50"
+     ]
+    },
+    {
+     "row": 281,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_STOCK_TRANSFER_ORDER_SHIPMENT_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 286,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_STOCK_TRANSFER_ORDER_SHIPMENT_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 291,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_INV_STOCK_TRANSFER_ORDER_DETAIL_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 296,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_INV_STOCK_TRANSFER_ORDER_SHIPMENT_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

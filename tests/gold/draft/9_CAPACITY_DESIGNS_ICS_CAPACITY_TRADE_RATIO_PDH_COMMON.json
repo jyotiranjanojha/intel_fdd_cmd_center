@@ -1,0 +1,296 @@
+{
+ "file": "9. CAPACITY DESIGNS/ICS_CAPACITY_TRADE_RATIO_PDH_COMMON.xlsx",
+ "sheets": [
+  "ICS_Core_V2"
+ ],
+ "skipped": [
+  {
+   "sheet": "ICS_Core_V1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "ICS_Core_v1_Draft",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "ICS_Core_V2": {
+   "blocks": [
+    {
+     "row": 68,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.SUPPLY_ANALYSIS.FACTORY_RESOURCE_TOOL_CAPACITY_STATEMENT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 91,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.SUPPLY_ANALYSIS.FACTORY_RESOURCE_TOOL_ITEM_TRADE_RATIO_METRIC",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 129,
+     "text": "Since this CAPACITY view contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table.\t\n\nIf TDI_GROUP_ID/ FACTORY_RESOURCE_NM / FACTORY_TOOL_NM is null, Assign    'NULL'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_TOOL_CAPACITY_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Since this CAPACITY view contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table. If TDI_GROUP_ID/ FACTORY_RESOURCE_NM / FACTORY_TOOL_NM is null, Assign    'NULL'"
+     ]
+    },
+    {
+     "row": 153,
+     "text": "Since this TRADE RATIO view contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table.\t\t\nHere, we have changed the column name from UNIFIED_PLANNING_ITEM_ID to ITEM_ID.\t\t\n\nIf TDI_GROUP_ID, FACTORY_RESOURCE_NM, FACTORY_TOOL_NM  is null, Assign 'NULL'\n\nOPERATION_NM=UPPER(OPERATION_NM)",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_TOOL_ITEM_TRADE_RATIO_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Since this TRADE RATIO view contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table. Here, we have changed the column name from UNIFIED_PLANNING_ITEM_ID to ITEM_ID. If TDI_GROUP_ID, FACTORY_RESOURCE_NM, FACTORY_TOOL_NM  is null, Assign 'NULL' OPERATION_NM=UPPER(OPERATION_NM)"
+     ]
+    },
+    {
+     "row": 193,
+     "text": "For records where TDI_GROUP_ID is 'NULL', fetch the default value from the metadata table and assign it to TDI_GROUP_ID. The metadata lookup should use the following criteria: SubjectAreaNm = 'Parameter', EntityNm = 'Planning_Parameter', BusinessRuleNm = 'Planning_Parameter', ColumnValueOnetxt = 'ICS Parameters' and ColumnValueTwotxt = 'CAPACITY'. Use the COLUMN_VALUE_THREE_TXT field from the matching metadata record as the TDI_GROUP_ID value",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_TOOL_CAPACITY_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "For records where TDI_GROUP_ID is 'NULL', fetch the default value from the metadata table and assign it to TDI_GROUP_ID. The metadata lookup should use the following criteria: SubjectAreaNm = 'Parameter', EntityNm = 'Planning_Parameter', BusinessRuleNm = 'Planning_Parameter', ColumnValueOnetxt = 'ICS Parameters' and ColumnValueTwotxt = 'CAPACITY'. Use the COLUMN_VALUE_THREE_TXT field from the matching metadata record as the TDI_GROUP_ID value"
+     ]
+    },
+    {
+     "row": 216,
+     "text": "1. For records where TDI_GROUP_ID is 'NULL', fetch the default value from the metadata table and assign it to TDI_GROUP_ID. The metadata lookup should use the following criteria: SubjectAreaNm = 'Parameter', EntityNm = 'Planning_Parameter', BusinessRuleNm = 'Planning_Parameter', ColumnValueOnetxt = 'ICS Parameters' and ColumnValueTwotxt = 'TRADE_RATIO'. Use the COLUMN_VALUE_THREE_TXT field from the matching metadata record as the TDI_GROUP_ID value.\n\n\n\n2. In this view we need to derive a column called 'CONSUMPTION_RATE'. The formula to derive the CONSUMPTION_RATE value is 1/TRADE_RATIO_QTY. If TRADE_RATIO=0, PUT 0\n\n3. In this Root View, we will define a column called 'PRIMARY_ALTERNATE_CD' based on the following logic:\n3A. For a particular combination of ITEM_ID, PLANT_CD, if the FACTORY_RESOURCE_PRIORITY_CD has different values, we need to define PRIMARY/ALTERNATE based on the sequence. (Example: If the FACTORY_RESOURCE_PRIORITY_CD is 0, then that record is PRIMARY, and the other record with '1' will be considered ALTERNATE). (remove this logic)\n3B. For a particular combination of  ITEM_ID, PLANT_CD,OPERATION_NM if the FACTORY_RESOURCE_PRIORITY_CD has the same values, we need to check the CONSUMPTION_RATE and assign the entry with the lowest QTY (best one) as PRIMARY and the rest as ALTERNATE.\n3C. If more than one PRIMARY resource is associated with a given item–location combination, we will refer to them as simultaneous resources.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_TOOL_ITEM_TRADE_RATIO_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "missing_name": true,
+     "statements": [
+      "1. For records where TDI_GROUP_ID is 'NULL', fetch the default value from the metadata table and assign it to TDI_GROUP_ID. The metadata lookup should use the following criteria: SubjectAreaNm = 'Parameter', EntityNm = 'Planning_Parameter', BusinessRuleNm = 'Planning_Parameter', ColumnValueOnetxt = 'ICS Parameters' and ColumnValueTwotxt = 'TRADE_RATIO'. Use the COLUMN_VALUE_THREE_TXT field from the matching metadata record as the TDI_GROUP_ID value.",
+      "2. In this view we need to derive a column called 'CONSUMPTION_RATE'. The formula to derive the CONSUMPTION_RATE value is 1/TRADE_RATIO_QTY. If TRADE_RATIO=0, PUT 0",
+      "3. In this Root View, we will define a column called 'PRIMARY_ALTERNATE_CD' based on the following logic:",
+      "3A. For a particular combination of ITEM_ID, PLANT_CD, if the FACTORY_RESOURCE_PRIORITY_CD has different values, we need to define PRIMARY/ALTERNATE based on the sequence. (Example: If the FACTORY_RESOURCE_PRIORITY_CD is 0, then that record is PRIMARY, and the other record with '1' will be considered ALTERNATE). (remove this logic)",
+      "3B. For a particular combination of  ITEM_ID, PLANT_CD,OPERATION_NM if the FACTORY_RESOURCE_PRIORITY_CD has the same values, we need to check the CONSUMPTION_RATE and assign the entry with the lowest QTY (best one) as PRIMARY and the rest as ALTERNATE.",
+      "3C. If more than one PRIMARY resource is associated with a given item–location combination, we will refer to them as simultaneous resources."
+     ]
+    },
+    {
+     "row": 272,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE",
+     "target_label": "Horizon_Core",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 289,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 323,
+     "text": "Bring only the master data resource columns i.e., RESOURCE, ITEM_ID, ITEM_CLASS_NM, PLANT_CD and RESOURCE_TYPE from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_ITEM_LOCATION_TRADE_RATIO_WORKWEEK_STAGE",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_RESOURCE_ITEM_LOCATION_STAGE",
+     "target_label": "RES_ITEM_LOC Stage",
+     "context": [],
+     "statements": [
+      "Bring only the master data resource columns i.e., RESOURCE, ITEM_ID, ITEM_CLASS_NM, PLANT_CD and RESOURCE_TYPE from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_ITEM_LOCATION_TRADE_RATIO_WORKWEEK_STAGE"
+     ]
+    },
+    {
+     "row": 341,
+     "text": "Bring the parameter related columns from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_ITEM_LOCATION_TRADE_RATIO_WORKWEEK_STAGE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_ITEM_LOCATION_WORKWEEK_STAGE",
+     "target_label": "RES_ITEM_LOC_WW Stage",
+     "context": [],
+     "statements": [
+      "Bring the parameter related columns from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_ITEM_LOCATION_TRADE_RATIO_WORKWEEK_STAGE."
+     ]
+    },
+    {
+     "row": 360,
+     "text": "1A. Define a column called 'RESOURCE' in this stage view by concatenating  FACTORY_RESOURCE_NM+'_'+PLANT_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_TOOL_CAPACITY_ROOT, and assign it a RESOURCE_TYPE of 'L2_RESOURCE'.\n\n1B. Define another resource in this stage view by concatenating FACTORY_TOOL_NM+'_'+PLANT_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_TOOL_CAPACITY_ROOT, and assign it a RESOURCE_TYPE of 'CEID'.\n\n1C. (CHECK)Whenever we see the FACTORY_RESOURCE_NM=FACTORY_TOOL_NM  we will create only one resource by concatenating TDI_GROUP_ID and FACTORY_RESOURCE_NM and assign it a RESOURCE_TYPE of 'L2_RESOURCE'.\n\n1D. Do a referential integrity check for all the RESOURCE and PLANT_CD in the stage view with the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_ITEM_LOCATION_TRADE_RATIO_WORKWEEK_STAGE. Get the corresponding PRIMARY_ALTERNATE_CD values of each resources.\n\n2. For Data Projection: Fetch only the metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ICS Parameters'. Pass the 'COLUMN_VALUE_FOURTEEN_TXT' into 'HORIZON_TOKEN_CD' in the view V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the CAPACITY_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW till the last week.\n\n3. Fetch the PARAMETER_NM column value from metadata - where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ICS Parameters'. Pass the 'COLUMN_VALUE_FIVE_TXT =CAPACITY' as PARAMETER_NM.\n\n4. Compare the data from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_CAPACITY_WORKWEEK_STAGE to identify resources that have a TRADE_RATIO_QTY but are missing CAPACITY_QTY  For these cases, populate the CAPACITY_QTY as '999999' using the metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', ColumnValueOnetxt = 'ICS Parameters', ColumnValueTwotxt = 'CAPACITY' and Pass the 'COLUMN_VALUE_TEN_TXT ='999999' as PARAMETER_QTY. FYI - We will not send these resources to BY. For these resources populate the COLUMN_VALUE_FIVE_TXT as PRIMARY_ALTERNATE_CD value where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config_Ext', ColumnValueOnetxt = 'ICS Parameters' and ColumnValueTwotxt = 'CAPACITY'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_CAPACITY_WORKWEEK_STAGE",
+     "target_label": "RES_LOC_CAPACITY_WW Stage",
+     "context": [
+      {
+       "label": "DQ",
+       "text": "Compare the resources from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_RESOURCE_LOCATION_CORE_PIT (previous cycle) with the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_CAPACITY_WORKWEEK_STAGE (current cycle) data."
+      }
+     ],
+     "statements": [
+      "1A. Define a column called 'RESOURCE' in this stage view by concatenating  FACTORY_RESOURCE_NM+'_'+PLANT_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_TOOL_CAPACITY_ROOT, and assign it a RESOURCE_TYPE of 'L2_RESOURCE'.",
+      "1B. Define another resource in this stage view by concatenating FACTORY_TOOL_NM+'_'+PLANT_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_TOOL_CAPACITY_ROOT, and assign it a RESOURCE_TYPE of 'CEID'.",
+      "1C. (CHECK)Whenever we see the FACTORY_RESOURCE_NM=FACTORY_TOOL_NM  we will create only one resource by concatenating TDI_GROUP_ID and FACTORY_RESOURCE_NM and assign it a RESOURCE_TYPE of 'L2_RESOURCE'.",
+      "1D. Do a referential integrity check for all the RESOURCE and PLANT_CD in the stage view with the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_ITEM_LOCATION_TRADE_RATIO_WORKWEEK_STAGE. Get the corresponding PRIMARY_ALTERNATE_CD values of each resources.",
+      "2. For Data Projection: Fetch only the metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ICS Parameters'. Pass the 'COLUMN_VALUE_FOURTEEN_TXT' into 'HORIZON_TOKEN_CD' in the view V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the CAPACITY_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW till the last week.",
+      "3. Fetch the PARAMETER_NM column value from metadata - where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ICS Parameters'. Pass the 'COLUMN_VALUE_FIVE_TXT =CAPACITY' as PARAMETER_NM.",
+      "4. Compare the data from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_CAPACITY_WORKWEEK_STAGE to identify resources that have a TRADE_RATIO_QTY but are missing CAPACITY_QTY  For these cases, populate the CAPACITY_QTY as '999999' using the metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', ColumnValueOnetxt = 'ICS Parameters', ColumnValueTwotxt = 'CAPACITY' and Pass the 'COLUMN_VALUE_TEN_TXT ='999999' as PARAMETER_QTY. FYI - We will not send these resources to BY. For these resources populate the COLUMN_VALUE_FIVE_TXT as PRIMARY_ALTERNATE_CD value where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config_Ext', ColumnValueOnetxt = 'ICS Parameters' and ColumnValueTwotxt = 'CAPACITY'."
+     ]
+    },
+    {
+     "row": 381,
+     "text": "Bring only the master data resource columns i.e., RESOURCE, PLANT_CD and RESOURCE_TYPE from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_CAPACITY_WORKWEEK_STAGE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_RESOURCE_LOCATION_STAGE",
+     "target_label": "RES_LOC Stage",
+     "context": [],
+     "statements": [
+      "Bring only the master data resource columns i.e., RESOURCE, PLANT_CD and RESOURCE_TYPE from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_CAPACITY_WORKWEEK_STAGE."
+     ]
+    },
+    {
+     "row": 401,
+     "text": "Bring the parameter related columns from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_CAPACITY_WORKWEEK_STAGE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_WORKWEEK_STAGE",
+     "target_label": "RES_LOC_WW Stage",
+     "context": [],
+     "statements": [
+      "Bring the parameter related columns from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_RESOURCE_LOCATION_CAPACITY_WORKWEEK_STAGE."
+     ]
+    },
+    {
+     "row": 421,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_ITEM_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 438,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_ITEM_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 455,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_RESOURCE_ITEM_LOCATION_CORE_PIT",
+     "target_label": "RES_ITEM_LOC Core PIT",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 472,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_ITEM_LOCATION_WORKWEEK_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 489,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_ITEM_LOCATION_WORKWEEK_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 506,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_RESOURCE_ITEM_LOCATION_WORKWEEK_CORE_PIT",
+     "target_label": "RES_ITEM_LOC_WW Core PIT",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 523,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 542,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_RESOURCE_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 561,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_RESOURCE_LOCATION_CORE_PIT",
+     "target_label": "RES_LOC Core PIT",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 580,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_LOCATION_WORKWEEK_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 599,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_RESOURCE_LOCATION_WORKWEEK_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 618,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_RESOURCE_LOCATION_WORKWEEK_CORE_PIT",
+     "target_label": "RES_LOC_WW Core PIT",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 22,
+     "kind": "header-area requirement",
+     "text": "Opens UPI to PROC level conversion should be handled in PDH"
+    }
+   ]
+  }
+ }
+}

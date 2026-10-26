@@ -1,0 +1,54 @@
+{
+ "file": "11. POR SCHEDULES/TRANSPORTATION_SCHEDULE_UI_UPLOAD_PDH_COMMON.xlsx",
+ "sheets": [
+  "DesignFlow"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "DesignFlow": {
+   "blocks": [
+    {
+     "row": 109,
+     "text": "ITEM_DSC=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT.ITEM_DSC when you join above table on ITEM_ID\nUOM= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT.BASE_UNIT_OF_MEASURE\nFISCAL_YEAR_WORK_WEEK_NBR=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.FISCAL_YEAR_WORK_WEEK_NBR when you join ARRIVAL_DATE  with CALENDAR_DT",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE_UI_UPLOAD",
+     "target_label": "Root UI Stage View",
+     "context": [],
+     "statements": [
+      "ITEM_DSC=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT.ITEM_DSC when you join above table on ITEM_ID UOM= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT.BASE_UNIT_OF_MEASURE FISCAL_YEAR_WORK_WEEK_NBR=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.FISCAL_YEAR_WORK_WEEK_NBR when you join ARRIVAL_DATE  with CALENDAR_DT"
+     ]
+    },
+    {
+     "row": 122,
+     "text": "No transformations are applicable; all active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_TRANSPORTATION_SCHEDULE_UI_UPLOAD_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "No transformations are applicable; all active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 135,
+     "text": "No transformations are applicable; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_TRANSPORTATION_SCHEDULE_UI_UPLOAD_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "No transformations are applicable; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 148,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_UI_UPLOAD_CORE_PIT",
+     "target_label": "Core PIT View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

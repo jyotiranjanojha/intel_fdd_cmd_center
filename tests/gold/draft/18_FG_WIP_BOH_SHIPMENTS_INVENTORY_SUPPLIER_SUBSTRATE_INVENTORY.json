@@ -1,0 +1,203 @@
+{
+ "file": "18. FG, WIP, BOH & SHIPMENTS INVENTORY/SUPPLIER_SUBSTRATE_INVENTORY.xlsx",
+ "sheets": [
+  "Supplier_Substrate_BOH_and_WIP",
+  "Supplier_Sustrate_Excess_Inv",
+  "Supplier_Substrate_Aged_Inv"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "Supplier_Substrate_BOH_and_WIP": {
+   "blocks": [
+    {
+     "row": 74,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 84,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 100,
+     "text": "",
+     "target": "PDH_COMMON_XFRM.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "missing_name": true,
+     "statements": []
+    },
+    {
+     "row": 118,
+     "text": "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 134,
+     "text": "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 150,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  },
+  "Supplier_Sustrate_Excess_Inv": {
+   "blocks": [
+    {
+     "row": 75,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_EXCESS_INVENTORY_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 86,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_INV_SUBSTRATE_ITEM_SUPPLIER_EXCESS_INVENTORY_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 102,
+     "text": "",
+     "target": "PDH_COMMON_XFRM.V_INV_SUBSTRATE_ITEM_SUPPLIER_EXCESS_INVENTORY_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "missing_name": true,
+     "statements": []
+    },
+    {
+     "row": 120,
+     "text": "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_EXCESS_INVENTORY_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 136,
+     "text": "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_EXCESS_INVENTORY_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 152,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_EXCESS_INVENTORY_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  },
+  "Supplier_Substrate_Aged_Inv": {
+   "blocks": [
+    {
+     "row": 75,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_LOT_BOH_INVENTORY_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 86,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_INV_SUBSTRATE_ITEM_SUPPLIER_LOT_BOH_INVENTORY_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 102,
+     "text": "",
+     "target": "PDH_COMMON_XFRM.V_INV_SUBSTRATE_ITEM_SUPPLIER_LOT_BOH_INVENTORY_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "missing_name": true,
+     "statements": []
+    },
+    {
+     "row": 120,
+     "text": "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_LOT_BOH_INVENTORY_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 136,
+     "text": "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_SUBSTRATE_ITEM_SUPPLIER_LOT_BOH_INVENTORY_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 152,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_LOT_BOH_INVENTORY_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

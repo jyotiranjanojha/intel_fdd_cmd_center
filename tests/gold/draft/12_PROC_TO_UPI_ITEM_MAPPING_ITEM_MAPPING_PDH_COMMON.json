@@ -1,0 +1,89 @@
+{
+ "file": "12. PROC TO UPI ITEM MAPPING/ITEM_MAPPING_PDH_COMMON.xlsx",
+ "sheets": [
+  "Item_Mapping_Core_V2"
+ ],
+ "skipped": [
+  {
+   "sheet": "Item_Mapping_Core",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "Item_Mapping_Core_V2": {
+   "blocks": [
+    {
+     "row": 64,
+     "text": "All data will be loaded from the source to the ROOT table by truncating the existing records in the table. Bring only latest MAX of CHANGE_DTM. Also check for duplicates.\nReplace any null values in the PROC_ITEM_ID, TEST_ITEM_ID, and OLD_ITEM_ID fields with 'NULL'. This is also done to avoid any issues from PK constraints\n\nCHANGE_DTM=INTELFOUNDRY_ITEM_PROC_TEST_MERGE_MAPPING.CHANGE_DTM\nCREATE_DTM=INTELFOUNDRY_ITEM_PROC_TEST_MERGE_MAPPING.ECA_XFRM_CREATE_UTC_DTM\nCREATE_AGENT_ID / CHANGE_AGENT_ID=CURRENT_USER()",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_MAPPING_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "All data will be loaded from the source to the ROOT table by truncating the existing records in the table. Bring only latest MAX of CHANGE_DTM. Also check for duplicates. Replace any null values in the PROC_ITEM_ID, TEST_ITEM_ID, and OLD_ITEM_ID fields with 'NULL'. This is also done to avoid any issues from PK constraints CHANGE_DTM=INTELFOUNDRY_ITEM_PROC_TEST_MERGE_MAPPING.CHANGE_DTM CREATE_DTM=INTELFOUNDRY_ITEM_PROC_TEST_MERGE_MAPPING.ECA_XFRM_CREATE_UTC_DTM CREATE_AGENT_ID / CHANGE_AGENT_ID=CURRENT_USER()"
+     ]
+    },
+    {
+     "row": 75,
+     "text": "We need to remove the leading zeros from the ITEM_ID and PROC_ITEM_ID. For example, if ITEM_ID = 0000010000007, it should be stored as ITEM_ID = 10000007.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_MAPPING_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We need to remove the leading zeros from the ITEM_ID and PROC_ITEM_ID. For example, if ITEM_ID = 0000010000007, it should be stored as ITEM_ID = 10000007."
+     ]
+    },
+    {
+     "row": 85,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 95,
+     "text": "Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT based on ITEM_ID to get the OWNER_CD column.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_MAPPING_STAGE",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT based on ITEM_ID to get the OWNER_CD column."
+     ]
+    },
+    {
+     "row": 107,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_MAPPING_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 119,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.\nIF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.\nT_BRD_ITEM_MAPPING_CORE_MEMORIES",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table. IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE. T_BRD_ITEM_MAPPING_CORE_MEMORIES"
+     ]
+    },
+    {
+     "row": 131,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT",
+     "target_label": "Common_Analysis Core",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "file": "7. CALENDAR/WORKWEEK_CALENDAR_PDH_COMMON.xlsx",
+ "sheets": [
+  "Horizon_Core"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "Horizon_Core": {
+   "blocks": [
+    {
+     "row": 147,
+     "text": "Here FINANCE_CALENDAR_STAGE data will be filtered based on the horizon tokens from metadata.\nFilter relative columns based on the COLUMN_VALUE_THREE (FORWARD_UNIT_CNT) and COLUMN_VALUE_FIVE (BACKWARD_UNIT_CNT) defined in the metadata with calendar week month quater year relative NBRs.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_CRR_CALENDAR_HORIZON_CORE",
+     "target_label": "Horizon_Core",
+     "context": [],
+     "statements": [
+      "Here FINANCE_CALENDAR_STAGE data will be filtered based on the horizon tokens from metadata. Filter relative columns based on the COLUMN_VALUE_THREE (FORWARD_UNIT_CNT) and COLUMN_VALUE_FIVE (BACKWARD_UNIT_CNT) defined in the metadata with calendar week month quater year relative NBRs."
+     ]
+    },
+    {
+     "row": 162,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR",
+     "target_label": "Finance_Calendar",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 180,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE",
+     "target_label": "Horizon_Core",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

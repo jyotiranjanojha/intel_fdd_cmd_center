@@ -1,0 +1,92 @@
+{
+ "file": "1. ITEM/ITEM_CHARACTERISTIC_BATCH_PDH_COMMON.xlsx",
+ "sheets": [
+  "Item_Characteristic_Batch_Core"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "Item_Characteristic_Batch_Core": {
+   "blocks": [
+    {
+     "row": 127,
+     "text": "For the first run, Load only Active records from  IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_MATERIAL_BATCH_CHARACTERISTIC if SOURCE_DELETE_IND =FALSE and DELETE_IND=FALSE to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_BATCH_CHARACTERISTIC_ROOT. Set ACTIVE_IND  = 'TRUE'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_BATCH_CHARACTERISTIC_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "For the first run, Load only Active records from  IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_MATERIAL_BATCH_CHARACTERISTIC if SOURCE_DELETE_IND =FALSE and DELETE_IND=FALSE to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_BATCH_CHARACTERISTIC_ROOT. Set ACTIVE_IND  = 'TRUE'."
+     ]
+    },
+    {
+     "row": 137,
+     "text": "Fetch only ACTIVE_IND =TRUE from ROOT TABLE",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_BATCH_CHARACTERISTIC_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Fetch only ACTIVE_IND =TRUE from ROOT TABLE"
+     ]
+    },
+    {
+     "row": 153,
+     "text": "1.Fetch from Root VIEW which has all ACTIVE records.\n2. Fetch only the characteristics in Metdata by mapping the CHARACTERISTIC_NM in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_BATCH_CHARACTERISTIC_ROOT with the Column_Value_One_Txt in V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm = 'Item_Batch_Characteristic', Entity_Nm ='Item_Characteristic' and Business_Rule_Nm='Item_Characteristic Inclusion List'.\n3. Join with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT based on ITEM_ID and ITEM_NON_LEADING_ZERO_ID to get the ITEM_CLASS_NM. Get matching records from root view and item root.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_BATCH_CHARACTERISTIC_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "1.Fetch from Root VIEW which has all ACTIVE records.",
+      "2. Fetch only the characteristics in Metdata by mapping the CHARACTERISTIC_NM in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_BATCH_CHARACTERISTIC_ROOT with the Column_Value_One_Txt in V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_Nm = 'Item_Batch_Characteristic', Entity_Nm ='Item_Characteristic' and Business_Rule_Nm='Item_Characteristic Inclusion List'.",
+      "3. Join with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT based on ITEM_ID and ITEM_NON_LEADING_ZERO_ID to get the ITEM_CLASS_NM. Get matching records from root view and item root."
+     ]
+    },
+    {
+     "row": 165,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_BATCH_CHARACTERISTIC_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 175,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_BATCH_CHARACTERISTIC_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 184,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_BATCH_CHARACTERISTIC_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 195,
+     "text": "PIVOT the columns CHARACTERISTIC_NM and ITEM_CHARACTERISTIC_VALUE_TXT. The LOTTYPE becomes the column and ITEM_CHARACTERISTIC_VALUE_TXT becomes the value of LOTTYPE column.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_BATCH_CHARACTERISTIC_DENORMALIZED_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "PIVOT the columns CHARACTERISTIC_NM and ITEM_CHARACTERISTIC_VALUE_TXT. The LOTTYPE becomes the column and ITEM_CHARACTERISTIC_VALUE_TXT becomes the value of LOTTYPE column."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 209,
+     "kind": "scenario table",
+     "text": "Scenario ITEM_CHARACTERISTIC_CORE_CURRENT ITEM_CHARACTERISTIC_CORE_MEMORIES"
+    }
+   ]
+  }
+ }
+}

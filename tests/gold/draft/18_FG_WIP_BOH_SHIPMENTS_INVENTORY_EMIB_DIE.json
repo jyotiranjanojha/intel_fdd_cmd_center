@@ -1,0 +1,172 @@
+{
+ "file": "18. FG, WIP, BOH & SHIPMENTS INVENTORY/EMIB_DIE.xlsx",
+ "sheets": [
+  "EMIB DIE",
+  "EMIB Internal"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "EMIB DIE": {
+   "blocks": [
+    {
+     "row": 75,
+     "text": "We don't have any major transformation",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_DIE_CONSUMPTION_ROOT",
+     "target_label": "Source Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation"
+     ]
+    },
+    {
+     "row": 82,
+     "text": "We don't have any major transformation now",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_DIE_CONSUMPTION_ROOT",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now"
+     ]
+    },
+    {
+     "row": 119,
+     "text": "1. In order to bring only EMIB Die records,  join the ITEM_ID in \"IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_DIE_CONSUMPTION_ROOT \" with ITEM_ID in \"IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT\". Only when the below metadata is satisfied.  In the matched records, , filter records when  \"DESIGNED_FUNCTION_CODE\" column value of IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT is equal to the value  fetched the value from COLUMN_VALUE_TWO_TXT from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_CURRENT where SubjectAreaNm = 'EMIBDIE', EntityNm = 'EMIB', BusinessRuleNm = 'EMIB' and COLUMN_VALUE_ONE_TXT =\"DESIGNED_FUNCTION_CODE\". If not, it should be marked as Fallout(DQ).\n\n2. To derive PLANT_CD, map the MANUFACTURING_LOCATION_ID fromIF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_DIE_CONSUMPTION_ROOT and join the withe MANUFACTURING_LOCATION_CD column from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT, the corresponding PLANT_CD will be PLANT_CD.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_DIE_CONSUMPTION_STAGE",
+     "target_label": "Master Stage View",
+     "context": [
+      {
+       "label": "DQ",
+       "text": "If the Item is not a BRIDGE DiE, it should be clearly marked as Fallout (DQ)"
+      }
+     ],
+     "statements": [
+      "1. In order to bring only EMIB Die records,  join the ITEM_ID in \"IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_DIE_CONSUMPTION_ROOT \" with ITEM_ID in \"IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT\". Only when the below metadata is satisfied.  In the matched records, , filter records when  \"DESIGNED_FUNCTION_CODE\" column value of IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT is equal to the value  fetched the value from COLUMN_VALUE_TWO_TXT from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_CURRENT where SubjectAreaNm = 'EMIBDIE', EntityNm = 'EMIB', BusinessRuleNm = 'EMIB' and COLUMN_VALUE_ONE_TXT =\"DESIGNED_FUNCTION_CODE\". If not, it should be marked as Fallout(DQ).",
+      "2. To derive PLANT_CD, map the MANUFACTURING_LOCATION_ID fromIF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_DIE_CONSUMPTION_ROOT and join the withe MANUFACTURING_LOCATION_CD column from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT, the corresponding PLANT_CD will be PLANT_CD."
+     ]
+    },
+    {
+     "row": 128,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_DIE_CONSUMPTION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 135,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_DIE_CONSUMPTION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 142,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_INV_DIE_CONSUMPTION_CORE_PIT",
+     "target_label": "Common_Analysis_View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 54,
+     "kind": "header-area requirement",
+     "text": "DQ Check If the Item is not a BRIDGE DiE, it should be clearly marked as Fallout"
+    }
+   ]
+  },
+  "EMIB Internal": {
+   "blocks": [
+    {
+     "row": 71,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.MAPPS_EMIB_DIE_SCHEDULE",
+     "target_label": "Source Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 82,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.V_MAPPS_EMIB_DIE_SCHEDULE",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 93,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_EMIB_DIE_SCHEDULE_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 104,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_EMIB_DIE_SCHEDULE_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 115,
+     "text": "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_EMIB_DIE_SCHEDULE_CORE_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 125,
+     "text": "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_EMIB_DIE_SCHEDULE_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 136,
+     "text": "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_INV_EMIB_DIE_SCHEDULE_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 147,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_INV_EMIB_DIE_SCHEDULE_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "file": "20. IF TO IP ITEM MAPPING/IF_TO_IP_ITEM_MAPPING_PDH_COMMON.xlsx",
+ "sheets": [
+  "IF_TO_IP_ITEM_MAPPING"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "IF_TO_IP_ITEM_MAPPING": {
+   "blocks": [
+    {
+     "row": 35,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 47,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 56,
+     "text": "We need to provide ITEM_ID values at the IP level also - for that we have to join the ITEM_ID from V_BRD_ITEM_CORE_PIT with the ITEM_ID in V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT and get the corresponding CUSTOMER_PART_NUMBER values from V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT as CUSTOMER_ITEM_ID in the below view.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_IF_TO_IP_ITEM_MAPPING_CORE",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We need to provide ITEM_ID values at the IP level also - for that we have to join the ITEM_ID from V_BRD_ITEM_CORE_PIT with the ITEM_ID in V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT and get the corresponding CUSTOMER_PART_NUMBER values from V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT as CUSTOMER_ITEM_ID in the below view."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

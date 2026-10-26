@@ -1,0 +1,152 @@
+{
+ "file": "13. PRODUCTION METHOD/Production Method.xlsx",
+ "sheets": [
+  "Production_Method_Core"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "Production_Method_Core": {
+   "blocks": [
+    {
+     "row": 83,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 101,
+     "text": "We don't have any transformations as of now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_HEADER_DETAIL_CORE_PIT",
+     "target_label": "Metadata-Header",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 109,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT",
+     "target_label": "MetaData",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 141,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT",
+     "target_label": "MetaData",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 153,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_EFFECTIVITY_CORE_PIT",
+     "target_label": "MetaData",
+     "context": [
+      {
+       "label": "Note",
+       "text": "This View is not yet developed; however, we are proceeding with the assumption that the values will be provided in these views."
+      }
+     ],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 163,
+     "text": "We don't have any transformations as of now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT",
+     "target_label": "MetaData",
+     "context": [
+      {
+       "label": "Note",
+       "text": "These parameters are not yet developed; however, we are proceeding with the assumption that the values will be provided in these views."
+      }
+     ],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 181,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 190,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_ITEM_CUSTOMER_CORE",
+     "target_label": "Source",
+     "context": [
+      {
+       "label": "Note",
+       "text": "This View is not yet developed; however, we are proceeding with the assumption that the values will be provided in these views."
+      }
+     ],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 199,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_SUPPLY_PLANNIN_XFRM.V_BRD_BY_SP_PRODUCTIONMETHOD_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    },
+    {
+     "row": 212,
+     "text": "Step 1: Get BOM Details and Production Method Derivation Type based on ItemClasses\nQuery V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT to  retrieve BILL_OF_MATERIAL_ID as BOMNUM, PARENT_ITEM_ID AS ITEM, PARENT_ITEM_CLASS_NM AS ITEM_CLASS_NM, PARENT_ITEM_PLANT_CD  AS LOC\ninner join with metadata on ITEM_CLASS_NM in ColumnValueOneTxt where SubjectAreaNm = \"ProductionMethod\", EntityNm = \"ProductionMethod\", BusinessRuleNm in ( ProductionMethod_Config) and get ColumnVauleTwoTxt as PMDerivationType\nJoin with V_BRD_ITEM_MATERIAL_CORE_PIT on item_id and MATERIAL_TYPE_CD NOT IN (UNBW) -- use metadata to  fetch this value ( to exclude bailed items)\nCreate an initial dataset:\n| BOM# | Item | Loc | ItemClassNm | PMDerivationType\nStep 2: Fetch Effective and Discontinue Dates - to determine the effectiveness range of an item - location pair\nFor each Item–Location pair, extract eff_ww (effective workweek) and disc_ww (discontinue workweek) using Production Method effectiveness UI  view/table (V_PRM_ITEM_LOC_EFFECTIVITY_CORE_PIT)\nwhere eff_ww is null set to default using metadata and disc_ww as null\nUpdate main dataset to include:\n| BOM# | Item | Loc | ItemClass | PMDerivationType | eff_ww | disc_ww |\nStep 3: Get Planning TPT by Work Week - to determine if an item - location pair falls under Timephasing or not\nFor every Item–Location pair, query V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT view to obtain Planning TPT values per Work Week (WW) where WW falls between eff_ww and disc_ww (inclusive).\nFor default eff_ww consider current ww and for disc_ww till the end",
+     "target": "PDH_SUPPLY_PLANNIN_ANALYSIS.BY_PRODUCTIONMETHOD",
+     "target_label": "STAGE VIEW",
+     "context": [],
+     "statements": [
+      "Step 1: Get BOM Details and Production Method Derivation Type based on ItemClasses Query V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT to  retrieve BILL_OF_MATERIAL_ID as BOMNUM, PARENT_ITEM_ID AS ITEM, PARENT_ITEM_CLASS_NM AS ITEM_CLASS_NM, PARENT_ITEM_PLANT_CD  AS LOC inner join with metadata on ITEM_CLASS_NM in ColumnValueOneTxt where SubjectAreaNm = \"ProductionMethod\", EntityNm = \"ProductionMethod\", BusinessRuleNm in ( ProductionMethod_Config) and get ColumnVauleTwoTxt as PMDerivationType Join with V_BRD_ITEM_MATERIAL_CORE_PIT on item_id and MATERIAL_TYPE_CD NOT IN (UNBW) -- use metadata to  fetch this value ( to exclude bailed items) Create an initial dataset: | BOM# | Item | Loc | ItemClassNm | PMDerivationType",
+      "Step 2: Fetch Effective and Discontinue Dates - to determine the effectiveness range of an item - location pair For each Item–Location pair, extract eff_ww (effective workweek) and disc_ww (discontinue workweek) using Production Method effectiveness UI  view/table (V_PRM_ITEM_LOC_EFFECTIVITY_CORE_PIT) where eff_ww is null set to default using metadata and disc_ww as null Update main dataset to include: | BOM# | Item | Loc | ItemClass | PMDerivationType | eff_ww | disc_ww |",
+      "Step 3: Get Planning TPT by Work Week - to determine if an item - location pair falls under Timephasing or not For every Item–Location pair, query V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT view to obtain Planning TPT values per Work Week (WW) where WW falls between eff_ww and disc_ww (inclusive). For default eff_ww consider current ww and for disc_ww till the end"
+     ]
+    },
+    {
+     "row": 291,
+     "text": "We don't have any transformations as of now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_PRODUCTIONMETHOD_CORE_PIT",
+     "target_label": "Final View",
+     "context": [],
+     "statements": [
+      "We don't have any transformations as of now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 78,
+     "kind": "header-area requirement",
+     "text": "EFF EFF VARCHAR2(20) Required Everytime a new production method is created set the eff date to its default value"
+    },
+    {
+     "row": 139,
+     "kind": "free text",
+     "text": "ProductionMethod ProductionMethod ProductionMethod_MaterialType_Config Exclude UNBW"
+    }
+   ]
+  }
+ }
+}

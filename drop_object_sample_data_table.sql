@@ -1,0 +1,12 @@
+-- Undo for create_object_sample_data_table.sql: removes the manual sample data feature's
+-- table and sequence. Run only after the app code is reverted (REVERT_SAMPLE_DATA.md),
+-- and only if the saved samples are no longer wanted - a backup is taken first.
+-- Co-authored with CoCo
+
+USE ROLE ROLE_IF_CDA_PDH_SUPPLY_PLANNING_ANALYSIS_CONTRIBUTOR;
+
+CREATE TABLE IF NOT EXISTS IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM_BASE.OBJECT_SAMPLE_DATA_BKP
+    AS SELECT * FROM IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM_BASE.OBJECT_SAMPLE_DATA;
+
+DROP TABLE IF EXISTS IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM_BASE.OBJECT_SAMPLE_DATA;
+DROP SEQUENCE IF EXISTS IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM_BASE.SEQ_OBJECT_SAMPLE_DATA;

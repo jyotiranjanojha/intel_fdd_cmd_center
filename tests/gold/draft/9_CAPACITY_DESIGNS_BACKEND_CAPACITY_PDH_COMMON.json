@@ -1,0 +1,375 @@
+{
+ "file": "9. CAPACITY DESIGNS/BACKEND_CAPACITY_PDH_COMMON.xlsx",
+ "sheets": [
+  "Backend_Capacity_v1"
+ ],
+ "skipped": [
+  {
+   "sheet": "Backend_Capacity",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "Backend_Capacity_v1": {
+   "blocks": [
+    {
+     "row": 102,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.ATCR_MAXCAP_RELATIONSHIP",
+     "target_label": "Source Base - Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 118,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.ATCR_CAPACITY_STATEMENT",
+     "target_label": "Source Base - Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 132,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.ATCR_CONSUMPTION_RATE",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 141,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.ATCR_MAXCAP_RELATIONSHIP",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 156,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.ATCR_CAPACITY_STATEMENT",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 171,
+     "text": "Always extract the latest data from SRC View based on the INGEST_TS\nWe need to apply a filter to the TARGET column so that only IF records are included.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_CONSUMPTION_RATE_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Always extract the latest data from SRC View based on the INGEST_TS We need to apply a filter to the TARGET column so that only IF records are included."
+     ]
+    },
+    {
+     "row": 179,
+     "text": "Always extract the latest data from SRC View based on the INGEST_TS",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_MAXCAP_RELATIONSHIP_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Always extract the latest data from SRC View based on the INGEST_TS"
+     ]
+    },
+    {
+     "row": 194,
+     "text": "Always extract the latest data from SRC View based on the INGEST_TS\nWe need to apply a filter to the PARAMETER_NM column to include only Capacity and MaxCapacity records, excluding the Committed Capacity parameter.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_CAPACITY_STATEMENT_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Always extract the latest data from SRC View based on the INGEST_TS We need to apply a filter to the PARAMETER_NM column to include only Capacity and MaxCapacity records, excluding the Committed Capacity parameter."
+     ]
+    },
+    {
+     "row": 208,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CONSUMPTION_RATE_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 216,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_MAXCAP_RELATIONSHIP_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 231,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CAPACITY_STATEMENT_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 250,
+     "text": "For Data Projection: Fetch only the metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ATCR Parameters'. Pass the COLUMN_VALUE_FOURTEEN_TXT into 'HORIZON_TOKEN_CD' in the view V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the RESOURCE_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW till the last week",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_CURRENT",
+     "target_label": "Metadata - Detail",
+     "context": [],
+     "statements": [
+      "For Data Projection: Fetch only the metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ATCR Parameters'. Pass the COLUMN_VALUE_FOURTEEN_TXT into 'HORIZON_TOKEN_CD' in the view V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the RESOURCE_QTY values for the corresponding work weeks in the stage view. For the remaining work weeks, extend the previously entered WW till the last week"
+     ]
+    },
+    {
+     "row": 256,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE",
+     "target_label": "Horizon_Core",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 273,
+     "text": "1. The base view for this transformation will be IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CONSUMPTION_RATE_ROOT. Since this view contains capacity resource data at the item location level, we need to bring all of this data to the stage layer.\n\n2. Fetch the PARAMETER_NM column value from metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', ColumnValueOnetxt = 'ATCR Parameters'  and  ColumnValueTwotxt = 'Consumption_Rate' and Pass the 'COLUMN_VALUE_FIVE_TXT =CONSUMPTION_RATE' as PARAMETER_NM.  RESOURCE_TYPE='Capacity'\n\n3. Bring the distinct COMMON Capacity envelope from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_MAXCAP_RELATIONSHIP_ROOT.  RESOURCE_TYPE='MaxCapacity'\n\n4. Since ATCR provides data for 9 Months only, We need to extend the last week's data to the remaining weeks of the 9Quarter Horizon",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_ITEM_RESOURCE_LOCATION_METRIC_STAGE",
+     "target_label": "Item_Loc_Res Master Stage View",
+     "context": [
+      {
+       "label": "Note",
+       "text": "Ensure that we do not include any items that were excluded from the XFRM Base layer"
+      }
+     ],
+     "statements": [
+      "1. The base view for this transformation will be IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CONSUMPTION_RATE_ROOT. Since this view contains capacity resource data at the item location level, we need to bring all of this data to the stage layer.",
+      "2. Fetch the PARAMETER_NM column value from metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', ColumnValueOnetxt = 'ATCR Parameters'  and  ColumnValueTwotxt = 'Consumption_Rate' and Pass the 'COLUMN_VALUE_FIVE_TXT =CONSUMPTION_RATE' as PARAMETER_NM.  RESOURCE_TYPE='Capacity'",
+      "3. Bring the distinct COMMON Capacity envelope from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_MAXCAP_RELATIONSHIP_ROOT.  RESOURCE_TYPE='MaxCapacity'",
+      "4. Since ATCR provides data for 9 Months only, We need to extend the last week's data to the remaining weeks of the 9Quarter Horizon"
+     ]
+    },
+    {
+     "row": 283,
+     "text": "1. The base view for this transformation will be IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_ITEM_RESOURCE_LOCATION_METRIC_STAGE. Since this view is considered to be a master capacity resource we need to bring the distinct of CAPACITY_ENVELOPE and LOCATION_ID to the stage layer.\n\n2. Bring the distinct COMMON Capacity envelope from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_MAXCAP_RELATIONSHIP_ROOT. \n\n3. For the above capacity envelopes we need fetch the PARAMETER_NM, FISCAL_YEAR_WORK_WEEK_NBR, PARAMETER_QTY and UNIT_OF_MEASURE_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CAPACITY_STATEMENT_ROOT. This is applicable to PARAMETER_NM= 'Capacity'.\nRetain  capacity envelopes coming in PARAMETER_NM= 'MaxCapacity'. \n\n4. Since ATCR provides data for 9 Months only, We need to extend the last week's data to the remaining weeks of the 9Quarter Horizon",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_RESOURCE_LOCATION_METRIC_STAGE",
+     "target_label": "Res_Loc Stage Master View",
+     "context": [
+      {
+       "label": "DQ",
+       "text": "Validate each CAPACITY_ENVELOPE and LOCATION_ID in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_RESOURCE_LOCATION_METRIC_STAGE against IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CAPACITY_STATEMENT_ROOT."
+      },
+      {
+       "label": "Note",
+       "text": "Ensure that we do not include any items that were excluded from the XFRM Base layer"
+      }
+     ],
+     "statements": [
+      "1. The base view for this transformation will be IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_ITEM_RESOURCE_LOCATION_METRIC_STAGE. Since this view is considered to be a master capacity resource we need to bring the distinct of CAPACITY_ENVELOPE and LOCATION_ID to the stage layer.",
+      "2. Bring the distinct COMMON Capacity envelope from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_MAXCAP_RELATIONSHIP_ROOT.",
+      "3. For the above capacity envelopes we need fetch the PARAMETER_NM, FISCAL_YEAR_WORK_WEEK_NBR, PARAMETER_QTY and UNIT_OF_MEASURE_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CAPACITY_STATEMENT_ROOT. This is applicable to PARAMETER_NM= 'Capacity'. Retain  capacity envelopes coming in PARAMETER_NM= 'MaxCapacity'.",
+      "4. Since ATCR provides data for 9 Months only, We need to extend the last week's data to the remaining weeks of the 9Quarter Horizon"
+     ]
+    },
+    {
+     "row": 295,
+     "text": "We don't have any major transformation now. Bringing only master data related columns",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BACKEND_ITEM_RESOURCE_LOCATION_CORE",
+     "target_label": "Item_Loc_Res Stage View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Bringing only master data related columns"
+     ]
+    },
+    {
+     "row": 304,
+     "text": "Since ATCR provides data for 9 Months only, We need to extend the last week's data to the remaining weeks of the 9Quarter Horizon. Bring only the records which has consumption rate.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_ITEM_RESOURCE_LOCATION_CONSUMPTION_RATE_CORE",
+     "target_label": "Item_Loc_Res_Prm Stage View",
+     "context": [],
+     "statements": [
+      "Since ATCR provides data for 9 Months only, We need to extend the last week's data to the remaining weeks of the 9Quarter Horizon. Bring only the records which has consumption rate."
+     ]
+    },
+    {
+     "row": 312,
+     "text": "We don't have any major transformation now. Bringing only master data related columns",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_BACKEND_RESOURCE_LOCATION_CORE",
+     "target_label": "Res_Loc Stage View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Bringing only master data related columns"
+     ]
+    },
+    {
+     "row": 322,
+     "text": "Since ATCR provides data for 9 Months only, We need to extend the last week's data to the remaining weeks of the 9Quarter Horizon",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_RESOURCE_LOCATION_CAPACITY_CORE",
+     "target_label": "Res_Loc_Prm Stage View",
+     "context": [],
+     "statements": [
+      "Since ATCR provides data for 9 Months only, We need to extend the last week's data to the remaining weeks of the 9Quarter Horizon"
+     ]
+    },
+    {
+     "row": 332,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_BACKEND_ITEM_RESOURCE_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 340,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_BACKEND_ITEM_RESOURCE_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 348,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_BACKEND_ITEM_RESOURCE_LOCATION_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 356,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_BACKEND_ITEM_RESOURCE_LOCATION_CONSUMPTION_RATE_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 364,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_BACKEND_ITEM_RESOURCE_LOCATION_CONSUMPTION_RATE_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 372,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_BACKEND_ITEM_RESOURCE_LOCATION_CONSUMPTION_RATE_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 380,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_BACKEND_RESOURCE_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 390,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_BACKEND_RESOURCE_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 400,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_BACKEND_RESOURCE_LOCATION_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 410,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_BACKEND_RESOURCE_LOCATION_CAPACITY_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 420,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_BACKEND_RESOURCE_LOCATION_CAPACITY_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 430,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_BACKEND_RESOURCE_LOCATION_CAPACITY_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 443,
+     "text": "Count the number of FISCAL_YEAR_WORK_WEEK_NBR between Current FISCAL_WORK_WEEK_NBR and  MAX(FISCAL_YEAR_WORK_WEEK_NBR) from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_RESOURCE_LOCATION_METRIC_STAGE at a CAPACITY_ENVELOPE_level\n\nleft  join IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE hor and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_RESOURCE_LOCATION_METRIC_STAGE  on \nhor.FISCAL_YEAR_WORK_WEEK_NBR= MAX(FISCAL_YEAR_WORK_WEEK_NBR) . Count the number of rows where MAX(FISCAL_YEAR_WORK_WEEK_NBR)>=hor.FISCAL_YEAR_WORK_WEEK_NBR. Take the HORIZON_CODE= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_FOURTEEN_TXT  from the metadata SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ATCR Parameters'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_BACKEND_RESOURCE_MAX_WORKWEEK_CORE",
+     "target_label": "Common_Analysis View",
+     "context": [
+      {
+       "label": "DQ:",
+       "text": "Make sure all the Capacity Envelope have same #(FISCAL_YEAR_WORK_WEEK)"
+      }
+     ],
+     "statements": [
+      "Count the number of FISCAL_YEAR_WORK_WEEK_NBR between Current FISCAL_WORK_WEEK_NBR and  MAX(FISCAL_YEAR_WORK_WEEK_NBR) from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_RESOURCE_LOCATION_METRIC_STAGE at a CAPACITY_ENVELOPE_level left  join IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE hor and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_BACKEND_RESOURCE_LOCATION_METRIC_STAGE  on hor.FISCAL_YEAR_WORK_WEEK_NBR= MAX(FISCAL_YEAR_WORK_WEEK_NBR) . Count the number of rows where MAX(FISCAL_YEAR_WORK_WEEK_NBR)>=hor.FISCAL_YEAR_WORK_WEEK_NBR. Take the HORIZON_CODE= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_FOURTEEN_TXT  from the metadata SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config', and ColumnValueOnetxt = 'ATCR Parameters'"
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 93,
+     "kind": "note",
+     "text": "Note No Conversion is needed for PARAMETER_QTY.No Consumption Rate for Common Envelope Name"
+    },
+    {
+     "row": 117,
+     "kind": "dq",
+     "text": "DQ For every Capacity_Envelope, the MaxCapacity PARAMETER_QTY must be greater than the Capacity PARAMETER_QTY for the given WW."
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "file": "9. CAPACITY DESIGNS/FAB/CAPACITY_CORRIDOR_ITEM_LOCATION_PDH_COMMON.xlsx",
+ "sheets": [
+  "CC_ITEM_LOC_METRIC_CORE"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "CC_ITEM_LOC_METRIC_CORE": {
+   "blocks": [
+    {
+     "row": 41,
+     "text": "Since CAPACITY_CORRIDOR contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table.",
+     "target": "IF_SUPPLY_CHAIN.SUPPLY_ANALYSIS.WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_PLANT_METRIC_CURRENT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "Since CAPACITY_CORRIDOR contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table."
+     ]
+    },
+    {
+     "row": 64,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 92,
+     "text": "1. This stage view has been projected for 9 quarters.\n2. Create a new record in the stage view where the CAPACITY_METRIC_NM = 'Utilization Percentage' by considering 'CAPACITY_GROUP_NM','ITEM_ID','CAPACITY_CORRIDOR_CD', 'MANUFACTURING_LOCATION_CD', and 'FISCAL_YEAR_WORK_WEEK_NBR' from V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_ROOT .To calculate the corresponding 'CAPACITY_METRIC_QTY', apply the formula (Min Capacity / Max Capacity) for the respective capacity group at the corridor level.\n3. Replace the MANUFACTURING_LOCATION_CD ='F11X' in PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_ROOT with the ColumnValueTwoTxt from metadata table where Subject_Area_Nm ='ExtractsBY', Entity_Nm='Location', Business_Rule_Nm= 'Location_Conversion' and ColumnValueOneTxt ='F11X'.",
+     "target": "PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. This stage view has been projected for 9 quarters.",
+      "2. Create a new record in the stage view where the CAPACITY_METRIC_NM = 'Utilization Percentage' by considering 'CAPACITY_GROUP_NM','ITEM_ID','CAPACITY_CORRIDOR_CD', 'MANUFACTURING_LOCATION_CD', and 'FISCAL_YEAR_WORK_WEEK_NBR' from V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_ROOT .To calculate the corresponding 'CAPACITY_METRIC_QTY', apply the formula (Min Capacity / Max Capacity) for the respective capacity group at the corridor level.",
+      "3. Replace the MANUFACTURING_LOCATION_CD ='F11X' in PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_CORRIDOR_SWAP_RATIO_CURRENT_ROOT with the ColumnValueTwoTxt from metadata table where Subject_Area_Nm ='ExtractsBY', Entity_Nm='Location', Business_Rule_Nm= 'Location_Conversion' and ColumnValueOneTxt ='F11X'."
+     ]
+    },
+    {
+     "row": 117,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 142,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 167,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_ITEM_LOCATION_METRIC_CURRENT_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

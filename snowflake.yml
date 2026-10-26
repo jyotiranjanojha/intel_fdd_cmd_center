@@ -1,0 +1,47 @@
+definition_version: 2
+entities:
+  streamlit_app:
+    type: streamlit
+    identifier:
+      database: SNOWFLAKE_LEARNING_DB
+      schema: PRITIX.M.SHARMA@INTEL.COM_SEMANTIC_MODEL
+      name: RULE_REPOSITORY_APP
+    title: RULE_REPOSITORY_APP
+    query_warehouse: SNOWFLAKE_LEARNING_WH
+    compute_pool: SYSTEM_COMPUTE_POOL_CPU
+    run_mode: SpcsOnly
+    execute_as: OWNER
+    main_file: streamlit_app.py
+    artifacts:
+      - pyproject.toml
+      - streamlit_app.py
+      - .streamlit/config.toml
+      - catalog.py
+      - compliance.py
+      - db.py
+      - fdd_render.py
+      - fdd_publish.py
+      - fdd_import.py
+      - fdd_import_page.py
+      - rule_editor.py
+      - lineage_diagram.py
+      - md_to_html.py
+      - nlp_router.py
+      - object_columns_builder.py
+      - repository.py
+      - repository_health.py
+      - requirement_compiler.py
+      - sample_data_ui.py
+      - sample_data.py
+      - rule_extractor.py
+      - xlsx_import.py
+      - fdd_draft.py
+      - module_handoff_ui.py
+      - as_written.py
+      - req_pager.py
+      - test_generator.py
+    sharing:
+      - role: ROLE_IF_CDA_PDH_SUPPLY_PLANNING_ANALYSIS_CONTRIBUTOR
+        with_grant_option: true
+      - role: PUBLIC
+        with_grant_option: true

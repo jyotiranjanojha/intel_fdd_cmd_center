@@ -1,0 +1,109 @@
+{
+ "file": "10. ITEM TO CUSTOMER MAPPING/ITEM_TO_CUSTOMER_PDH_COMMON_DP.xlsx",
+ "sheets": [
+  "Item_To_Customer_Core_V2"
+ ],
+ "skipped": [
+  {
+   "sheet": "Dataflow",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Sheet1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Item_To_Customer_Core",
+   "why": "older version of Item_To_Customer_Core_V2"
+  }
+ ],
+ "by_sheet": {
+  "Item_To_Customer_Core_V2": {
+   "blocks": [
+    {
+     "row": 66,
+     "text": "",
+     "target": "IF_SUPPLY_CHAIN.ORDER_MANAGEMENT_ANALYSIS.CUSTOMER_SALES_ITEM",
+     "target_label": "Source",
+     "context": [],
+     "statements": []
+    },
+    {
+     "row": 74,
+     "text": "",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CUSTOMER_CORE",
+     "target_label": "Table",
+     "context": [],
+     "statements": []
+    },
+    {
+     "row": 82,
+     "text": "",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_CUSTOMER_PLANNING_HIERARCHY_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": []
+    },
+    {
+     "row": 90,
+     "text": "Add a column \"CUSTOMER_TYPE\"\nJoin the  Customer_Planning_Hierarchy_Core_PIT with the CUSTOMER_ID and find the CUSTOMER_TYPE = HIERARCHY LEVEL 2 CUSTOMER CODE NM\nWHEN PLANNING_HIERARCHY_LEVEL2_CUSTOMER_CODE_NM = 'INTEL PRODUCTS GROUP' THEN 'IP' ELSE 'IFS'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CUSTOMER_CORE",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "Add a column \"CUSTOMER_TYPE\" Join the  Customer_Planning_Hierarchy_Core_PIT with the CUSTOMER_ID and find the CUSTOMER_TYPE = HIERARCHY LEVEL 2 CUSTOMER CODE NM WHEN PLANNING_HIERARCHY_LEVEL2_CUSTOMER_CODE_NM = 'INTEL PRODUCTS GROUP' THEN 'IP' ELSE 'IFS'"
+     ]
+    },
+    {
+     "row": 101,
+     "text": "",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CUSTOMER_CORE",
+     "target_label": "View",
+     "context": [],
+     "statements": []
+    },
+    {
+     "row": 129,
+     "text": "Union of all the source views and pick one distinct ITEM_ID to minimum of 1 customer ID",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CUSTOMER_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "Union of all the source views and pick one distinct ITEM_ID to minimum of 1 customer ID"
+     ]
+    },
+    {
+     "row": 142,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CUSTOMER_CORE",
+     "target_label": "Intermediate Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 155,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CUSTOMER_CORE",
+     "target_label": "Intermediate View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 168,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CUSTOMER_CORE",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

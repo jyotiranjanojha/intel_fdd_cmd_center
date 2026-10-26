@@ -1,0 +1,91 @@
+{
+ "file": "6. TRANSPORTATION ROUTE/TRANSPORTATION_ROUTE_PDH_COMMON.xlsx",
+ "sheets": [
+  "Transportation_Core_v1"
+ ],
+ "skipped": [
+  {
+   "sheet": "Transportation_Core",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Sheet1",
+   "why": "SheetN duplicate of a named design sheet"
+  }
+ ],
+ "by_sheet": {
+  "Transportation_Core_v1": {
+   "blocks": [
+    {
+     "row": 53,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_TRANSPORTATION_ROUTE_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 70,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 82,
+     "text": "Datset 1: We select the distinct routes combination of FROM_LOCATION_ID and TO_LOCATION_ID from Item Transportation routes.\n\nDataset 2: \n- Production version data shall be sourced from view IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT.\n- Cross‑site evaluation shall be performed only for records where PV_CROSS_SITE_IND = 'Y'.\n- Operations shall be sequenced using OPERATION_NBR for each combination of ITEM_ID, IPV_PLANT_CD, and PV_ROUTE_CD.\n- WCH_PLANT_CD shall be treated as the source plant for the current operation.\n- The destination plant shall be derived as the next sequential WCH_PLANT_CD over ordered operations.\n- Cross‑site movement shall be identified only when the derived destination plant is not null.\n- Records where FROM_LOCATION_ID= TO_LOCATION_ID shall be excluded from cross‑site consideration.\n- Each valid  FROM_LOCATION_ID-TO_LOCATION_ID pair shall be used.\n\nFinal Dataset:\nDATASET1 Union DATASET2",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_TRANSPORTATION_ROUTE_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "Datset 1: We select the distinct routes combination of FROM_LOCATION_ID and TO_LOCATION_ID from Item Transportation routes. Dataset 2:",
+      "- Production version data shall be sourced from view IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT.",
+      "- Cross‑site evaluation shall be performed only for records where PV_CROSS_SITE_IND = 'Y'.",
+      "- Operations shall be sequenced using OPERATION_NBR for each combination of ITEM_ID, IPV_PLANT_CD, and PV_ROUTE_CD.",
+      "- WCH_PLANT_CD shall be treated as the source plant for the current operation.",
+      "- The destination plant shall be derived as the next sequential WCH_PLANT_CD over ordered operations.",
+      "- Cross‑site movement shall be identified only when the derived destination plant is not null.",
+      "- Records where FROM_LOCATION_ID= TO_LOCATION_ID shall be excluded from cross‑site consideration.",
+      "- Each valid  FROM_LOCATION_ID-TO_LOCATION_ID pair shall be used. Final Dataset: DATASET1 Union DATASET2"
+     ]
+    },
+    {
+     "row": 98,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_TRANSPORTATION_ROUTE_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 112,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_TRANSPORTATION_ROUTE_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 127,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_TRANSPORTATION_ROUTE_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

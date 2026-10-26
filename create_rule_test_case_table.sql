@@ -1,0 +1,19 @@
+-- DDL for RULE_TEST_CASE, storing suggested and accepted functional/DQ test cases per rule
+-- Co-authored with CoCo
+
+CREATE TABLE IF NOT EXISTS IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM_BASE.RULE_TEST_CASE (
+    TEST_CASE_ID    INT           NOT NULL,
+    RULE_ID         INT           NOT NULL,
+    TEST_TYPE       VARCHAR(20)   NOT NULL,   -- FUNCTIONAL | DQ_CHECK
+    TEST_NAME       VARCHAR(500)  NOT NULL,
+    SCENARIO        VARCHAR(4000),
+    EXPECTED_RESULT VARCHAR(4000),
+    TEST_SQL        VARCHAR(16777216),
+    STATUS          VARCHAR(20)   DEFAULT 'SUGGESTED',  -- SUGGESTED | ACCEPTED | REJECTED
+    SOURCE_ACTION   VARCHAR(20),                        -- ON_CREATE | ON_UPDATE | BULK
+    CREATED_BY      VARCHAR(256)  DEFAULT CURRENT_USER(),
+    CREATED_TS      TIMESTAMP_LTZ DEFAULT CURRENT_TIMESTAMP()
+);
+
+COMMENT ON TABLE IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM_BASE.RULE_TEST_CASE IS
+    'Functional test cases and DQ checks suggested or accepted for each business rule.';

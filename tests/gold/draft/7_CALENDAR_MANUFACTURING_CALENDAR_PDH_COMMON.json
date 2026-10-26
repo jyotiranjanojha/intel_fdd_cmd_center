@@ -1,0 +1,96 @@
+{
+ "file": "7. CALENDAR/MANUFACTURING_CALENDAR_PDH_COMMON.xlsx",
+ "sheets": [
+  "Manufacturing_Calendar"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "Manufacturing_Calendar": {
+   "blocks": [
+    {
+     "row": 121,
+     "text": "Load the data from IF_MASTER_DATA.LOCATION_ANALYSIS.MANUFACTURING_LOCATION_DETAIL  IF MANUFACTURING_LOCATION_NM = ACT to PDH_COMMON_XFRM_BASE.T_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Load the data from IF_MASTER_DATA.LOCATION_ANALYSIS.MANUFACTURING_LOCATION_DETAIL  IF MANUFACTURING_LOCATION_NM = ACT to PDH_COMMON_XFRM_BASE.T_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT"
+     ]
+    },
+    {
+     "row": 136,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 150,
+     "text": "We don't have any major transformation now. We brought this view because this view has the mapping between both LEGACY PLANT CODE & S4 PLANT CODE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. We brought this view because this view has the mapping between both LEGACY PLANT CODE & S4 PLANT CODE."
+     ]
+    },
+    {
+     "row": 170,
+     "text": "1. Join the MANUFACTURING_LOCATION_CD from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT with the MANUFACTURING_LOCATION_CD from PDH_COMMON_XFRM.V_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT & bring the values in column of PLANT _CD From IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT to Stage View & the column name(PLANT_CD) will be S4_PLANT_CD.\n\n2. Here we are renaming the PLANT_CD from PDH_COMMON_XFRM.V_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT to LEGACY_PLANT_CD.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MANUFACTURING_LOCATION_DETAIL_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. Join the MANUFACTURING_LOCATION_CD from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT with the MANUFACTURING_LOCATION_CD from PDH_COMMON_XFRM.V_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT & bring the values in column of PLANT _CD From IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT to Stage View & the column name(PLANT_CD) will be S4_PLANT_CD.",
+      "2. Here we are renaming the PLANT_CD from PDH_COMMON_XFRM.V_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT to LEGACY_PLANT_CD."
+     ]
+    },
+    {
+     "row": 178,
+     "text": "All active records will be time-traveled, leaving only current date records in the below table. Fetch the below listed columns from  PDH_COMMON_XFRM.V_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT_STAGE",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_MANUFACTURING_LOCATION_DETAIL_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "All active records will be time-traveled, leaving only current date records in the below table. Fetch the below listed columns from  PDH_COMMON_XFRM.V_BRD_MANUFACTURING_LOCATION_DETAIL_ROOT_STAGE"
+     ]
+    },
+    {
+     "row": 185,
+     "text": "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_MANUFACTURING_LOCATION_DETAIL_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 192,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_MANUFACTURING_LOCATION_DETAIL_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 169,
+     "kind": "note",
+     "text": "Note Objective:- We are bringing additional column to hold the S4 plant codes in front of  the Legacy plant codes."
+    },
+    {
+     "row": 177,
+     "kind": "note",
+     "text": "Note We are bringing only the required columns in this view related to cutoff timings"
+    }
+   ]
+  }
+ }
+}

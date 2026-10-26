@@ -1,0 +1,238 @@
+{
+ "file": "14. SALES ORDER/SALES_ORDER_PDH_COMMON V2.xlsx",
+ "sheets": [
+  "SALES_ORDER_SHIPMENT_DETAIL",
+  "SALES_ORDER_TRANSACTION_DETAIL"
+ ],
+ "skipped": [
+  {
+   "sheet": "SALES_ORDER_CORE",
+   "why": "hidden"
+  },
+  {
+   "sheet": "SALES_ORDER_CORE_V1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "SALES_ORDER_CORE_V2_OLD",
+   "why": "hidden"
+  },
+  {
+   "sheet": "SALES_ORDER_CORE_V2_OLD2",
+   "why": "hidden"
+  },
+  {
+   "sheet": "BY Mapping",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "SALES_ORDER_SHIPMENT_DETAIL": {
+   "blocks": [
+    {
+     "row": 92,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_DMD_SALES_ORDER_SHIPMENT_DETAIL_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 103,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_DMD_SALES_ORDER_SHIPMENT_DETAIL_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 114,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT",
+     "target_label": "Item to Proc",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 123,
+     "text": "We have Item transformation.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_DMD_SALES_ORDER_SHIPMENT_DETAIL_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "We have Item transformation."
+     ]
+    },
+    {
+     "row": 134,
+     "text": "We are dropping the column 'ITEM_LEADING_ZERO_ID' and keeping only ITEM_ID and renamed as 'SALES_ORDER_ITEM_ID' in Result.\nTo pull Proc_Item_Id from PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT with co_product_ind = 'Y' , join it with PDH_COMMON_XFRM.V_DMD_SALES_ORDER_SHIPMENT_DETAIL_ROOT on Item_Id column and pull Proc_Item_Id if available. If Proc_Item_Id is null or Blank then keep Item_Id from V_DMD_SALES_ORDER_SHIPMENT_DETAIL_ROOT and renamed as 'Derived ITEM_ID'.\nIn final result  'Derived ITEM_ID' will renamed as 'ITEM_ID'.\nFor Sum of shipment qty , we will take sum of 'GROSS_ACTUAL_GOODS_ISSUE_SHIPMENT_QTY' and group by on SALES_ORDER_ID, SALES_ORDER_LINE_NBR, SALES_ORDER_SCHEDULE_LINE_NBR, DERIVED_ITEM_ID, PLANT_CD, ACTUAL_GOODS_MOVEMENT_DTM.",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "We are dropping the column 'ITEM_LEADING_ZERO_ID' and keeping only ITEM_ID and renamed as 'SALES_ORDER_ITEM_ID' in Result. To pull Proc_Item_Id from PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT with co_product_ind = 'Y' , join it with PDH_COMMON_XFRM.V_DMD_SALES_ORDER_SHIPMENT_DETAIL_ROOT on Item_Id column and pull Proc_Item_Id if available. If Proc_Item_Id is null or Blank then keep Item_Id from V_DMD_SALES_ORDER_SHIPMENT_DETAIL_ROOT and renamed as 'Derived ITEM_ID'. In final result  'Derived ITEM_ID' will renamed as 'ITEM_ID'. For Sum of shipment qty , we will take sum of 'GROSS_ACTUAL_GOODS_ISSUE_SHIPMENT_QTY' and group by on SALES_ORDER_ID, SALES_ORDER_LINE_NBR, SALES_ORDER_SCHEDULE_LINE_NBR, DERIVED_ITEM_ID, PLANT_CD, ACTUAL_GOODS_MOVEMENT_DTM."
+     ]
+    },
+    {
+     "row": 145,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_DMD_SALES_ORDER_SHIPMENT_DETAIL_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 156,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_DMD_SALES_ORDER_SHIPMENT_DETAIL_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 167,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_DMD_SALES_ORDER_SHIPMENT_DETAIL_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 181,
+     "kind": "scenario table",
+     "text": "Scenario SALES_ORDER_SHIPMENT_DETAIL_CORE_CURRENT SALES_ORDER_SHIPMENT_DETAIL_CORE_MEMORIES"
+    }
+   ]
+  },
+  "SALES_ORDER_TRANSACTION_DETAIL": {
+   "blocks": [
+    {
+     "row": 124,
+     "text": "",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.T_CRR_BUSINESS_RULE_METADATA_HEADER_DETAIL_CORE_PIT",
+     "target_label": "Metadata-Header",
+     "context": [],
+     "statements": []
+    },
+    {
+     "row": 130,
+     "text": "",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.T_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT",
+     "target_label": "Metadata-Details",
+     "context": [],
+     "statements": []
+    },
+    {
+     "row": 136,
+     "text": "We don't have any major transformation now.",
+     "target": null,
+     "target_label": "Root Table",
+     "context": [],
+     "missing_name": true,
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 147,
+     "text": "We will filter for active records i.e, Active_Ind = 'Y'.",
+     "target": "PDH_COMMON_XFRM.V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We will filter for active records i.e, Active_Ind = 'Y'."
+     ]
+    },
+    {
+     "row": 158,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_CORE_PIT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 168,
+     "text": "1.) Add a new column DELRDD_CALC_DT\nLogic for DELRDD_CALC_DT:\n.Join the PDH_COMMON_XFRM.V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_ROOT with PDH_COMMON_XFRM_BASE.T_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_CURRENT on SALES_ORDER_ID, SALES_ORDER_LINE_NBR and SALES_ORDER_SCHEDULE_LINE_NBR. \nIf a matching record is found in T_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_CURRENT and the column DELRDD_CAL_DT is not null, then:\n  Set DELRDD_CALC_DT in V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_STAGE = value of DELRDD_CAL_DT from T_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_CURRENT.\nIf DELRDD_CAL_DT is null, then apply the following logic:\n check if Requested_Goods_Issue_DT < PLan_Start_date (i.e., Saturday of the last week + Order Lead Time + 7 days) and Confirmed_Goods_issue_DT is Null \n   then  DELRDD_CALC_DT  =  PLan_Start_date (i.e., Saturday of the last week + Customer Order Lead Time + 7 days).\n\n2.) Fetch order Lead time (PARAMETER_QTY) for Current Workweek by joining ON ITEM_ID from PDH_COMMON_XFRM.V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_ROOT and PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_CORE_PIT\nwhere PARAMETER_NM = 'ORDER_LEAD_TIME'\n\n\n3.) Add a new column CO_PROD_IND\nLogic for CO_PROD_IND:\n\nif SALES_ORDER_LINE_CATEGORY_CD = 'ZCOP' then CO_PROD_IND = 'Y' \nelse  CO_PROD_IND = 'N'\n3.) Add a new column CO_PROD_IND\nLogic for CO_PROD_IND:\n\n if SALES_ORDER_LINE_CATEGORY_CD <> (SELECT column_value_two_text FROM if_supply_chain.pdh_common_analysis.t_crr_business_rule_metadata_detail_core_pit\n                                                                        WHERE subject_area_nm  = 'SalesOrder' ,\n                                                                                      entitty_nm = 'SalesOrderTransaction',\n                                                                                      business_rule_nm = 'SalesOrder_CategoryCd_Config',\n                                                                                      column_value_one_text = 'Exclude' )\n\n      CO_PROD_IND = 'Y'\nelse \n      CO_PROD_IND = 'N'",
+     "target": "PDH_COMMON_XFRM.V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1.) Add a new column DELRDD_CALC_DT Logic for DELRDD_CALC_DT: .Join the PDH_COMMON_XFRM.V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_ROOT with PDH_COMMON_XFRM_BASE.T_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_CURRENT on SALES_ORDER_ID, SALES_ORDER_LINE_NBR and SALES_ORDER_SCHEDULE_LINE_NBR. If a matching record is found in T_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_CURRENT and the column DELRDD_CAL_DT is not null, then: Set DELRDD_CALC_DT in V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_STAGE = value of DELRDD_CAL_DT from T_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_CURRENT. If DELRDD_CAL_DT is null, then apply the following logic: check if Requested_Goods_Issue_DT < PLan_Start_date (i.e., Saturday of the last week + Order Lead Time + 7 days) and Confirmed_Goods_issue_DT is Null then  DELRDD_CALC_DT  =  PLan_Start_date (i.e., Saturday of the last week + Customer Order Lead Time + 7 days).",
+      "2.) Fetch order Lead time (PARAMETER_QTY) for Current Workweek by joining ON ITEM_ID from PDH_COMMON_XFRM.V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_ROOT and PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_CORE_PIT where PARAMETER_NM = 'ORDER_LEAD_TIME'",
+      "3.) Add a new column CO_PROD_IND Logic for CO_PROD_IND: if SALES_ORDER_LINE_CATEGORY_CD = 'ZCOP' then CO_PROD_IND = 'Y' else  CO_PROD_IND = 'N'",
+      "3.) Add a new column CO_PROD_IND Logic for CO_PROD_IND: if SALES_ORDER_LINE_CATEGORY_CD <> (SELECT column_value_two_text FROM if_supply_chain.pdh_common_analysis.t_crr_business_rule_metadata_detail_core_pit WHERE subject_area_nm  = 'SalesOrder' , entitty_nm = 'SalesOrderTransaction', business_rule_nm = 'SalesOrder_CategoryCd_Config', column_value_one_text = 'Exclude' ) CO_PROD_IND = 'Y' else CO_PROD_IND = 'N'"
+     ]
+    },
+    {
+     "row": 180,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 191,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 202,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_DMD_SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 134,
+     "kind": "free text",
+     "text": "SalesOrder SalesOrderTransaction SalesOrder_CategoryCd_Config Exclude ZCOP"
+    },
+    {
+     "row": 135,
+     "kind": "free text",
+     "text": "SalesOrder SalesOrderTransaction SalesOrder_CategoryCd_Config Exclude ZVCP"
+    },
+    {
+     "row": 204,
+     "kind": "observations",
+     "text": "Observations For Uncommited SO we will have only single SALES_ORDER_SCHEDULE_LINE_NBR as 1"
+    },
+    {
+     "row": 218,
+     "kind": "scenario table",
+     "text": "Scenario SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_CURRENT SALES_ORDER_TRANSACTIONAL_DETAIL_CORE_MEMORIES"
+    }
+   ]
+  }
+ }
+}

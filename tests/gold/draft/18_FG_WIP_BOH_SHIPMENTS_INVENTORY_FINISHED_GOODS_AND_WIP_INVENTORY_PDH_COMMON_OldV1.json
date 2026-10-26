@@ -1,0 +1,394 @@
+{
+ "file": "18. FG, WIP, BOH & SHIPMENTS INVENTORY/FINISHED_GOODS_AND_WIP_INVENTORY_PDH_COMMON_OldV1.xlsx",
+ "sheets": [
+  "FINISHED_GOODS_INVENTORY_CORE",
+  "WORK_IN_PROCESS_INVENTORY_CORE",
+  "Substrate_Inventory",
+  "INVENTORY_CORE"
+ ],
+ "skipped": [
+  {
+   "sheet": "BOH_AND_SHIPMENTS_CORE_OLD",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "FINISHED_GOODS_INVENTORY_CORE": {
+   "blocks": [
+    {
+     "row": 74,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_FINISHED_GOODS_INVENTORY_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 84,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM.V_INV_FINISHED_GOODS_INVENTORY_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 100,
+     "text": "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_FINISHED_GOODS_INVENTORY_ROOT_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 116,
+     "text": "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_FINISHED_GOODS_INVENTORY_ROOT_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 132,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_INV_FINISHED_GOODS_INVENTORY_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  },
+  "WORK_IN_PROCESS_INVENTORY_CORE": {
+   "blocks": [
+    {
+     "row": 105,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_WORK_IN_PROCESS_INVENTORY_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 132,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 144,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_PRM_MANUFACTURING_PARAMETER_ITEM_LOCATION_WORK_WEEK_CORE_PIT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 154,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MESFACILITY_MANUFACTURING_LOCATION_MAPPING_ROOT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 166,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_SRC.V_BRD_BILL_OF_MATERIAL_LOCATION_TRAVERSAL",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 177,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 188,
+     "text": "1-Filter PROD Lots -\nLOT_OWNER_CD = 'P'(PROD).\n\n2-Extract Planning Items -\nRetrieve PLANNING_ITEM_ID as UPI_PLANNING_ITEM_ID, PLANNING_ITEM_DSC AS UPI_PLANNING_ITEM_DSC, and PLANNING_ITEM_CLASS_NM AS UPI_PLANNING_ITEM_CLASS_NM from the view V_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT by joining with WORK_IN_PROCESS_INVENTORY_PIT using PRODUCT_NM = (SHOP_FLOOR_PRODUCT_ITEM_DSC) as the join key.\n  2.1-For PLANNING_ITEM_CLASS_NM in UPI_FAB or UPI_BUMP \n     Also join with the PLANNING_STAGE data to map the correct PLANNING_ITEM_CLASS_NM ; -- as same SFP can be associated with both FAB and BUMP \n     if PLANNING_STAGE is 'FAB', the map to PLANNING_ITEM_CLASS_NM = UPI_FAB; \n     if PLANNING_STAGE is 'BUMP', then map to PLANNING_ITEM_CLASS_NM = UPI_BUMP.\n \n3-Apply S-Package Logic -\nOnly for PLANNING_ITEM_CLASS_NM in UPI_SORT and PLANNING_STAGE in ('FAB' or 'FAB_END' or BUMP' or 'BUMP_END') -- (S-PACKAGE)\n-create a column PRIOR STAGE UPI ID and set as\n     When PLANNING_STAGE is 'BUMP' or 'BUMP_END', utilize PDH_COMMON_ANALYSIS.V_BRD_BILL_OF_MATERIAL_LOCATION_TRAVERSAL to traverse the BOM  to find related Bump items and capture as PRIOR STAGE UPI ID \n     When PLANNING_STAGE is 'FAB' or 'FAB_END', similarly use the same BOM traversal view to locate the Fab items and capture as PRIOR STAGE UPI ID \n-create a column IS_TRANSFORMED and add S-Package: Current UPI ID ⇒ PRIOR STAGE UPI ID, ''NOT APPLICABLE FOR S PACKAGE''\n-create a column FINAL_ITEM_ID AS COALESCE(PRIOR_STAGE_UPI_ID, UNIFIED_PLANNING_ITEM_ID\n\n 3.1 Update LOCATION  -  for s package\nJoin IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MESFACILITY_MANUFACTURING_LOCATION_MAPPING_ROOT on PLANNING_OWNER_SITE =  MESFACILITY_CD and PLANNING STAGE = MESPLANNING_STAGE (Note- map all end planning  stage to the non end mesplanning stage like fab and fab end to fab)\n -create a column WORK_IN_PROCESS_INVENTORY_SITE_CD_DERIVED and set as - When the PLANNING_STAGE is not end stages i.e., Fab or Bump, take MANUFACTURING_LOCATION_CD(MES LOCATION) else WORK_IN_PROCESS_INVENTORY_SITE_CD    \n -create a column TO_LOCATION_ID_DERIVED and set as - When the PLANNING_STAGE is End stage i.e., Fab-End or Bump-End, take TO_LOCATION_ID and if it is null then WORK_IN_PROCESS_INVENTORY_SITE_CD_DERIVED \n -create a column FINAL_LOCATION_ID when end stages then TO_LOCATION_ID_DERIVED else WORK_IN_PROCESS_INVENTORY_SITE_CD_DERIVED\n -update column IS_TRANSFORMED and append with comments as per the location used  ' : USED ORIGINAL TO_LOCATION_ID' , ': USED ORIGINAL WORK_IN_PROCESS_INVENTORY_SITE_CD', ':'USED MES LOCATION'', ''MASTER DATA ISSUE, NEED TO IGNORE''\n4- ADD a new column AS INVENTORY_TYPE_CD AND PROJECTION_TYPE \nIf Planning_stage like end and WORK_IN_PROCESS_INVENTORY_SITE_CD and TO_LOCATION_ID is not null then INVENTORY_TYPE_CD =  INTRANSIT and PROJECTION_TYPE  =   INTRANSIT\nelse BOH and WIP Projection\nIf planning stage = non end stage then BOH and WIP Projection\n\n5 Update ItemId and location id\nUpdate Final_Item_Id for non end planning stages and  INVENTORY_TYPE_CD =  BOH\n utilize PDH_COMMON_ANALYSIS.V_BRD_BILL_OF_MATERIAL_LOCATION_TRAVERSAL to traverse the BOM  to find previous stage and its associated Item_Id and update in Final_location_id \nUpdate Final Location_Id for end planning stage to to_location_id  We have to exclude the record if this Fab item is External which we can find out using Location Master.-- use r2 logic\nIf the Planning_stage is Fab - No change is done (Shouldn't go to BY, if it occurs we have to remove this case - write a DQ)\n7.ADD a new column - LOT7 With LOT_ID first Seven Characters. We are creating this column for the purpose of lot comparison with FSCO Outs.\n \n8. Pass the Point_In_Time as Last Saturday Midnight time for example 2025-07-19 23:59:59.00000 and fetch the records from IF_SUPPLY_CHAIN.ENHANCED_INVENTORY_ANALYSIS.WORK_IN_PROCESS_INVENTORY_PIT\n\n9. Logic for Inventory_Qty:\nUpdate in new column Final_Inventory_Qty and Final_UOM as 'W'\na. If the Unit_of_measure_cd is 'W', no changes are required\nb. If the Unit_of_measure_cd is either 'U' or 'D' and Secondary_unit_of_measure_cd is 'W' then replace the Inventory_qty value with Secondary_Qty value.\nc If the Unit_of_measure_cd is either 'U' or 'D' and secondary_unit_of_measure_cd is not 'W' then use V_PRM_MANUFACTURING_PARAMETER_ITEM_LOCATION_WORK_WEEK_CORE_PIT view to convert the Unit or Die into Wafer. \nHow to Convert the 'U' or 'D' into 'W':\nJoin the Unified_planning_Item_Id, Work_in_process_Inventory_site_cd from PDH_COMMON_XFRM.V_INV_WORK_IN_PROCESS_INVENTORY_ROOT with Item_Id, Location_Id from PDH_COMMON_ANALYSIS.V_PRM_MANUFACTURING_PARAMETER_ITEM_LOCATION_WORK_WEEK_CORE_PIT where Parameter_Nm is 'DPW', FISCAL_WORK_WEEK_NBR = 'CURRENT_WEEK' ('We can get Current_Week by fetching FISCAL_YEAR_WORK_WEEK_NBR FROM IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR WHERE RELATIVE_DAYS_FROM_TODAY_NBR = '0' ) and  fetch the Parameter_Qty. If this Parameter_Qty is greater than zero then replace the Value of Inventory_qty in Common_Analysis view with the (Inventory_Qty(from Root) / Parameter_Qty (from Manufacturing_Paramter view).\nupdate column  IS_TRANSFORMED and append with comments like NO CHANGES in QTY, USED SECONDARY WAFER QTY, DPW CONVERSION APPLIED\n\nDrop lots if planning site and planning owner site is null and is_transformed = 'MASTER DATA ISSUE, NEED TO IGNORE'\n\nDrop Lot if the Item is an Order Point and Planning Stage is \"End\" Stage ( sames as r2 logic)\nget the list of Items from sku for location = VF and traverse it to previous stage and remove these items from Inventory.\n\nCreate column PLANT_CD  and fetch PLANT_CD by joining with V_BRD_PLANT_CODE_MAPPING_CORE_PIT  on fINAL_LOCATION_ID = MANUFACTURING_LOCATION_CD",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_WORK_IN_PROCESS_INVENTORY_STAGE",
+     "target_label": "STAGE View",
+     "context": [],
+     "missing_name": true,
+     "statements": [
+      "1-Filter PROD Lots - LOT_OWNER_CD = 'P'(PROD). 2-Extract Planning Items - Retrieve PLANNING_ITEM_ID as UPI_PLANNING_ITEM_ID, PLANNING_ITEM_DSC AS UPI_PLANNING_ITEM_DSC, and PLANNING_ITEM_CLASS_NM AS UPI_PLANNING_ITEM_CLASS_NM from the view V_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT by joining with WORK_IN_PROCESS_INVENTORY_PIT using PRODUCT_NM = (SHOP_FLOOR_PRODUCT_ITEM_DSC) as the join key.",
+      "2.1-For PLANNING_ITEM_CLASS_NM in UPI_FAB or UPI_BUMP Also join with the PLANNING_STAGE data to map the correct PLANNING_ITEM_CLASS_NM ; -- as same SFP can be associated with both FAB and BUMP if PLANNING_STAGE is 'FAB', the map to PLANNING_ITEM_CLASS_NM = UPI_FAB; if PLANNING_STAGE is 'BUMP', then map to PLANNING_ITEM_CLASS_NM = UPI_BUMP. 3-Apply S-Package Logic - Only for PLANNING_ITEM_CLASS_NM in UPI_SORT and PLANNING_STAGE in ('FAB' or 'FAB_END' or BUMP' or 'BUMP_END') -- (S-PACKAGE)",
+      "-create a column PRIOR STAGE UPI ID and set as When PLANNING_STAGE is 'BUMP' or 'BUMP_END', utilize PDH_COMMON_ANALYSIS.V_BRD_BILL_OF_MATERIAL_LOCATION_TRAVERSAL to traverse the BOM  to find related Bump items and capture as PRIOR STAGE UPI ID When PLANNING_STAGE is 'FAB' or 'FAB_END', similarly use the same BOM traversal view to locate the Fab items and capture as PRIOR STAGE UPI ID",
+      "-create a column IS_TRANSFORMED and add S-Package: Current UPI ID ⇒ PRIOR STAGE UPI ID, ''NOT APPLICABLE FOR S PACKAGE''",
+      "-create a column FINAL_ITEM_ID AS COALESCE(PRIOR_STAGE_UPI_ID, UNIFIED_PLANNING_ITEM_ID",
+      "3.1 Update LOCATION  -  for s package Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MESFACILITY_MANUFACTURING_LOCATION_MAPPING_ROOT on PLANNING_OWNER_SITE =  MESFACILITY_CD and PLANNING STAGE = MESPLANNING_STAGE (Note- map all end planning  stage to the non end mesplanning stage like fab and fab end to fab)",
+      "-create a column WORK_IN_PROCESS_INVENTORY_SITE_CD_DERIVED and set as - When the PLANNING_STAGE is not end stages i.e., Fab or Bump, take MANUFACTURING_LOCATION_CD(MES LOCATION) else WORK_IN_PROCESS_INVENTORY_SITE_CD",
+      "-create a column TO_LOCATION_ID_DERIVED and set as - When the PLANNING_STAGE is End stage i.e., Fab-End or Bump-End, take TO_LOCATION_ID and if it is null then WORK_IN_PROCESS_INVENTORY_SITE_CD_DERIVED",
+      "-create a column FINAL_LOCATION_ID when end stages then TO_LOCATION_ID_DERIVED else WORK_IN_PROCESS_INVENTORY_SITE_CD_DERIVED",
+      "-update column IS_TRANSFORMED and append with comments as per the location used  ' : USED ORIGINAL TO_LOCATION_ID' , ': USED ORIGINAL WORK_IN_PROCESS_INVENTORY_SITE_CD', ':'USED MES LOCATION'', ''MASTER DATA ISSUE, NEED TO IGNORE'' 4- ADD a new column AS INVENTORY_TYPE_CD AND PROJECTION_TYPE If Planning_stage like end and WORK_IN_PROCESS_INVENTORY_SITE_CD and TO_LOCATION_ID is not null then INVENTORY_TYPE_CD =  INTRANSIT and PROJECTION_TYPE  =   INTRANSIT else BOH and WIP Projection If planning stage = non end stage then BOH and WIP Projection 5 Update ItemId and location id Update Final_Item_Id for non end planning stages and  INVENTORY_TYPE_CD =  BOH utilize PDH_COMMON_ANALYSIS.V_BRD_BILL_OF_MATERIAL_LOCATION_TRAVERSAL to traverse the BOM  to find previous stage and its associated Item_Id and update in Final_location_id Update Final Location_Id for end planning stage to to_location_id  We have to exclude the record if this Fab item is External which we can find out using Location Master.-- use r2 logic If the Planning_stage is Fab - No change is done (Shouldn't go to BY, if it occurs we have to remove this case - write a DQ)",
+      "7.ADD a new column - LOT7 With LOT_ID first Seven Characters. We are creating this column for the purpose of lot comparison with FSCO Outs.",
+      "8. Pass the Point_In_Time as Last Saturday Midnight time for example 2025-07-19 23:59:59.00000 and fetch the records from IF_SUPPLY_CHAIN.ENHANCED_INVENTORY_ANALYSIS.WORK_IN_PROCESS_INVENTORY_PIT",
+      "9. Logic for Inventory_Qty: Update in new column Final_Inventory_Qty and Final_UOM as 'W'",
+      "a. If the Unit_of_measure_cd is 'W', no changes are required",
+      "b. If the Unit_of_measure_cd is either 'U' or 'D' and Secondary_unit_of_measure_cd is 'W' then replace the Inventory_qty value with Secondary_Qty value. c If the Unit_of_measure_cd is either 'U' or 'D' and secondary_unit_of_measure_cd is not 'W' then use V_PRM_MANUFACTURING_PARAMETER_ITEM_LOCATION_WORK_WEEK_CORE_PIT view to convert the Unit or Die into Wafer. How to Convert the 'U' or 'D' into 'W': Join the Unified_planning_Item_Id, Work_in_process_Inventory_site_cd from PDH_COMMON_XFRM.V_INV_WORK_IN_PROCESS_INVENTORY_ROOT with Item_Id, Location_Id from PDH_COMMON_ANALYSIS.V_PRM_MANUFACTURING_PARAMETER_ITEM_LOCATION_WORK_WEEK_CORE_PIT where Parameter_Nm is 'DPW', FISCAL_WORK_WEEK_NBR = 'CURRENT_WEEK' ('We can get Current_Week by fetching FISCAL_YEAR_WORK_WEEK_NBR FROM IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR WHERE RELATIVE_DAYS_FROM_TODAY_NBR = '0' ) and  fetch the Parameter_Qty. If this Parameter_Qty is greater than zero then replace the Value of Inventory_qty in Common_Analysis view with the (Inventory_Qty(from Root) / Parameter_Qty (from Manufacturing_Paramter view). update column  IS_TRANSFORMED and append with comments like NO CHANGES in QTY, USED SECONDARY WAFER QTY, DPW CONVERSION APPLIED Drop lots if planning site and planning owner site is null and is_transformed = 'MASTER DATA ISSUE, NEED TO IGNORE' Drop Lot if the Item is an Order Point and Planning Stage is \"End\" Stage ( sames as r2 logic) get the list of Items from sku for location = VF and traverse it to previous stage and remove these items from Inventory. Create column PLANT_CD  and fetch PLANT_CD by joining with V_BRD_PLANT_CODE_MAPPING_CORE_PIT  on fINAL_LOCATION_ID = MANUFACTURING_LOCATION_CD"
+     ]
+    },
+    {
+     "row": 206,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_INV_WIP_INVENTORY_CORE_PIT",
+     "target_label": "Common Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 50,
+     "kind": "header-area requirement",
+     "text": "If Lot comparision is not required then we can skip combining all source data"
+    },
+    {
+     "row": 89,
+     "kind": "note",
+     "text": "Note IN R3 We need to bring all classes data"
+    },
+    {
+     "row": 156,
+     "kind": "note",
+     "text": "NOTE: 1. If the Planning stage are End stages that is Fab-End, Bump-End, Sort-End, we can include all the records without doing any ITEM-LOCATION (SKU) check. We can include both 'M', 'C' ITEM-LOCATION TYPES. NO SORT-END SHOULD BE SENT TO BY.\n2. If the Planning stages are not End stages that is Fab, Bump, Sort, we need to include the records whose ITEM-LOCATION type is 'C'.\nHow to use SKU to find the ITEM-LOCATION type:\nTo PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT, send the Work_IN_PROCESS_INVENTORY_SITE_CD, UNIFIED_PLANNING_ITEM_ID from WORK_IN_PROCESS_INVENTORY_PIT to ITEM_ID, LOCATION_ID column and get the corresponding ITEM_LOCATION_TYPE_CD."
+    },
+    {
+     "row": 157,
+     "kind": "note",
+     "text": "NOTE: Use if_supply_chain.PDH_COMMON_ANALYSIS.V_BRD_ITEM_LOCATION_CORE_PIT to list the items, which has VF or VP06 as location and remove these items from the CIBR Data."
+    }
+   ]
+  },
+  "Substrate_Inventory": {
+   "blocks": [
+    {
+     "row": 68,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 79,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_LEGACY_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 90,
+     "text": "Filter data on DELETION_IND = 'N' OR DELETION_IND IS NULL   AND UNRESTRICTED_STOCK_QTY <> 0 \nUnion ENHANCED_INVENTORY_ANALYSIS.ITEM_STORAGE_LOCATION_LOT_INVENTORY and ENHANCED_INVENTORY_ANALYSIS.ITEM_STORAGE_LOCATION_LOT_INVENTORY_LEGACY",
+     "target": "PDH_COMMON_XFRM.V_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Filter data on DELETION_IND = 'N' OR DELETION_IND IS NULL   AND UNRESTRICTED_STOCK_QTY <> 0 Union ENHANCED_INVENTORY_ANALYSIS.ITEM_STORAGE_LOCATION_LOT_INVENTORY and ENHANCED_INVENTORY_ANALYSIS.ITEM_STORAGE_LOCATION_LOT_INVENTORY_LEGACY"
+     ]
+    },
+    {
+     "row": 106,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT",
+     "target_label": "Source View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 117,
+     "text": "For Source_System_Nm = ECC , update the PLANT_CD , join V_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_ROOT with V_BRD_PLANT_CODE_MAPPING_CORE_PIT on PLANT_CD = LEGACY_PLANT_CD AND FETCH PLANT_CD FROM V_BRD_PLANT_CODE_MAPPING_CORE_PIT \nmap below column as follows - .\n     UNRESTRICTED_STOCK_QTY AS LOT_UNRESTRICTED_QTY,\n    .QUALITY_INSPECTION_STOCK_QTY AS LOT_QI_QTY,\n    .BLOCKED_STOCK_QTY AS LOT_BLOCKED_QTY,\n    .TOTAL_RESTRICTED_LOT_STOCK_QTY AS LOT_RESTRICTED_QTY,",
+     "target": "PDH_COMMON_XFRM.V_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "For Source_System_Nm = ECC , update the PLANT_CD , join V_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_ROOT with V_BRD_PLANT_CODE_MAPPING_CORE_PIT on PLANT_CD = LEGACY_PLANT_CD AND FETCH PLANT_CD FROM V_BRD_PLANT_CODE_MAPPING_CORE_PIT map below column as follows - . UNRESTRICTED_STOCK_QTY AS LOT_UNRESTRICTED_QTY, .QUALITY_INSPECTION_STOCK_QTY AS LOT_QI_QTY, .BLOCKED_STOCK_QTY AS LOT_BLOCKED_QTY, .TOTAL_RESTRICTED_LOT_STOCK_QTY AS LOT_RESTRICTED_QTY,"
+     ]
+    },
+    {
+     "row": 133,
+     "text": "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_ROOT_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now , all active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 149,
+     "text": "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "PDH_COMMON_XFRM_BASE.T_ITEM_STORAGE_LOCATION_LOT_INVENTORY_ROOT_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now ; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 165,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  },
+  "INVENTORY_CORE": {
+   "blocks": [
+    {
+     "row": 76,
+     "text": "",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_INV_WORK_IN_PROCESS_INVENTORY_STAGE",
+     "target_label": "STAGE View",
+     "context": [],
+     "statements": []
+    },
+    {
+     "row": 92,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_START_CORE",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 106,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 123,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 134,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_INV_DIE_CONSUMPTION_CORE_PIT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 141,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PURCHASE_ORDER_DETAIL_DETAIL_CORE_PIT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 148,
+     "text": "We don't have any major transformation now.",
+     "target": "PDH_COMMON_ANALYSIS.V_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_CORE_PIT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 161,
+     "text": "1. fetch data from PDH_COMMON_XFRM.V_INV_WORK_IN_PROCESS_INVENTORY_STAGE (CIBR Data)\n2. For View  PDH_COMMON_XFRM.V_SCH_START_CORE (FSCO/APPS/XEUS Data) filter where LOT_OWNER_CODE in 'P' OR 'PROD'\n -  identify if an item is TurnKey or not  -\n   join WITH PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT ON ITEM_ID AND GET NSB_FLAG (NSB_FLAG = N IS TURNKEY & Y= NON TURNKEY) and ITEM_ORDER_POINT\n  Create a column INVENTORY_TYPE_CD and set as 'SCHED_RCPTS'\n2.1 Drop lots as per below logic -- For FFS drop all stages and keep only order pt stage\n    if NSB_FLAG = N AND ITEM_ORDER_POINT = N for SOURCE_SYSTEM_NM = FFS THEN DROP THE RECORD, KEEP ONLY ITEM_ORDER_POINT= Y\n3. For View  PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE (FSCO/APPS/XEUS Data)  where LOT_OWNER_CODE in 'P' OR 'PROD'\n-  identify if an item is TurnKey or not  -\n   join WITH PDH_COMMON_ANALYSIS.V_BRD_SP_HYBRID_ITEM_LOCATION_CORE_PIT ON ITEM_ID AND GET NSB_FLAG (NSB_FLAG = N IS TURNKEY & Y= NON TURNKEY)\n  Create a column INVENTORY_TYPE_CD and set as 'SCHED_RCPTS'\n3.1 Drop lots as per below logic -- For FFS drop all stages and keep only order pt stage\n    if NSB_FLAG = N AND ITEM_ORDER_POINT = N for SOURCE_SYSTEM_NM = FFS THEN DROP THE RECORD, KEEP ONLY ITEM_ORDER_POINT= Y\n\nLOT Comparision between FSCO OUTs and CIBR\n4. We need to compare data between CIBR and FSCO OUTS ( PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE ) where Source_sytem_nm = 'FSCO' AND PROJECTION_TYPE = 'WIP Projection'\nIf a lot matches, ie exist in both views then (same logic as r2 - PDH_COMMON_XFRM.V_INV_WIP_COMPARISON_TRANSFORM )\nIf the Planning_stages also match & If both the CIBR and FSCO OUTS planning stages are either FAB, BUMP,SORT and so on ie non end planning stage, we will leave them as is in FSCO OUTS , drop CIBR data\n&  If the Planning_stages doesn't match, please do the transformation based on the below cases:\n     4A.  If the CIBR Planning Stage is Fab_End and FSCO OUTS Planning_stage is Fab then remove this lot from FSCO OUTS. keep CIBR Data\n     4B.  If the CIBR Planning Stage is Bump_End and FSCO OUTS Planning_stage is Bump then remove this lot from FSCO OUTS. and so on for all stages\nLot only exists in WIP projection(FSCO OUTS) - No Action is Needed (Expect to only see when new lot created at Fab Stage - Most probably doesn't happen to see this case).\nLot only exists in Inventory(CIBR): No Action is needed\n\n5. Union all 3 views ( step 2, 3, 4 , from step 3 exclude where Source_sytem_nm = 'FSCO' AND PROJECTION_TYPE = 'WIP Projection' as already covered in step 4 ) after lot comparision betwee FSCO Outs and CIBR, keep all the data from APPS and XEUS - Aggregate all 3 views at Item_id. location_id, Inventory_type_cd, schedule_date\nMap FINAL_ITEM_ID WITH ITEM_ID , FINAL_INVENTORY_QTY with QTY,PLANT_CD with LOCATION_ID, START_DATE with START_TRANSACTION_PST_TS, DEST_LOCATION_ID WITH TO_LOCATION_ID from CIBR view to final view, all other sources have same naming conventions\n6. We need to bring only the records where BATCH_IND ='W' from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_START_CORE.\n6.Fetch data from PDH_COMMON_ANALYSIS.V_BRD_PURCHASE_ORDER_DETAIL_CORE_PIT  and aggregate at ITEM_ID , PLANT_CD  and get  GOODS_RECEIVED_QTY,OPEN_PO_QTY, and OPEN_PO_DATE,  GOODS_RECEIVED_DT\nappend this data in the final view based on below logic :\nSet SOURCE_SYSTEM_NM = 'S4-IF', PROJECTION_TYPE = 'PO', INVENTORY_TYPE_CD = 'BOH', ITEM_ID = ITEM_ID, LOCATION_ID = PLANT_CD\nQTY, SCHEDULE_DATE = ( a. if  GOODS_RECEIVED_QTY =  0  then  OPEN_PO_QTY &  OPEN_PO_DATE\n                                           b.  if  open_po_qty = 0 then GOODS_RECEIVED_QTY &  GOODS_RECEIVED_DT\n                                           C. if   GOODS_RECEIVED_QTY <> 0 and open_po_qty <> 0 then create two rows one with GOODS_RECEIVED_QTY &   GOODS_RECEIVED_DT and other with OPEN_PO_QTY and OPEN_PO_DATE\n7.Fetch data from V_INV_DIE_CONSUMPTION_CORE_PIT where lot_owner_cd = 'P' and aggregate at item_id and plant_cd and append/union the data and set inventory_type_cd = 'SCHED_RCPTS', PROJECTION_TYPE = 'WIP Projection' AND MAP ITEM_ID, PLANT_CD AND SOURCE_SYSTEM_NM AND PARAMETER_QTY\n\n8. Fetch ITEM_ID, PLANT_CD AS LOCATION_ID ,  LOT_UNRESTRICTED_QTY AS QTY,SOURCE_SYSTEM_NM, POSTING_PERIOD_FISCAL_YEAR_NBR, POSTING_PERIOD_NBR from V_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_CORE_PIT jOIN WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR USING POSTING_PERIOD_FISCAL_YEAR_NBR AS YEAR AND  POSTING_PERIOD_NBR AS WW AND FETCH AS OF SATURDAY DATE AS 'SCHEDULE_DATE'\naggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND 'SCHEDULE_DATE'\nSET PROJECTION_TYPE = 'Balance Starts' , INVENTORY_TYPE_CD = 'BOH'\nappend the data in the final combined view\n\n9.) Supplier Substrate data (BOH):\n\nQuery YEAR_WORK_WEEK_NBR from  PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT to:\n\nIF YEAR_WORK_WEEK_NBR = CURRENT WORKWEEK :\n   SET SOURCE_SYSTEM_NM = 'E2 Open',\n          PROJECTION_TYPE = 'Balance Starts',\n          INVENTORY_TYPE_CD = 'BOH'\n          LOCATION_ID = 'VF_S'\n   Fetch ITEM_ID,\n             ITEM_FINISHED_GOODS_QTY  AS QTY,\n             YEAR_WORK_WEEK_NBR\n   from PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT\n   join WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR =YEAR_WORK_WEEK_NBR\n   and Fetch as of SATURDAY DATE for current WW (YEAR_WORK_WEEK_NBR) AS SCHEDULE_DATE\n   QTY = aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND SCHEDULE_DATE\n\nIF YEAR_WORK_WEEK_NBR = FUTURE WORKWEEK :\n   SET SOURCE_SYSTEM_NM = 'E2 Open',\n          PROJECTION_TYPE = 'Projected BOH',\n          INVENTORY_TYPE_CD = 'BOH'\n          LOCATION_ID = 'VF_S'\n   Fetch ITEM_ID,\n             ITEM_FINISHED_GOODS_QTY  AS QTY,\n             YEAR_WORK_WEEK_NBR\n   from PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT\n   join WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR =YEAR_WORK_WEEK_NBR\n   and Fetch as of SATURDAY DATE for current WW (YEAR_WORK_WEEK_NBR) AS SCHEDULE_DATE\n   QTY = aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND SCHEDULE_DATE\n\nUNION the data in the final combined view\n10.) Supplier Substrate data (WIP):\n\nQuery YEAR_WORK_WEEK_NBR from  PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT to:\n\nIF YEAR_WORK_WEEK_NBR = CURRENT WORKWEEK :\n   SET SOURCE_SYSTEM_NM = 'E2 Open',\n          PROJECTION_TYPE = 'WIP Projection',\n          INVENTORY_TYPE_CD = 'SCHED_RCPTS'\n          LOCATION_ID = 'VF_S'\n   Fetch ITEM_ID,\n             ITEM_WIP_GOODS_QTY  AS QTY,\n             YEAR_WORK_WEEK_NBR\n   from PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT\n   join WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR = YEAR_WORK_WEEK_NBR\n   and Fetch as of SATURDAY DATE for following WW (YEAR_WORK_WEEK_NBR + 1) AS SCHEDULE_DATE            --- 7 window to convert WIP wty to BOH (assumption). To be re-validated. ambiguity regading TPT\n   QTY = aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND SCHEDULE_DATE\n\nIF YEAR_WORK_WEEK_NBR = FUTURE WORKWEEK :\n   SET SOURCE_SYSTEM_NM = 'E2 Open',\n          PROJECTION_TYPE = 'Balance Starts',\n          INVENTORY_TYPE_CD = 'Projected BOH'\n          LOCATION_ID = 'VF_S'\n   Fetch ITEM_ID,\n             ITEM_FINISHED_GOODS_QTY  AS QTY,\n             YEAR_WORK_WEEK_NBR\n   from PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT\n   join WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR = YEAR_WORK_WEEK_NBR\n   and Fetch as of SATURDAY DATE for following WW (YEAR_WORK_WEEK_NBR + 1) AS SCHEDULE_DATE             -----scenario to be re confimrd with benny\n   QTY = aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND SCHEDULE_DATE\n\nUNION the data in the final combined view",
+     "target": "PDH_COMMON_XFRM.V_INV_INVENTORY_STAGE_COMBINED",
+     "target_label": "STAGE VIEW",
+     "context": [
+      {
+       "label": "Note",
+       "text": "We will get the START_DATE and SCHEDULE_DATE from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE (from Varun's Design)"
+      }
+     ],
+     "statements": [
+      "1. fetch data from PDH_COMMON_XFRM.V_INV_WORK_IN_PROCESS_INVENTORY_STAGE (CIBR Data)",
+      "2. For View  PDH_COMMON_XFRM.V_SCH_START_CORE (FSCO/APPS/XEUS Data) filter where LOT_OWNER_CODE in 'P' OR 'PROD'",
+      "-  identify if an item is TurnKey or not  - join WITH PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_LOCATION_CORE_PIT ON ITEM_ID AND GET NSB_FLAG (NSB_FLAG = N IS TURNKEY & Y= NON TURNKEY) and ITEM_ORDER_POINT Create a column INVENTORY_TYPE_CD and set as 'SCHED_RCPTS'",
+      "2.1 Drop lots as per below logic -- For FFS drop all stages and keep only order pt stage if NSB_FLAG = N AND ITEM_ORDER_POINT = N for SOURCE_SYSTEM_NM = FFS THEN DROP THE RECORD, KEEP ONLY ITEM_ORDER_POINT= Y",
+      "3. For View  PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE (FSCO/APPS/XEUS Data)  where LOT_OWNER_CODE in 'P' OR 'PROD'",
+      "-  identify if an item is TurnKey or not  - join WITH PDH_COMMON_ANALYSIS.V_BRD_SP_HYBRID_ITEM_LOCATION_CORE_PIT ON ITEM_ID AND GET NSB_FLAG (NSB_FLAG = N IS TURNKEY & Y= NON TURNKEY) Create a column INVENTORY_TYPE_CD and set as 'SCHED_RCPTS'",
+      "3.1 Drop lots as per below logic -- For FFS drop all stages and keep only order pt stage if NSB_FLAG = N AND ITEM_ORDER_POINT = N for SOURCE_SYSTEM_NM = FFS THEN DROP THE RECORD, KEEP ONLY ITEM_ORDER_POINT= Y LOT Comparision between FSCO OUTs and CIBR",
+      "4. We need to compare data between CIBR and FSCO OUTS ( PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE ) where Source_sytem_nm = 'FSCO' AND PROJECTION_TYPE = 'WIP Projection' If a lot matches, ie exist in both views then (same logic as r2 - PDH_COMMON_XFRM.V_INV_WIP_COMPARISON_TRANSFORM ) If the Planning_stages also match & If both the CIBR and FSCO OUTS planning stages are either FAB, BUMP,SORT and so on ie non end planning stage, we will leave them as is in FSCO OUTS , drop CIBR data &  If the Planning_stages doesn't match, please do the transformation based on the below cases:",
+      "4A.  If the CIBR Planning Stage is Fab_End and FSCO OUTS Planning_stage is Fab then remove this lot from FSCO OUTS. keep CIBR Data",
+      "4B.  If the CIBR Planning Stage is Bump_End and FSCO OUTS Planning_stage is Bump then remove this lot from FSCO OUTS. and so on for all stages Lot only exists in WIP projection(FSCO OUTS) - No Action is Needed (Expect to only see when new lot created at Fab Stage - Most probably doesn't happen to see this case). Lot only exists in Inventory(CIBR): No Action is needed",
+      "5. Union all 3 views ( step 2, 3, 4 , from step 3 exclude where Source_sytem_nm = 'FSCO' AND PROJECTION_TYPE = 'WIP Projection' as already covered in step 4 ) after lot comparision betwee FSCO Outs and CIBR, keep all the data from APPS and XEUS - Aggregate all 3 views at Item_id. location_id, Inventory_type_cd, schedule_date Map FINAL_ITEM_ID WITH ITEM_ID , FINAL_INVENTORY_QTY with QTY,PLANT_CD with LOCATION_ID, START_DATE with START_TRANSACTION_PST_TS, DEST_LOCATION_ID WITH TO_LOCATION_ID from CIBR view to final view, all other sources have same naming conventions",
+      "6. We need to bring only the records where BATCH_IND ='W' from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_WORK_IN_PROCESS_CORE and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_START_CORE.",
+      "6.Fetch data from PDH_COMMON_ANALYSIS.V_BRD_PURCHASE_ORDER_DETAIL_CORE_PIT  and aggregate at ITEM_ID , PLANT_CD  and get  GOODS_RECEIVED_QTY,OPEN_PO_QTY, and OPEN_PO_DATE,  GOODS_RECEIVED_DT append this data in the final view based on below logic : Set SOURCE_SYSTEM_NM = 'S4-IF', PROJECTION_TYPE = 'PO', INVENTORY_TYPE_CD = 'BOH', ITEM_ID = ITEM_ID, LOCATION_ID = PLANT_CD QTY, SCHEDULE_DATE = ( a. if  GOODS_RECEIVED_QTY =  0  then  OPEN_PO_QTY &  OPEN_PO_DATE",
+      "b.  if  open_po_qty = 0 then GOODS_RECEIVED_QTY &  GOODS_RECEIVED_DT",
+      "C. if   GOODS_RECEIVED_QTY <> 0 and open_po_qty <> 0 then create two rows one with GOODS_RECEIVED_QTY &   GOODS_RECEIVED_DT and other with OPEN_PO_QTY and OPEN_PO_DATE",
+      "7.Fetch data from V_INV_DIE_CONSUMPTION_CORE_PIT where lot_owner_cd = 'P' and aggregate at item_id and plant_cd and append/union the data and set inventory_type_cd = 'SCHED_RCPTS', PROJECTION_TYPE = 'WIP Projection' AND MAP ITEM_ID, PLANT_CD AND SOURCE_SYSTEM_NM AND PARAMETER_QTY",
+      "8. Fetch ITEM_ID, PLANT_CD AS LOCATION_ID ,  LOT_UNRESTRICTED_QTY AS QTY,SOURCE_SYSTEM_NM, POSTING_PERIOD_FISCAL_YEAR_NBR, POSTING_PERIOD_NBR from V_INV_ITEM_STORAGE_LOCATION_LOT_INVENTORY_CORE_PIT jOIN WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR USING POSTING_PERIOD_FISCAL_YEAR_NBR AS YEAR AND  POSTING_PERIOD_NBR AS WW AND FETCH AS OF SATURDAY DATE AS 'SCHEDULE_DATE' aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND 'SCHEDULE_DATE' SET PROJECTION_TYPE = 'Balance Starts' , INVENTORY_TYPE_CD = 'BOH' append the data in the final combined view",
+      "9.) Supplier Substrate data (BOH): Query YEAR_WORK_WEEK_NBR from  PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT to: IF YEAR_WORK_WEEK_NBR = CURRENT WORKWEEK : SET SOURCE_SYSTEM_NM = 'E2 Open', PROJECTION_TYPE = 'Balance Starts', INVENTORY_TYPE_CD = 'BOH' LOCATION_ID = 'VF_S' Fetch ITEM_ID, ITEM_FINISHED_GOODS_QTY  AS QTY, YEAR_WORK_WEEK_NBR from PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT join WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR =YEAR_WORK_WEEK_NBR and Fetch as of SATURDAY DATE for current WW (YEAR_WORK_WEEK_NBR) AS SCHEDULE_DATE QTY = aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND SCHEDULE_DATE IF YEAR_WORK_WEEK_NBR = FUTURE WORKWEEK : SET SOURCE_SYSTEM_NM = 'E2 Open', PROJECTION_TYPE = 'Projected BOH', INVENTORY_TYPE_CD = 'BOH' LOCATION_ID = 'VF_S' Fetch ITEM_ID, ITEM_FINISHED_GOODS_QTY  AS QTY, YEAR_WORK_WEEK_NBR from PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT join WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR =YEAR_WORK_WEEK_NBR and Fetch as of SATURDAY DATE for current WW (YEAR_WORK_WEEK_NBR) AS SCHEDULE_DATE QTY = aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND SCHEDULE_DATE UNION the data in the final combined view",
+      "10.) Supplier Substrate data (WIP): Query YEAR_WORK_WEEK_NBR from  PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT to: IF YEAR_WORK_WEEK_NBR = CURRENT WORKWEEK : SET SOURCE_SYSTEM_NM = 'E2 Open', PROJECTION_TYPE = 'WIP Projection', INVENTORY_TYPE_CD = 'SCHED_RCPTS' LOCATION_ID = 'VF_S' Fetch ITEM_ID, ITEM_WIP_GOODS_QTY  AS QTY, YEAR_WORK_WEEK_NBR from PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT join WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR = YEAR_WORK_WEEK_NBR and Fetch as of SATURDAY DATE for following WW (YEAR_WORK_WEEK_NBR + 1) AS SCHEDULE_DATE            --- 7 window to convert WIP wty to BOH (assumption). To be re-validated. ambiguity regading TPT QTY = aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND SCHEDULE_DATE IF YEAR_WORK_WEEK_NBR = FUTURE WORKWEEK : SET SOURCE_SYSTEM_NM = 'E2 Open', PROJECTION_TYPE = 'Balance Starts', INVENTORY_TYPE_CD = 'Projected BOH' LOCATION_ID = 'VF_S' Fetch ITEM_ID, ITEM_FINISHED_GOODS_QTY  AS QTY, YEAR_WORK_WEEK_NBR from PDH_COMMON_ANALYSIS.V_INV_SUBSTRATE_ITEM_SUPPLIER_INVENTORY_DETAIL_CORE_PIT join WITH CALENDAR VIEW ON FISCAL_YEAR_WORK_WEEK_NBR = YEAR_WORK_WEEK_NBR and Fetch as of SATURDAY DATE for following WW (YEAR_WORK_WEEK_NBR + 1) AS SCHEDULE_DATE             -----scenario to be re confimrd with benny QTY = aggregate QTY FROM ABOVE VIEW ON ITEM_ID, LOCATION_ID AND SCHEDULE_DATE UNION the data in the final combined view"
+     ]
+    },
+    {
+     "row": 191,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_INV_INVENTORY_CORE",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

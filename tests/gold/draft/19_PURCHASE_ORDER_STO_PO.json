@@ -1,0 +1,255 @@
+{
+ "file": "19. PURCHASE ORDER & STO/PO.xlsx",
+ "sheets": [
+  "PO"
+ ],
+ "skipped": [
+  {
+   "sheet": "Rough work",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Sheet2",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Sheet4",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "PO": {
+   "blocks": [
+    {
+     "row": 61,
+     "text": "we will have records with both PURCHASE_DOCUMENT_HEADER_ACTIVE_IND & PURCHASE_DOCUMENT_LINE_ACTIVE_IND = Y (indicating active records) and ACTIVE_IND = N (indicating inactive records).",
+     "target": "IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.PURCHASE_DOCUMENT_HEADER_LINE",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "we will have records with both PURCHASE_DOCUMENT_HEADER_ACTIVE_IND & PURCHASE_DOCUMENT_LINE_ACTIVE_IND = Y (indicating active records) and ACTIVE_IND = N (indicating inactive records)."
+     ]
+    },
+    {
+     "row": 73,
+     "text": "Load only Active records where PURCHASE_DOCUMENT_HEADER_ACTIVE_IND & PURCHASE_DOCUMENT_LINE_ACTIVE_IND = Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_PURCHASE_DOCUMENT_HEADER_LINE_ROOT",
+     "target_label": "Table",
+     "context": [],
+     "statements": [
+      "Load only Active records where PURCHASE_DOCUMENT_HEADER_ACTIVE_IND & PURCHASE_DOCUMENT_LINE_ACTIVE_IND = Y"
+     ]
+    },
+    {
+     "row": 79,
+     "text": "We don’t have any major transformation",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_TRN_PURCHASE_DOCUMENT_HEADER_LINE_ROOT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don’t have any major transformation"
+     ]
+    },
+    {
+     "row": 86,
+     "text": "we will have records with PURCHASE_DOCUMENT_SCHEDULE_LINE_ACTIVE_IND= Y (indicating active records) and ACTIVE_IND = N (indicating inactive records).",
+     "target": "IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.PURCHASE_DOCUMENT_SCHEDULE_LINE",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "we will have records with PURCHASE_DOCUMENT_SCHEDULE_LINE_ACTIVE_IND= Y (indicating active records) and ACTIVE_IND = N (indicating inactive records)."
+     ]
+    },
+    {
+     "row": 96,
+     "text": "we will  bring records with PURCHASE_DOCUMENT_SCHEDULE_LINE_ACTIVE_IND= Y (indicating active records).",
+     "target": null,
+     "target_label": "Table",
+     "context": [],
+     "missing_name": true,
+     "statements": [
+      "we will  bring records with PURCHASE_DOCUMENT_SCHEDULE_LINE_ACTIVE_IND= Y (indicating active records)."
+     ]
+    },
+    {
+     "row": 102,
+     "text": "We don’t have any major transformation",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_TRN_PURCHASE_DOCUMENT_SCHEDULE_LINE_ROOT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don’t have any major transformation"
+     ]
+    },
+    {
+     "row": 108,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.PURCHASE_DOCUMENT_LINE_SUPPLIER_CONFIRMATION",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 117,
+     "text": "We don’t have any major transformation",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_PURCHASE_DOCUMENT_LINE_SUPPLIER_CONFIRMATION_ROOT",
+     "target_label": "Table",
+     "context": [],
+     "statements": [
+      "We don’t have any major transformation"
+     ]
+    },
+    {
+     "row": 123,
+     "text": "We don’t have any major transformation",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_TRN_PURCHASE_DOCUMENT_LINE_SUPPLIER_CONFIRMATION_ROOT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don’t have any major transformation"
+     ]
+    },
+    {
+     "row": 129,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.SOURCE_TO_PAY_ANALYSIS.PURCHASE_DOCUMENT_GOODS_RECEIPT_INVOICE_RECEIPT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 138,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_PURCHASE_DOCUMENT_GOODS_RECEIPT_INVOICE_RECEIPT_ROOT",
+     "target_label": "Table",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 144,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_TRN_PURCHASE_DOCUMENT_GOODS_RECEIPT_INVOICE_RECEIPT_ROOT",
+     "target_label": "View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 165,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE",
+     "target_label": "Calendar",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 178,
+     "text": "1. Document Types: Filter PURCHASE_DOCUMENT_TYPE_CD from  IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT by using Meta Data when Subject Area= 'PURCHASE ORDER', Entity name= 'PURCHASE ORDER' ,Business_rule= ' PurchaseOrder_Config' & Get the COLUMN_VALUE_TWO_TXT.\n& PURCHASE_DOCUMENT_HEADER_DELETION_STATUS_CD = ''   (means empty rows or we can say that where there is not L) in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT\n& PURCHASE_DOCUMENT_LINE_DELETION_STATUS_CD = '' , (means empty rows or we can say that where there is not L) in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT\n& filter out the DELIVERY_COMPLETE_IND='N' in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "1. Document Types: Filter PURCHASE_DOCUMENT_TYPE_CD from  IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT by using Meta Data when Subject Area= 'PURCHASE ORDER', Entity name= 'PURCHASE ORDER' ,Business_rule= ' PurchaseOrder_Config' & Get the COLUMN_VALUE_TWO_TXT. & PURCHASE_DOCUMENT_HEADER_DELETION_STATUS_CD = ''   (means empty rows or we can say that where there is not L) in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT & PURCHASE_DOCUMENT_LINE_DELETION_STATUS_CD = '' , (means empty rows or we can say that where there is not L) in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT & filter out the DELIVERY_COMPLETE_IND='N' in IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT"
+     ]
+    },
+    {
+     "row": 179,
+     "text": "1. Get Data for relevant time lines: Filter to the required timehorizon by filtering IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT. PURCHASE_DOCUMENT_DT < 6 months before current Date and PURCHASE_DOCUMENT_DT is in between  (IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.CALENDAR_DT WHERE HORIZON_CORE_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_LABEL_THREE_TXT WHERE SUBJECT_AREA_NM='PURCHASE ORDER' and ENTITY_NM='PURCHASE ORDER' AND BUSINESS_RULE_NM='PurchaseOrder_Config' \n\n\nFetch FISCAL_YEAR_WORK_WEEK_NBR from V_CRR_CALENDAR_HORIZON_CORE  corresponding to the PURCHASE_DOCUMENT_DT & project in the FISCAL_YEAR_WORK_WEEK_NBR_Purchase_Doc.\n3.Supplier Confirmation category Code/Qty:- Fetch SUPPLIER_CONFIRMATION_CATEGORY_CD, SUPPLIER_CONFIRMED_QTY & SUPPLIER_CONFIRMATION_DELIVERY_DT, SUPPLIER_CONFIRMATION_ACTIVE_IND , SUPPLIER_CONFIRMATION_DELETION_STATUS_CD, PURCHASE_DOCUMENT_LINE_QTY from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_LINE_SUPPLIER_CONFIRMATION_ROOT  by Joining PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT.\n4. Fetch the FISCAL_YEAR_WORK_WEEK_NBR from V_CRR_CALENDAR_HORIZON_CORE  corresponding to SUPPLIER_CONFIRMATION_DELIVERY_DTM & Prject in the FISCAL_YEAR_WORK_WEEK_NBR_Supplier_Confirmation.\n4. Filter on which SUPPLIER_CONFIRMATION_CATEGORY_CODE- AB  (By Using Meta Data -Subject Area nm='PURCHASE ORDER', Entity_nm='PURCHASE Order', Business_rule_nm='PurchaseOrder_Config' & Project Column Value Six i.e. AB)\n5. Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_SCHEDULE_LINE_ROOT based on  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR. Project the  SCHEDULE_LINE_DELIVERY_QTY & GOODS_RECEIVED_QTY, \n\nTo Fetch  GOODS_RECEIVED_DT :-. Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PURCHASE_DOCUMENT_GOODS_RECEIPT_INVOICE_RECEIPT_ROOT based on  PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR, Fetch Latest date i.e.  GOODS_RECEIVED_DT from the GOODS_RECEIPT_INVOICE_RECEIPT_ROOT & Project in GOODS_RECEIVED_DT.\n6. Derive the CONFIRMED_PO_IND column:-   \nHere we will Derive - UNCONFIRMED,      Full confirmation,            Partial confirmation- All QTY,                    Partial confirmation- Partial QTY,                   \n(i) Unconfirmed- Not confirmed by Supplier.\n Where  SUPPLIER_CONFIRMED_DELIVERY_DT = is  BLANK & SUPPLIER_CONFIRMATION_CATEGORY_CODE='' BLANK then mark  UNCONFIRMED. \n(ii) Full confirmation- All QTYs delivery will be confirmed at once on a date. \n  When for Particular PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR  check SUPPLIER_CONFIRMED_DELIVERY_DT  =  Not Null or Not Blank &   SUPPLIER_CONFIRMED_QTY =  SCHEDULE_LINE_DELIVERY_QTY  , Then Project the FULL CONFIRMATION.\n(iii) Partial confirmation, All QTY: All QTYs delivered across multiple dates\n When for Particular PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR  , Aggregate Sum of SUPPLIER_CONFIRMED_QTY =   Aggregate Sum of SCHEDULE_LINE_DELIVERY_QTY then project the PARTIAL CONFIRMATION- ALL QTY.\n\n(iv) Partial confirmation, Partial QTY: Partial QTYs confirmed when compared to requested QTY across multiple dates\nWhen for Particular PURCHASE_DOCUMENT_NBR &PURCHASE_DOCUMENT_LINE_NBR ,  Aggregate Sum of SUPPLIER_CONFIRMED_QTY < Aggregate Sum of SCHEDULE_LINE_DELIVERY_QTY  then project the PARTIAL CONFIRMATION- PARTIAL QTY.\n6. -For  PURCHASE_DOCUMENT_NBR and PURCHASE_DOCUMENT_LINE_NBR&   PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR , Drive EXCESS_DELIVERY_QTY BY Performing SCHEDULE_LINE_DELIVERY_QTY - GOODS_RECEIVED_QTY, Project values only if The received Qty is greater than Schedule line delivery Qty. \nEg. If recived qty is 120 agaisnt delivert qty of 100 then the rersulut is 100-120= -20, instead of -20 project 20 which is non negative value.\n7. Calculate OPEN_PO_QTY, OPEN_PO_Date & PO_STATUS\nFor PO where CONFIRMED_PO_IND is UNCONFIRMED.\nOPEN_PO_QTY  =:-For  PURCHASE_DOCUMENT_NBR and PURCHASE_DOCUMENT_LINE_NBR we have  Aggregate SCHEDULE_LINE_DELIVERY_QTY and Aggregate GOODS_RECEIVED_QTY from PURCHASE_DOCUMENT_SCHEDULE_LINE table.\n IF aggregate GOODS_RECEIVED_QTY >  aggregate SCHEDULE_LINE_DELIVERY_QTY THEN project 0 (or we can say that if EXCESS_DELIVERY_QTY is negative then project 0 instead of negative value) ELSE  project actual qty by subtraction (SCHEDULE_LINE_DELIVERY_QTY - GOODS_RECEIVED_QTY ) >0 \nOPEN_PO_Date=  is same as  REQUESTED_DELIVERY_DTM\nPO_STATUS = if OPEN_PO_QTY = 0 & DELIVERY_COMPLETE_IND= Y then COMPLETE else OPEN\nCalculate OPEN_PO_QTY, OPEN_PO_Date & PO_STATUS\nFor PO where CONFIRMED_PO_IND is Full confirmation\nOPEN_PO_QTY  =:-For  PURCHASE_DOCUMENT_NBR and PURCHASE_DOCUMENT_LINE_NBR we have   SUPPLIER_CONFIRMED_QTY from supplier CONFIRMATION table  and GOODS_RECEIVED_QTY from schedule line table . &\n calculate aggregate SUPPLIER_CONFIRMED_QTY – aggregate RECEIVED_QTY.\nFISCAL_YEAR_WORK_WEEK_NBR_Supplier_Confirmation =  FISCAL_YEAR_WORK_WEEK_NBR_Purchase_Doc\nOPEN_PO_Date=  SUPPLIER_CONFIRMED_DELIVERY_DT+  GOODS_RECEIPT_PROCESS_TIME_DAY_CNT\nPO_STATUS = if OPEN_PO_QTY = 0 & DELIVERY_COMPLETE_IND= Y then COMPLETE else OPEN\nCalculate OPEN_PO_QTY, OPEN_PO_Date & PO_STATUS\nFor PO where CONFIRMED_PO_IND is  Partial confirmation- All QTY\nOPEN_PO_QTY  =:-For  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR & PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR, we have GOODS_RECEIVED_QTY from Schedule line table & For  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR level we have  SUPPLIER_CONFIRMED_QTY from supplier CONFIRMATION table. \nCheck SUPPLIER_CONFIRMED_QTY >=PURCHASE_DOCUMENT_LINE_QTY \ncalculate OPEN_PO QTY = SUPPLIER_CONFIRMED_QTY minus  Aggregate RECEIVED_QTY.  \nOPEN_PO_Date=  SUPPLIER_CONFIRMED_DELIVERY_DT +  GOODS_RECEIPT_PROCESS_TIME_DAY_CNT\nPO_STATUS = if OPEN_PO_QTY = 0 & DELIVERY_COMPLETE_IND= Y then COMPLETE else OPEN\n\nAggregated logic of Received qty of fifo= For  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR & PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR, we have GOODS_RECEIVED_QTY from Schedule line table & For  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR level we have  SUPPLIER_CONFIRMED_QTY from supplier CONFIRMATION table. We dont have confirmation qty on Schedule line level, we have confirmation qty only on the Purchase document line number only.\nBut we have received qty at schedule line number thats why the received qty is aggregated.\nCalculate OPEN_PO_QTY, OPEN_PO_Date & PO_STATUS\nFor PO where CONFIRMED_PO_IND is   Partial confirmation- Partial QTY\n\nOPEN_PO_QTY  =:-For  PURCHASE_DOCUMENT_NBR and PURCHASE_DOCUMENT_LINE_NBR  we have  Aggregate SUPPLIER_CONFIRMED_QTY & Aggregate PURCHASE_DOCUMENT_LINE_QTY and at PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR & PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR we have GOODS_RECEIVED_QTY.\n calculate aggregate: (PURCHASE_DOCUMENT_LINE_QTY minus aggregate SUPPLIER_CONFIRMED_QTY) minus aggregate RECEIVED_QTY.\n \nOPEN_PO_Date=  SUPPLIER_CONFIRMED_DELIVERY_DT+  GOODS_RECEIPT_PROCESS_TIME_DAY_CNT\nPO_STATUS = if OPEN_PO_QTY = 0 & DELIVERY_COMPLETE_IND= Y then COMPLETE else OPEN\nOther Colums:- Against PURCHASE DOCUMENT_NBR ,  PURCHASE_DOCUMENT_LINE_NBR, PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR bring the STATISTICAL_DELIVERY_DT from From Schedule Line table.\n                            Against PURCHASE_DOCUMENT_NBR, PURCHASE_DOCUMENT_LINE_NBR bring the SUPPLIER_CONFIRMATION_SEQUENCE_NBR, SUPPLIER_CONFIRMATION_CREATION_CD, SUPPLIER_REDUCED_QTY",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_TRN_PURCHASE_ORDER_DETAIL_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "1. Get Data for relevant time lines: Filter to the required timehorizon by filtering IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT. PURCHASE_DOCUMENT_DT < 6 months before current Date and PURCHASE_DOCUMENT_DT is in between  (IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.CALENDAR_DT WHERE HORIZON_CORE_CD=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_LABEL_THREE_TXT WHERE SUBJECT_AREA_NM='PURCHASE ORDER' and ENTITY_NM='PURCHASE ORDER' AND BUSINESS_RULE_NM='PurchaseOrder_Config' Fetch FISCAL_YEAR_WORK_WEEK_NBR from V_CRR_CALENDAR_HORIZON_CORE  corresponding to the PURCHASE_DOCUMENT_DT & project in the FISCAL_YEAR_WORK_WEEK_NBR_Purchase_Doc.",
+      "3.Supplier Confirmation category Code/Qty:- Fetch SUPPLIER_CONFIRMATION_CATEGORY_CD, SUPPLIER_CONFIRMED_QTY & SUPPLIER_CONFIRMATION_DELIVERY_DT, SUPPLIER_CONFIRMATION_ACTIVE_IND , SUPPLIER_CONFIRMATION_DELETION_STATUS_CD, PURCHASE_DOCUMENT_LINE_QTY from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_LINE_SUPPLIER_CONFIRMATION_ROOT  by Joining PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT.",
+      "4. Fetch the FISCAL_YEAR_WORK_WEEK_NBR from V_CRR_CALENDAR_HORIZON_CORE  corresponding to SUPPLIER_CONFIRMATION_DELIVERY_DTM & Prject in the FISCAL_YEAR_WORK_WEEK_NBR_Supplier_Confirmation.",
+      "4. Filter on which SUPPLIER_CONFIRMATION_CATEGORY_CODE- AB  (By Using Meta Data -Subject Area nm='PURCHASE ORDER', Entity_nm='PURCHASE Order', Business_rule_nm='PurchaseOrder_Config' & Project Column Value Six i.e. AB)",
+      "5. Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_SCHEDULE_LINE_ROOT based on  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR. Project the  SCHEDULE_LINE_DELIVERY_QTY & GOODS_RECEIVED_QTY, To Fetch  GOODS_RECEIVED_DT :-. Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PURCHASE_DOCUMENT_HEADER_LINE_ROOT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PURCHASE_DOCUMENT_GOODS_RECEIPT_INVOICE_RECEIPT_ROOT based on  PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR, Fetch Latest date i.e.  GOODS_RECEIVED_DT from the GOODS_RECEIPT_INVOICE_RECEIPT_ROOT & Project in GOODS_RECEIVED_DT.",
+      "6. Derive the CONFIRMED_PO_IND column:- Here we will Derive - UNCONFIRMED,      Full confirmation,            Partial confirmation- All QTY,                    Partial confirmation- Partial QTY, (i) Unconfirmed- Not confirmed by Supplier. Where  SUPPLIER_CONFIRMED_DELIVERY_DT = is  BLANK & SUPPLIER_CONFIRMATION_CATEGORY_CODE='' BLANK then mark  UNCONFIRMED. (ii) Full confirmation- All QTYs delivery will be confirmed at once on a date. When for Particular PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR  check SUPPLIER_CONFIRMED_DELIVERY_DT  =  Not Null or Not Blank &   SUPPLIER_CONFIRMED_QTY =  SCHEDULE_LINE_DELIVERY_QTY  , Then Project the FULL CONFIRMATION. (iii) Partial confirmation, All QTY: All QTYs delivered across multiple dates When for Particular PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR  , Aggregate Sum of SUPPLIER_CONFIRMED_QTY =   Aggregate Sum of SCHEDULE_LINE_DELIVERY_QTY then project the PARTIAL CONFIRMATION- ALL QTY. (iv) Partial confirmation, Partial QTY: Partial QTYs confirmed when compared to requested QTY across multiple dates When for Particular PURCHASE_DOCUMENT_NBR &PURCHASE_DOCUMENT_LINE_NBR ,  Aggregate Sum of SUPPLIER_CONFIRMED_QTY < Aggregate Sum of SCHEDULE_LINE_DELIVERY_QTY  then project the PARTIAL CONFIRMATION- PARTIAL QTY.",
+      "6. -For  PURCHASE_DOCUMENT_NBR and PURCHASE_DOCUMENT_LINE_NBR&   PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR , Drive EXCESS_DELIVERY_QTY BY Performing SCHEDULE_LINE_DELIVERY_QTY - GOODS_RECEIVED_QTY, Project values only if The received Qty is greater than Schedule line delivery Qty. Eg. If recived qty is 120 agaisnt delivert qty of 100 then the rersulut is 100-120= -20, instead of -20 project 20 which is non negative value.",
+      "7. Calculate OPEN_PO_QTY, OPEN_PO_Date & PO_STATUS For PO where CONFIRMED_PO_IND is UNCONFIRMED. OPEN_PO_QTY  =:-For  PURCHASE_DOCUMENT_NBR and PURCHASE_DOCUMENT_LINE_NBR we have  Aggregate SCHEDULE_LINE_DELIVERY_QTY and Aggregate GOODS_RECEIVED_QTY from PURCHASE_DOCUMENT_SCHEDULE_LINE table. IF aggregate GOODS_RECEIVED_QTY >  aggregate SCHEDULE_LINE_DELIVERY_QTY THEN project 0 (or we can say that if EXCESS_DELIVERY_QTY is negative then project 0 instead of negative value) ELSE  project actual qty by subtraction (SCHEDULE_LINE_DELIVERY_QTY - GOODS_RECEIVED_QTY ) >0 OPEN_PO_Date=  is same as  REQUESTED_DELIVERY_DTM PO_STATUS = if OPEN_PO_QTY = 0 & DELIVERY_COMPLETE_IND= Y then COMPLETE else OPEN Calculate OPEN_PO_QTY, OPEN_PO_Date & PO_STATUS For PO where CONFIRMED_PO_IND is Full confirmation OPEN_PO_QTY  =:-For  PURCHASE_DOCUMENT_NBR and PURCHASE_DOCUMENT_LINE_NBR we have   SUPPLIER_CONFIRMED_QTY from supplier CONFIRMATION table  and GOODS_RECEIVED_QTY from schedule line table . & calculate aggregate SUPPLIER_CONFIRMED_QTY – aggregate RECEIVED_QTY. FISCAL_YEAR_WORK_WEEK_NBR_Supplier_Confirmation =  FISCAL_YEAR_WORK_WEEK_NBR_Purchase_Doc OPEN_PO_Date=  SUPPLIER_CONFIRMED_DELIVERY_DT+  GOODS_RECEIPT_PROCESS_TIME_DAY_CNT PO_STATUS = if OPEN_PO_QTY = 0 & DELIVERY_COMPLETE_IND= Y then COMPLETE else OPEN Calculate OPEN_PO_QTY, OPEN_PO_Date & PO_STATUS For PO where CONFIRMED_PO_IND is  Partial confirmation- All QTY OPEN_PO_QTY  =:-For  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR & PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR, we have GOODS_RECEIVED_QTY from Schedule line table & For  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR level we have  SUPPLIER_CONFIRMED_QTY from supplier CONFIRMATION table. Check SUPPLIER_CONFIRMED_QTY >=PURCHASE_DOCUMENT_LINE_QTY calculate OPEN_PO QTY = SUPPLIER_CONFIRMED_QTY minus  Aggregate RECEIVED_QTY. OPEN_PO_Date=  SUPPLIER_CONFIRMED_DELIVERY_DT +  GOODS_RECEIPT_PROCESS_TIME_DAY_CNT PO_STATUS = if OPEN_PO_QTY = 0 & DELIVERY_COMPLETE_IND= Y then COMPLETE else OPEN Aggregated logic of Received qty of fifo= For  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR & PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR, we have GOODS_RECEIVED_QTY from Schedule line table & For  PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR level we have  SUPPLIER_CONFIRMED_QTY from supplier CONFIRMATION table. We dont have confirmation qty on Schedule line level, we have confirmation qty only on the Purchase document line number only. But we have received qty at schedule line number thats why the received qty is aggregated. Calculate OPEN_PO_QTY, OPEN_PO_Date & PO_STATUS For PO where CONFIRMED_PO_IND is   Partial confirmation- Partial QTY OPEN_PO_QTY  =:-For  PURCHASE_DOCUMENT_NBR and PURCHASE_DOCUMENT_LINE_NBR  we have  Aggregate SUPPLIER_CONFIRMED_QTY & Aggregate PURCHASE_DOCUMENT_LINE_QTY and at PURCHASE_DOCUMENT_NBR and  PURCHASE_DOCUMENT_LINE_NBR & PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR we have GOODS_RECEIVED_QTY. calculate aggregate: (PURCHASE_DOCUMENT_LINE_QTY minus aggregate SUPPLIER_CONFIRMED_QTY) minus aggregate RECEIVED_QTY. OPEN_PO_Date=  SUPPLIER_CONFIRMED_DELIVERY_DT+  GOODS_RECEIPT_PROCESS_TIME_DAY_CNT PO_STATUS = if OPEN_PO_QTY = 0 & DELIVERY_COMPLETE_IND= Y then COMPLETE else OPEN Other Colums:- Against PURCHASE DOCUMENT_NBR ,  PURCHASE_DOCUMENT_LINE_NBR, PURCHASE_DOCUMENT_SCHEDULE_LINE_NBR bring the STATISTICAL_DELIVERY_DT from From Schedule Line table. Against PURCHASE_DOCUMENT_NBR, PURCHASE_DOCUMENT_LINE_NBR bring the SUPPLIER_CONFIRMATION_SEQUENCE_NBR, SUPPLIER_CONFIRMATION_CREATION_CD, SUPPLIER_REDUCED_QTY"
+     ]
+    },
+    {
+     "row": 198,
+     "text": "We don’t have major transformation.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_PURCHASE_ORDER_DETAIL_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don’t have major transformation."
+     ]
+    },
+    {
+     "row": 203,
+     "text": "We don’t have major transformation.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_PURCHASE_ORDER_DETAIL_CORE_MEMORIES",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don’t have major transformation."
+     ]
+    },
+    {
+     "row": 209,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_TRN_PURCHASE_ORDER_DETAIL_DETAIL_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 216,
+     "text": "Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PURCHASE_DOCUMENT_HEADER_LINE_ROOT  & SCHEDULE_LINE &GOODS_RECEIPT_INVOICE_RECEIPT based on  PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR to get the relevenat columns.\nProject  PURCHASE_DOCUMENT_LINE_GOODS_RECEIPT_QTY, PURCHASE_DOCUMENT_LINE_RECEIPT_ITEM_BATCH_NBR, GOODS_RECEIPT_DT, \nNote:- Here in This view we have shipment wise breakup i.e date wise PURCHASE_DOCUMENT_LINE_GOODS_RECEIPT_QTY",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_TRN_PURCHASE_ORDER_SHIPMENT_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PURCHASE_DOCUMENT_HEADER_LINE_ROOT  & SCHEDULE_LINE &GOODS_RECEIPT_INVOICE_RECEIPT based on  PURCHASE_DOCUMENT_NBR & PURCHASE_DOCUMENT_LINE_NBR to get the relevenat columns. Project  PURCHASE_DOCUMENT_LINE_GOODS_RECEIPT_QTY, PURCHASE_DOCUMENT_LINE_RECEIPT_ITEM_BATCH_NBR, GOODS_RECEIPT_DT, Note:- Here in This view we have shipment wise breakup i.e date wise PURCHASE_DOCUMENT_LINE_GOODS_RECEIPT_QTY"
+     ]
+    },
+    {
+     "row": 223,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_PURCHASE_ORDER_SHIPMENT_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 229,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_TRN_PURCHASE_ORDER_SHIPMENT_CORE_MEMORIES",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 235,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_TRN_PURCHASE_ORDER_SHIPMENT_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

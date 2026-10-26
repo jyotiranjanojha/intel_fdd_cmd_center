@@ -1,0 +1,65 @@
+{
+ "file": "15. WSPW/CAPACITY_CORRIDOR_PDH_COMMON.xlsx",
+ "sheets": [
+  "Capacity_Corridor_Core"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "Capacity_Corridor_Core": {
+   "blocks": [
+    {
+     "row": 67,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_DETAIL_CURRENT_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 77,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_DETAIL_CURRENT_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 88,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_DETAIL_CURRENT_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 98,
+     "text": "A new column called DOT_PROCESS_CD will be created in the COMMON_ANALYSIS view by concatenating the FABRICATION_PROCESS_CD and FABRICATION_DOT_PROCESS_CD from the IF_SUPPLY_CHAIN.SUPPLY_ANALYSIS.WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_DETAIL_CURRENT table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_DETAIL_CURRENT_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "A new column called DOT_PROCESS_CD will be created in the COMMON_ANALYSIS view by concatenating the FABRICATION_PROCESS_CD and FABRICATION_DOT_PROCESS_CD from the IF_SUPPLY_CHAIN.SUPPLY_ANALYSIS.WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_DETAIL_CURRENT table."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 79,
+     "kind": "note",
+     "text": "Note We don't have to bring the PRODUCTION_PLAN_VERSION_ID, INGEST_TS and MVIEW_TS"
+    },
+    {
+     "row": 111,
+     "kind": "scenario table",
+     "text": "Scenario WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_DETAIL_CURRENT_CORE_CURRENT WAFER_START_CAPACITY_GROUP_PROCESS_CORRIDOR_DETAIL_CURRENT_CORE_MEMORIES"
+    }
+   ]
+  }
+ }
+}

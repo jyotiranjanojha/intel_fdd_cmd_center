@@ -1,0 +1,230 @@
+{
+ "file": "1. ITEM/ITEM_PDH_COMMON.xlsx",
+ "sheets": [
+  "Item_Core_v4"
+ ],
+ "skipped": [
+  {
+   "sheet": "Item_Core_v2",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Item_Core",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Item_Core_v2_WIP",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Item_Core_v1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Item_Core_v3",
+   "why": "hidden"
+  },
+  {
+   "sheet": "Sheet3",
+   "why": "SheetN duplicate of a named design sheet"
+  }
+ ],
+ "by_sheet": {
+  "Item_Core_v4": {
+   "blocks": [
+    {
+     "row": 139,
+     "text": "For the first load, load only Active data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_MATERIAL_DETAIL where  SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, \nand SOURCE_SYSTEM_NM='S4 MDG'  and lab_design_office_cd<>'REF' to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROOT. Set ACTIVE_IND = 'TRUE'.\n\nIn Subsequent runs, check the status of record and set ACTIVE_IND to TRUE or FALSE depending on below.\n1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.\n2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.\n3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.\n4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "For the first load, load only Active data from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_MATERIAL_DETAIL where  SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, and SOURCE_SYSTEM_NM='S4 MDG'  and lab_design_office_cd<>'REF' to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROOT. Set ACTIVE_IND = 'TRUE'. In Subsequent runs, check the status of record and set ACTIVE_IND to TRUE or FALSE depending on below.",
+      "1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.",
+      "2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.",
+      "3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.",
+      "4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive."
+     ]
+    },
+    {
+     "row": 164,
+     "text": "For the first run, Load only Active records from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_SALES_DETAIL where SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE and  SOURCE_SYSTEM_NM='S4 MDG' to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_SALES_DETAIL_ROOT. Set ACTIVE_IND  = 'TRUE'\n\nIn Subsequent runs, check the status of record and set ACTIVE_IND to TRUE or FALSE depending on below.\n1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.\n2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.\n3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.\n4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_SALES_DETAIL_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "For the first run, Load only Active records from IF_MASTER_DATA.ITEM_IF_ANALYSIS.INTELFOUNDRY_ITEM_SALES_DETAIL where SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE and  SOURCE_SYSTEM_NM='S4 MDG' to IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_SALES_DETAIL_ROOT. Set ACTIVE_IND  = 'TRUE' In Subsequent runs, check the status of record and set ACTIVE_IND to TRUE or FALSE depending on below.",
+      "1. Set ACTIVE_IND = TRUE, If SOURCE_DELETE_IND is Blank and DELETE_IND = FALSE, this record is active in both ROO and ROR. In PDH, we should consider this as an active record.",
+      "2. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is Blank and DELETE_IND = TRUE, this active record is physically deleted in ROO (under normal circumstance, it should not happen if the source table has soft-deletion indicator) In PDH, we should consider this as an inactive record.",
+      "3. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = FALSE, this record was soft deleted in the ROO but still considered as a valid record in ROR, in case DSA needs to know a record is now inactivated in ROO. In PDH, we should either ignore this record or mark it as inactive.",
+      "4. Set ACTIVE_IND=FALSE, If SOURCE_DELETE_IND is X and DELETE_IND = TRUE, this record was soft deleted in the ROO, and later it was hard deleted from the source object. In PDH, we should either ignore this record or mark it as inactive."
+     ]
+    },
+    {
+     "row": 290,
+     "text": "1. Bring only the active records to this view.  ACTIVE_IND=TRUE\n2A. Fetch the matching records from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROOT by mapping the ITEM_CLASS_NM with the Column_Value_One_Txt from V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_NM= 'Item', Entity_Nm='Item' and Business_Rule_NM ='ItemClass'.\n2B. Fetch the matching records from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROOT by mapping the MATERIAL_TYPE_CD with the Column_Value_One_Txt from V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_NM= 'Item', Business_Rule_NM ='MaterialType' and 'Entity_Nm ='Item'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "1. Bring only the active records to this view.  ACTIVE_IND=TRUE",
+      "2A. Fetch the matching records from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROOT by mapping the ITEM_CLASS_NM with the Column_Value_One_Txt from V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_NM= 'Item', Entity_Nm='Item' and Business_Rule_NM ='ItemClass'.",
+      "2B. Fetch the matching records from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_ROOT by mapping the MATERIAL_TYPE_CD with the Column_Value_One_Txt from V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where Subject_Area_NM= 'Item', Business_Rule_NM ='MaterialType' and 'Entity_Nm ='Item'."
+     ]
+    },
+    {
+     "row": 301,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 310,
+     "text": "Bring only the active records to this view. i.e., ACTIVE_IND ='TRUE'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_SALES_DETAIL_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Bring only the active records to this view. i.e., ACTIVE_IND ='TRUE'"
+     ]
+    },
+    {
+     "row": 323,
+     "text": "Bring only Revenue/Engg Product if any of the below criteria meets:\n     3A. Map the 'Column_Value_One_Txt' from the Metadata table where Subject_Area_Nm='Item Characteristic', Entity_Nm='Item Characteristic', Business_Rule_Nm='Derived Characteristic' and Column_Value_Four_Txt ='1' with the 'ITEM_CLASS_NM' from PDH_COMMON_XFRM.V_BRD_ITEM_ROOT and bring only the relevant items. Set  OWNER_CD=P;\n\n     3B. Bring revenue and engineering items by mapping the  'Column_Value_One_Txt' from the Metadata table where Subject_Area_Nm='Item Characteristic', Entity_Nm='Item Characteristic', Business_Rule_Nm='Derived Characteristic' and Column_Value_Four_Txt ='2' with the 'CHARACTERISTIC_NM' from PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT and map the 'Column_Value_Three_Txt' with the 'CHARACTERISTIC_VALUE_TXT' in PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT. Based on 'CHARACTERISTIC_VALUE_TXT' =  'Column_Value_Three_Txt'  , value of OWNER_CD = 'Column_Value_Five_Txt'.\n\n     3C. For the F_FINISH items - Map the ITEM_CLASS_NM with 'Column_Value_One_Txt' from the Metadata table where Subject_Area_Nm='Item Characteristic', Entity_Nm='Item Characteristic', Business_Rule_Nm='Derived Characteristic' and Column_Value_Four_Txt ='3' and for those items map the 'Column_Value_Two_Txt' with the 'CHARACTERISTIC_NM' from PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT and map the 'Column_Value_Three_Txt' with the 'CHARACTERISTIC_VALUE_TXT'.\n\n     3D. For the F_FINISH items - Map the ITEM_CLASS_NM with 'Column_Value_One_Txt' from the Metadata table where Subject_Area_Nm='Item Characteristic', Entity_Nm='Item Characteristic', Business_Rule_Nm='Derived Characteristic' and Column_Value_Four_Txt ='4' and for those items map the 'Column_Value_Two_Txt' with the 'CHARACTERISTIC_NM' from PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT and map the 'Column_Value_Three_Txt' with the 'CHARACTERISTIC_VALUE_TXT' and COLUMN_VALUE_FIVE_TXT as OWNER_CD where the Column_Value_Four_Txt ='5'.\n\n     4. For the ITEM_DSC column - Join the ITEM_ID from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT with the ITEM_ID in V_BRD_ITEM_CHARACTERISTIC_ROOT populate the CHARACTERISTIC_VALUE_TXT of the CHARACTERISTIC_NM ='LEGACY_DESCRIPTION' from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT to the ITEM_DSC column in the Stage View else keep it as it is.\n\n     5. We need to derive the dummy item information for our master view from the metadata where SUBJECT_AREA_NM = 'Item', ENTITY_NM = 'Item', and BUSINESS_RULE_NM = 'DummyItem'. We should populate the following fields: COLUMN_VALUE_ONE_TXT as ITEM_ID, COLUMN_VALUE_TWO_TXT as ITEM_CLASS_NM, and COLUMN_VALUE_THREE_TXT as ITEM_DSC and COLUMN_VALUE_EIGHT_TXT as SOURCE_SYSTEM_NM and COLUMN_VALUE_FIVE_TXT as OWNER_CD. \n\n     6. We need to remove the leading zeros from the ITEM_ID. For example, if ITEM_ID = 0000010000007, it should be stored as ITEM_ID = 10000007.This does not apply to the Dummy Item derived in the PDH layer.\n\n     7. Bring the min of MINIMUM_ORDER_QTY from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_SALES_DETAIL_ROOT by joining the data with ITEM_ID.\n     \n     8. We need to derive the ALL_PRODUCTS item information for our master view from the metadata where SUBJECT_AREA_NM = 'Item', ENTITY_NM = 'Item', and BUSINESS_RULE_NM = 'AllProducts'. We should populate the following fields: COLUMN_VALUE_ONE_TXT as ITEM_ID, COLUMN_VALUE_TWO_TXT as ITEM_CLASS_NM, and COLUMN_VALUE_THREE_TXT as ITEM_DSC and COLUMN_VALUE_FIVE_TXT as SOURCE_SYSTEM_NM and COLUMN_VALUE_FOUR_TXT as OWNER_CD.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "Bring only Revenue/Engg Product if any of the below criteria meets:",
+      "3A. Map the 'Column_Value_One_Txt' from the Metadata table where Subject_Area_Nm='Item Characteristic', Entity_Nm='Item Characteristic', Business_Rule_Nm='Derived Characteristic' and Column_Value_Four_Txt ='1' with the 'ITEM_CLASS_NM' from PDH_COMMON_XFRM.V_BRD_ITEM_ROOT and bring only the relevant items. Set  OWNER_CD=P;",
+      "3B. Bring revenue and engineering items by mapping the  'Column_Value_One_Txt' from the Metadata table where Subject_Area_Nm='Item Characteristic', Entity_Nm='Item Characteristic', Business_Rule_Nm='Derived Characteristic' and Column_Value_Four_Txt ='2' with the 'CHARACTERISTIC_NM' from PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT and map the 'Column_Value_Three_Txt' with the 'CHARACTERISTIC_VALUE_TXT' in PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT. Based on 'CHARACTERISTIC_VALUE_TXT' =  'Column_Value_Three_Txt'  , value of OWNER_CD = 'Column_Value_Five_Txt'.",
+      "3C. For the F_FINISH items - Map the ITEM_CLASS_NM with 'Column_Value_One_Txt' from the Metadata table where Subject_Area_Nm='Item Characteristic', Entity_Nm='Item Characteristic', Business_Rule_Nm='Derived Characteristic' and Column_Value_Four_Txt ='3' and for those items map the 'Column_Value_Two_Txt' with the 'CHARACTERISTIC_NM' from PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT and map the 'Column_Value_Three_Txt' with the 'CHARACTERISTIC_VALUE_TXT'.",
+      "3D. For the F_FINISH items - Map the ITEM_CLASS_NM with 'Column_Value_One_Txt' from the Metadata table where Subject_Area_Nm='Item Characteristic', Entity_Nm='Item Characteristic', Business_Rule_Nm='Derived Characteristic' and Column_Value_Four_Txt ='4' and for those items map the 'Column_Value_Two_Txt' with the 'CHARACTERISTIC_NM' from PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT and map the 'Column_Value_Three_Txt' with the 'CHARACTERISTIC_VALUE_TXT' and COLUMN_VALUE_FIVE_TXT as OWNER_CD where the Column_Value_Four_Txt ='5'.",
+      "4. For the ITEM_DSC column - Join the ITEM_ID from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_ROOT with the ITEM_ID in V_BRD_ITEM_CHARACTERISTIC_ROOT populate the CHARACTERISTIC_VALUE_TXT of the CHARACTERISTIC_NM ='LEGACY_DESCRIPTION' from the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_CHARACTERISTIC_ROOT to the ITEM_DSC column in the Stage View else keep it as it is.",
+      "5. We need to derive the dummy item information for our master view from the metadata where SUBJECT_AREA_NM = 'Item', ENTITY_NM = 'Item', and BUSINESS_RULE_NM = 'DummyItem'. We should populate the following fields: COLUMN_VALUE_ONE_TXT as ITEM_ID, COLUMN_VALUE_TWO_TXT as ITEM_CLASS_NM, and COLUMN_VALUE_THREE_TXT as ITEM_DSC and COLUMN_VALUE_EIGHT_TXT as SOURCE_SYSTEM_NM and COLUMN_VALUE_FIVE_TXT as OWNER_CD.",
+      "6. We need to remove the leading zeros from the ITEM_ID. For example, if ITEM_ID = 0000010000007, it should be stored as ITEM_ID = 10000007.This does not apply to the Dummy Item derived in the PDH layer.",
+      "7. Bring the min of MINIMUM_ORDER_QTY from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_ITEM_SALES_DETAIL_ROOT by joining the data with ITEM_ID.",
+      "8. We need to derive the ALL_PRODUCTS item information for our master view from the metadata where SUBJECT_AREA_NM = 'Item', ENTITY_NM = 'Item', and BUSINESS_RULE_NM = 'AllProducts'. We should populate the following fields: COLUMN_VALUE_ONE_TXT as ITEM_ID, COLUMN_VALUE_TWO_TXT as ITEM_CLASS_NM, and COLUMN_VALUE_THREE_TXT as ITEM_DSC and COLUMN_VALUE_FIVE_TXT as SOURCE_SYSTEM_NM and COLUMN_VALUE_FOUR_TXT as OWNER_CD."
+     ]
+    },
+    {
+     "row": 336,
+     "text": "All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 348,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_ITEM_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 360,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT",
+     "target_label": "Common_Analysis View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 372,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 383,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 390,
+     "text": "Join the COMPONENT_ITEM_ID in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT include only the matching items in this view.\n-Join the PARENT_ITEM_ID in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT include only the matching items in this view.\n-Deduplication and get the final list of items.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_ITEM_CORE_PIT",
+     "target_label": "UPI Core PIT",
+     "context": [],
+     "statements": [
+      "Join the COMPONENT_ITEM_ID in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT include only the matching items in this view.",
+      "-Join the PARENT_ITEM_ID in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_UPI_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT include only the matching items in this view.",
+      "-Deduplication and get the final list of items."
+     ]
+    },
+    {
+     "row": 401,
+     "text": "1. Join the PARENT_ITEM_ID in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT include only the matching items in this view.\n- Join the COMPONENT_ITEM_ID in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT include only the matching items in this view.\n- Deduplicate and get the final list of items.\n\n2. We need to derive the dummy item information for our master view from the metadata where SUBJECT_AREA_NM = 'Item', ENTITY_NM = 'Item', and BUSINESS_RULE_NM = 'DummyItem'. We should populate the following fields: COLUMN_VALUE_ONE_TXT as ITEM_ID, COLUMN_VALUE_TWO_TXT as ITEM_CLASS_NM, and COLUMN_VALUE_THREE_TXT as ITEM_DSC and COLUMN_VALUE_EIGHT_TXT as SOURCE_SYSTEM_NM and COLUMN_VALUE_FIVE_TXT as OWNER_CD. \n\n3. We need to derive the ALL_PRODUCTS item information for our master view from the metadata where SUBJECT_AREA_NM = 'Item', ENTITY_NM = 'Item', and BUSINESS_RULE_NM = 'AllProducts'. We should populate the following fields: COLUMN_VALUE_ONE_TXT as ITEM_ID, COLUMN_VALUE_TWO_TXT as ITEM_CLASS_NM, and COLUMN_VALUE_THREE_TXT as ITEM_DSC and COLUMN_VALUE_FIVE_TXT as SOURCE_SYSTEM_NM and COLUMN_VALUE_FOUR_TXT as OWNER_CD.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_CORE_PIT",
+     "target_label": "HYBRID Core PIT",
+     "context": [
+      {
+       "label": "Note",
+       "text": "This view will primarily include items where ITEM_CLASS_NM starts with 'F_PROC_', wherever applicable."
+      }
+     ],
+     "statements": [
+      "1. Join the PARENT_ITEM_ID in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT include only the matching items in this view.",
+      "- Join the COMPONENT_ITEM_ID in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_BILL_OF_MATERIAL_LOCATION_CORE_PIT with the ITEM_ID in the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT include only the matching items in this view.",
+      "- Deduplicate and get the final list of items.",
+      "2. We need to derive the dummy item information for our master view from the metadata where SUBJECT_AREA_NM = 'Item', ENTITY_NM = 'Item', and BUSINESS_RULE_NM = 'DummyItem'. We should populate the following fields: COLUMN_VALUE_ONE_TXT as ITEM_ID, COLUMN_VALUE_TWO_TXT as ITEM_CLASS_NM, and COLUMN_VALUE_THREE_TXT as ITEM_DSC and COLUMN_VALUE_EIGHT_TXT as SOURCE_SYSTEM_NM and COLUMN_VALUE_FIVE_TXT as OWNER_CD.",
+      "3. We need to derive the ALL_PRODUCTS item information for our master view from the metadata where SUBJECT_AREA_NM = 'Item', ENTITY_NM = 'Item', and BUSINESS_RULE_NM = 'AllProducts'. We should populate the following fields: COLUMN_VALUE_ONE_TXT as ITEM_ID, COLUMN_VALUE_TWO_TXT as ITEM_CLASS_NM, and COLUMN_VALUE_THREE_TXT as ITEM_DSC and COLUMN_VALUE_FIVE_TXT as SOURCE_SYSTEM_NM and COLUMN_VALUE_FOUR_TXT as OWNER_CD."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 6,
+     "kind": "header-area requirement",
+     "text": "Should we truncate and load the records? - will follow the existing approach Contains only active records"
+    },
+    {
+     "row": 17,
+     "kind": "header-area requirement",
+     "text": "if more than 5% insert/update/delete records , we need to stop the load."
+    },
+    {
+     "row": 167,
+     "kind": "note",
+     "text": "Note For the time being, let’s keep CHANGE_DTM as one of the primary key columns."
+    },
+    {
+     "row": 189,
+     "kind": "free text",
+     "text": "Check with jyoti if we need to filter MATERIALTYPE"
+    },
+    {
+     "row": 325,
+     "kind": "note",
+     "text": "Note We have to bring the 'BASE_UNIT_OF_MEASURE_CD' and 'OLD_MATERIAL_NBR'. Usecase of OLD_MATERIAL_NBR - For semifinished products, It holds the old Item Id (where material type = 'FERT')  before data conversion.\n\nFor UNBW, it holds the corresponding IF HALB Item Id."
+    },
+    {
+     "row": 414,
+     "kind": "scenario table",
+     "text": "Scenario ITEM_CORE_CURRENT ITEM_CORE_MEMORIES"
+    }
+   ]
+  }
+ }
+}

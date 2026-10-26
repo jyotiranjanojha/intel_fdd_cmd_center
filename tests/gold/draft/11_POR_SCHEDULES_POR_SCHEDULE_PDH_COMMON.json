@@ -1,0 +1,373 @@
+{
+ "file": "11. POR SCHEDULES/POR_SCHEDULE_PDH_COMMON.xlsx",
+ "sheets": [
+  "UPI_MFG_SCH_POR_PV_OPR",
+  "TRANS_SCH_UI_Logic-V2",
+  "UPI_TRANS_SCH_POR_PV_OPR"
+ ],
+ "skipped": [
+  {
+   "sheet": "MFG_DMD_SCH_MASTER_DATA_v1",
+   "why": "hidden"
+  },
+  {
+   "sheet": "MFG_DMD_SCH_UI_DesignFlow_v2",
+   "why": "hidden"
+  },
+  {
+   "sheet": "MFG_DMD_SCH_UI_Logic_v2",
+   "why": "hidden"
+  }
+ ],
+ "by_sheet": {
+  "UPI_MFG_SCH_POR_PV_OPR": {
+   "blocks": [
+    {
+     "row": 76,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_MANUFACTURING_SCHEDULE_POR_PV_OPR_CORE_PIT",
+     "target_label": "Core PIT View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 105,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 117,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_IP_SCHEDULE_CORE_PIT",
+     "target_label": "Source",
+     "context": [
+      {
+       "label": "Note",
+       "text": "LOCATION_ID will be getting is IF plant code level."
+      }
+     ],
+     "missing_name": true,
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 137,
+     "text": "1. Join IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_MANUFACTURING_SCHEDULE_POR_PV_OPR_CORE_PIT with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT to convert PROC items to UPI items. The ITEM_ID will be now UPI item ID.  Make sure IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_BRD_SP_ITEM_MAPPING_CORE_PIT.CO_PRODUCT_IND='Y' filter is applied\n2. To derive the QTY, need to use PARAMETER name from metadata for corresponding item classes mentioned in metadata where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='ScheduleConfig', COLUMN_VALUE_ONE_TXT= 'BOM_IN_OUT_WW' and COLUMN_VALUE_TWO_TXT = ITEM_CLASS_NM, use the COLUMN_VALUE_THREE_TXT as Parameter in below logic to derive QTY\n  a) Join withIF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_MANUFACTURING_BILL_OF_MATERIAL_INPUT_OUTPUT_ITEM_WORKWEEK_TPA_BINSPLIT_CORE_PIT where OUTPUT_ITEM_ID =  ITEM_ID and PARAMETER_NM = Parameter and YEAR_WORK_WEEK_NBR=FISCAL_YEAR_WORK_WEEK_NBR\n  b) PARAMETER_QTY multiply with the corresponding PROC item qty, this will give the UPI item qty.\n  c) Use this QTY for the UPI item in the target table.\n3. For upi ITEM_CLASS F_FINISH and F_STACK_SI-> Lookup IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_IP_SCHEDULE_CORE_PIT based on ITEM_ID and FISCAL_YEAR_WORK_WEEK,  use the PLAN_QTY value for QTY column for the ITEM.\n4. If the OPERATION_NBR value is not available then populate the default value from meta data table where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config' and pass the Column_Value_Twelve_Txt as column value.\n5. Rest all columns will retain the values from PROC.\n6. Rest UPI items will be as it is.\n\nOPEN: In case of  substages, how should we calculate the QTY; Resolved: Jyoti confirmed it will be required by Legacy.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_UPI_MANUFACTURING_SCHEDULE_POR_PV_OPR_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [
+      {
+       "label": "Note",
+       "text": "We shouldn't exlude any records, all UPI records will be retained and PROC records will be converted to UPI"
+      }
+     ],
+     "statements": [
+      "1. Join IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_MANUFACTURING_SCHEDULE_POR_PV_OPR_CORE_PIT with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT to convert PROC items to UPI items. The ITEM_ID will be now UPI item ID.  Make sure IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_BRD_SP_ITEM_MAPPING_CORE_PIT.CO_PRODUCT_IND='Y' filter is applied",
+      "2. To derive the QTY, need to use PARAMETER name from metadata for corresponding item classes mentioned in metadata where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='ScheduleConfig', COLUMN_VALUE_ONE_TXT= 'BOM_IN_OUT_WW' and COLUMN_VALUE_TWO_TXT = ITEM_CLASS_NM, use the COLUMN_VALUE_THREE_TXT as Parameter in below logic to derive QTY",
+      "a) Join withIF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_MANUFACTURING_BILL_OF_MATERIAL_INPUT_OUTPUT_ITEM_WORKWEEK_TPA_BINSPLIT_CORE_PIT where OUTPUT_ITEM_ID =  ITEM_ID and PARAMETER_NM = Parameter and YEAR_WORK_WEEK_NBR=FISCAL_YEAR_WORK_WEEK_NBR",
+      "b) PARAMETER_QTY multiply with the corresponding PROC item qty, this will give the UPI item qty.",
+      "c) Use this QTY for the UPI item in the target table.",
+      "3. For upi ITEM_CLASS F_FINISH and F_STACK_SI-> Lookup IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_IP_SCHEDULE_CORE_PIT based on ITEM_ID and FISCAL_YEAR_WORK_WEEK,  use the PLAN_QTY value for QTY column for the ITEM.",
+      "4. If the OPERATION_NBR value is not available then populate the default value from meta data table where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config' and pass the Column_Value_Twelve_Txt as column value.",
+      "5. Rest all columns will retain the values from PROC.",
+      "6. Rest UPI items will be as it is. OPEN: In case of  substages, how should we calculate the QTY; Resolved: Jyoti confirmed it will be required by Legacy."
+     ]
+    }
+   ],
+   "extras": []
+  },
+  "TRANS_SCH_UI_Logic-V2": {
+   "blocks": [
+    {
+     "row": 73,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_TRANSPORTATION_ROUTE_CORE_PIT",
+     "target_label": "Source Master",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 86,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_CORE_PIT",
+     "target_label": "Source Master",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 149,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE",
+     "target_label": "Horizon_Core",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 168,
+     "text": "1. AFor Data Projection: Fetch only the metadata where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'Schedule_Config', and ColumnValueOnetxt = 'Transportation Schedule'. Pass the 'COLUMN_VALUE_FOURTEEN_TXT' into 'HORIZON_TOKEN_CD' in the view V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the QTY column with the default value as '0' for the corresponding work weeks in the stage view.\n1B. Filter to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_MANUFACTURING_SCHEDULE_MASTERDATA_CORE_PIT. OWNER_CD=  V_CRR_CALENDAR_HORIZON_CORE. COLUMN_VALUE_THIRTEEN_TXT where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'Schedule_Config', and ColumnValueOnetxt  IN ( 'Manufacturing Schedule','Demand Schedule')\n\n2. Split every record with two DEMAND_TYPE , one with 'Customer Order' and Other with 'Forecast'.\n\n3. SCHEDULE_ARRIVAL_DATE should be populated with the CALENDAR_DT from  V_CRR_CALENDAR_HORIZON_CORE  of the corresponding FISCAL_YEAR_WORK_WEEK_NBR\n\n4. Populate the UOM column - Join the ITEM_CLASS_NM in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_TRANSPORTATION_ROUTE_CORE_PIT with the 'COLUMN_VALUE_EIGHT_TXT' in the metadata where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'Schedule_Config', and ColumnValueOnetxt = 'Transportation Schedule' and populate the 'COLUMN_VALUE_SIX_TXT' in the UOM Column.\n\n5. Populate the ITEM_DSC=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_CORE_PIT. ITEM_DSC by joining the above results with V_BRD_HYBRID_ITEM_CORE_PIT.ITEM_ID & ITEM_CLASS_NM\n\n\n6. OWNER_CD=V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THIRTEEN_TXT where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'Schedule_Config', and ColumnValueOnetxt = 'Transportation Schedule' \n\n7. This step is done to not lose the historical values obtained from Flow 2 (UI) and Flow 3 (BY Publishback)\n7A. Populate the QTY from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT by comparing the Key columns. Then, populate the QTY column with the default value as '0' for the corresponding work weeks in the stage view that do not have values. \n7B.For forecast order,  USE 'NA' for SALES_ORDER_ID, SALES_ORDER_LINE_NBR & SCHEDULE_LINE_NBR \n7C. For rest of the columns, populate the default value as NULL.\n\n8. Populate COMMENTS=  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT   where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'TransportationSch_Comments_Config'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE",
+     "target_label": "Stage View",
+     "context": [
+      {
+       "label": "Note",
+       "text": "We are introducing a new column called OWNER_CD. The transformation logic for deriving this column will be implemented by the SA working on the Revenue Engineering/Production CR design changes. For now, we simply need to expose the column from the Stage layer to PIT view."
+      }
+     ],
+     "statements": [
+      "1. AFor Data Projection: Fetch only the metadata where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'Schedule_Config', and ColumnValueOnetxt = 'Transportation Schedule'. Pass the 'COLUMN_VALUE_FOURTEEN_TXT' into 'HORIZON_TOKEN_CD' in the view V_CRR_CALENDAR_HORIZON_CORE to retrieve the corresponding FISCAL_YEAR_WORK_WEEK_NBR based on the source inputs. Then, populate the QTY column with the default value as '0' for the corresponding work weeks in the stage view.",
+      "1B. Filter to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_MANUFACTURING_SCHEDULE_MASTERDATA_CORE_PIT. OWNER_CD=  V_CRR_CALENDAR_HORIZON_CORE. COLUMN_VALUE_THIRTEEN_TXT where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'Schedule_Config', and ColumnValueOnetxt  IN ( 'Manufacturing Schedule','Demand Schedule')",
+      "2. Split every record with two DEMAND_TYPE , one with 'Customer Order' and Other with 'Forecast'.",
+      "3. SCHEDULE_ARRIVAL_DATE should be populated with the CALENDAR_DT from  V_CRR_CALENDAR_HORIZON_CORE  of the corresponding FISCAL_YEAR_WORK_WEEK_NBR",
+      "4. Populate the UOM column - Join the ITEM_CLASS_NM in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_TRANSPORTATION_ROUTE_CORE_PIT with the 'COLUMN_VALUE_EIGHT_TXT' in the metadata where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'Schedule_Config', and ColumnValueOnetxt = 'Transportation Schedule' and populate the 'COLUMN_VALUE_SIX_TXT' in the UOM Column.",
+      "5. Populate the ITEM_DSC=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_CORE_PIT. ITEM_DSC by joining the above results with V_BRD_HYBRID_ITEM_CORE_PIT.ITEM_ID & ITEM_CLASS_NM",
+      "6. OWNER_CD=V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THIRTEEN_TXT where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'Schedule_Config', and ColumnValueOnetxt = 'Transportation Schedule'",
+      "7. This step is done to not lose the historical values obtained from Flow 2 (UI) and Flow 3 (BY Publishback)",
+      "7A. Populate the QTY from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT by comparing the Key columns. Then, populate the QTY column with the default value as '0' for the corresponding work weeks in the stage view that do not have values.",
+      "7B.For forecast order,  USE 'NA' for SALES_ORDER_ID, SALES_ORDER_LINE_NBR & SCHEDULE_LINE_NBR",
+      "7C. For rest of the columns, populate the default value as NULL.",
+      "8. Populate COMMENTS=  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT   where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'TransportationSch_Comments_Config'."
+     ]
+    },
+    {
+     "row": 198,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE_UI",
+     "target_label": "Root UI Stage View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 211,
+     "text": "1. When planners update any data in the UI, validate using only the primary key, and update the corresponding values through custom time travel from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE_UI to the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE  view.\n\n2. For Items that have substages. Identified by Metadata. ITEM_CLASS_NM= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT where SubjectAreaNm = 'Item', EntityNm = 'Item', BusinessRuleNm = 'PV_OPR_Substage' \nEnable Edit to only the max (OPERATION_NBR) at a ITEM_ID,SOURCE,DEST and PV_ROUTE_CD level. \nIf a planner changes a QTY for a FISCAL_YEAR_WORK_WEEK_NBR, calculate the QTY FOR other levels using the formula  {QTY of MAX(OPERATION_NBR}/CUMULATIVE_YIELD *YIELD . Get CUMULATIVE_YIELD ,  YIELD from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "1. When planners update any data in the UI, validate using only the primary key, and update the corresponding values through custom time travel from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE_UI to the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE  view.",
+      "2. For Items that have substages. Identified by Metadata. ITEM_CLASS_NM= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT where SubjectAreaNm = 'Item', EntityNm = 'Item', BusinessRuleNm = 'PV_OPR_Substage' Enable Edit to only the max (OPERATION_NBR) at a ITEM_ID,SOURCE,DEST and PV_ROUTE_CD level. If a planner changes a QTY for a FISCAL_YEAR_WORK_WEEK_NBR, calculate the QTY FOR other levels using the formula  {QTY of MAX(OPERATION_NBR}/CUMULATIVE_YIELD *YIELD . Get CUMULATIVE_YIELD ,  YIELD from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT"
+     ]
+    },
+    {
+     "row": 226,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_INDDMDLINK_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 235,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_RESLOADDETAIL_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 245,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 255,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 264,
+     "text": "We don't have any major transformations.",
+     "target": "PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 273,
+     "text": "We don't have any major transformations.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_TRANSPORTATION_ROUTE_WORKWEEK_PARAMETER_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations."
+     ]
+    },
+    {
+     "row": 287,
+     "text": "1. Get Item Class Name: Join  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_INDDMDLINK_CORE_PIT and IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_CORE_PIT based on SUPPLY_ITEM_ID= ITEM_ID and fetch the ITEM_CLASS_NM\n\n2a) SUBSTAGE_IND: Add a column   SUBSTAGE_INDICATOR =Y if IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_INDDMDLINK_CORE_PIT . ITEM_CLASS_NM  in  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT where  SUBJECT_AREA_NM=' Item' and ENTITY_NM='Item' and BUSINESS_RULE_NM='PV_OPR_Substage' else populate 'N'.\nJoin with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT  based on ITEM_ID and IPV_PLANT_CD=FROM_LOCATION_ID. \ni. Non Substages: Fetch MIN( PV_ROUTE_CD)  at an ITEM_ID and IPV_PLANT_CD  (IFNULL use 'NA'), with  OPERATION_NBR = use distinct IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_TWELVE_TXT from metadata where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config' , COLUMN_VALUE_TWELVE_TXT='Transportation Schedule'\nii. Substages:   PV_ROUTE_CD=4th part of V_DMD_INDDMDLINK_CORE_PIT .SUPPLY_METHOD, OPERATION_NBR  at an ITEM_ID and IPV_PLANT_CD \n Populate the SALES_ORDER_ID, SALES_ORDER_LINE_NBR, and SALES_ORDER_SCHEDULE_LINE_NBR from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_INDDMDLINK_CORE_PIT. ORDER_ID. For Forecast, populate the default value as 'NULL'.\n2b) PV_CROSS_SITE_IND : Join Above results with (   ITEM_ID, IPV_PLANT_CD, PV_ROUTE_CD ,MAX(OPERATION_NBR) as OPERATION_NBR  FROM   PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT) based on ITEM ID and LOCATION_ID=IPV_PLANT_CD,PV_ROUTE_CD=4th part of V_DMD_INDDMDLINK_CORE_PIT .SUPPLY_METHOD when split using the '_' delimiter  . Fetch  for the corresponding OPERATION_NBR, PV_CROSS_SITE_IND\n\n3) Get the FISCAL_YEAR_WORK_WEEK_NBR by joining above results with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR  based on CALENDAR_DT= PARENT_SUPPLY_SCHEDULED_DATE\nSCENARIO 1  [No Substages & Substages with No crosssite]: For V_DMD_INDDMDLINK_CORE_PIT.PARENT_SUPPLY_TYPE='1' and PV_CROSS_SITE_IND='N'\n                                          Source=V_DMD_INDDMDLINK_CORE_PIT.SUPPLY_LOCATION_ID \n                                          DEST=V_DMD_INDDMDLINK_CORE_PIT.PARENT_LOCATION_ID\n                                          QTY= V_DMD_INDDMDLINK_CORE_PIT. SUPPLY_MET_QUANTITY\n                                          SCHEDULE_ARRIVAL_DATE=V_DMD_INDDMDLINK_CORE_PIT.PARENT_SUPPLY_SCHEDULED_DATE\n                                           FISCAL_YEAR_WORK_WEEK_NBR=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.FISCAL_YEAR_WORK_WEEK_NBR for the SCHEDULE_ARRIVAL_DT when joined on  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.CALENDAR_DT\n                                          Populate PV_ROUTE_CD\n\nSCENARIO 2  [ Substages with  Cross Site]: For V_DMD_INDDMDLINK_CORE_PIT.PARENT_SUPPLY_TYPE in ('1','0') and PV_CROSS_SITE_IND='Y'\n           i.  RES: Join such records with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_RESLOADDETAIL_CORE_PIT where RES_LOCATION_ID= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_TWO_TXT where SUBJECT_AREA_NM='Schedule',        ENTITY_NM='PV' and BUSINESS_RULE_NM='Transportation_Schedule' and COLUMN_VALUE_TWO_TXT = 'Midstage_Locator'  based on ITEM_ID and SUPPLY_SEQUENCE_NUMBER. Fetch RES and STEPNUM column \n          ii. CUMMULATIVE YIELD & YIELD: From IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT fetch PARAMETER_NM IN  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT where SUBJECT_AREA_NM='Schedule',        ENTITY_NM='Parameter' and BUSINESS_RULE_NM='Transportation Schedule'  and COLUMN_VALUE_TWO_TXT='ITM_LOC_PV_OPR'. Pivot the Parameter Names of Cummulative Yield AND Yield from Rows to columns. Join with above results  based on ITEM_ID, \tV_BRD_PRODUCTION_VERSION_CORE_PIT.IPV_PLANT_CD=V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT .PLANT_CD\t,\tV_BRD_PRODUCTION_VERSION_CORE_PIT.PV_ROUTE_CD=V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT .PV_ROUTE_CD, OPERATION_NBR= ROUND(RES.STEP_NUM) to the nearest 10s  and FISCAL_YEAR_WORK_WEEK_NBR\n          iii.  Intransit TPT: Join above results with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_TRANSPORTATION_ROUTE_WORKWEEK_PARAMETER_CORE_PIT based on FROM_LOCATION_ID= IPV_PLANT_CD and   TO_LOCATION_ID=Parse the last 4 characters from V_DMD_RESLOADDETAIL_CORE_PIT .RES and FISCAL_YEAR_WORK_WEEK_NBR, where PARAMETER_NM=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT and SUBJECT_AREA_NM='Schedule',        ENTITY_NM='Parameter' and BUSINESS_RULE_NM='Transportation Schedule'  and COLUMN_VALUE_TWO_TXT='INTRP_RT'\n                                   \n                                         Source=V_DMD_INDDMDLINK_CORE_PIT.SUPPLY_LOCATION_ID \n                                          DEST=Parse the last 4 characters fromV_DMD_RESLOADDETAIL_CORE_PIT .RES\n                                          QTY= V_DMD_INDDMDLINK_CORE_PIT. SUPPLY_MET_QUANTITY  /cum yield * yield\n                                         SCHEDULE_ARRIVAL_DATE=DATEADD('DAY', IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_SP_TRANSPORTATION_ROUTE_WORKWEEK_PARAMETER_CORE_PIT.QTY  ,V_DMD_RESLOADDETAIL_CORE_PIT.START_DATE)\n                                        FISCAL_YEAR_WORK_WEEK_NBR=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.FISCAL_YEAR_WORK_WEEK_NBR for the SCHEDULE_ARRIVAL_DT when joined on  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.CALENDAR_DT\n                                         Populate PV_ROUTE_CD, V_DMD_RESLOADDETAIL_CORE_PIT.STEPNUM\n                                         CROSS_SITE_IND='Y'\n                                                                                     UNION\n                                         Source=Parse the last 4 characters fromV_DMD_RESLOADDETAIL_CORE_PIT .RES \n                                          DEST=V_DMD_INDDMDLINK_CORE_PIT.PARENT_LOCATION_ID\n                                          QTY= V_DMD_INDDMDLINK_CORE_PIT. SUPPLY_MET_QUANTITY\n                                         SCHEDULE_ARRIVAL_DATE=V_DMD_INDDMDLINK_CORE_PIT.PARENT_SUPPLY_SCHEDULED_DATE\n                                        FISCAL_YEAR_WORK_WEEK_NBR=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.FISCAL_YEAR_WORK_WEEK_NBR for the SCHEDULE_ARRIVAL_DT when joined on  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.CALENDAR_DT\n                                         Populate PV_ROUTE_CD, V_BRD_PRODUCTION_VERSION_CORE_PIT.OPERATION_NBR,\nFor Forecast Order, concatenate the  V_DMD_INDDMDLINK_CORE_PIT.DEMAND_SEQUENCE_NUMBER+'_'+ V_DMD_INDDMDLINK_CORE_PIT.SUPPLY_SEQUENCE_NUMBER = REFERENCE_ORDER_ID\n4. Join with CURRENT Table: Join the resuts  with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_TRANSPORTATION_SCHEDULE_CORE_CURRENT based on ITEM_ID, SOURCE ,  DEST , SCHEDULE_ARRIVAL_DATE & DEMAND_TYPE. Update the QTY if the  SCHEDULE_ARRIVAL_DATE is outside the date from the frozen period based on the weeks specified in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_NINE_TXT where SUBJECT_AREA_NM='Schedule' and ENTITY_NM='Schedule' and BUSINESS_RULE_NM='Schedule_Config' and COLUMN_VALUE_ONE_TXT='Transportation_Schedule' for the corresponding ITEM_CLASS_NM in COLUMN_VALUE_EIGHT_TXT from the current date.\n\n\n4a.Any values that were non-zero in previous runs must be reset to zero in accordance with the BY publishback.\n\n4b. Even if BY publishes data for item classes falling within the frozen week, updates must not be performed for that timeframe. (The Frozen Week metadata has been updated based on R2 but it is subject to change). Compare the data with the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_CORE_PIT_UI and update the QTY values for the items beyond the frozen time.\n\n4c. Modify COMMENTS = IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT   where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'TransportationSch_Comments_Config'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_POR_TRANSPORTATION_SCHEDULE_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "1. Get Item Class Name: Join  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_INDDMDLINK_CORE_PIT and IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HYBRID_ITEM_CORE_PIT based on SUPPLY_ITEM_ID= ITEM_ID and fetch the ITEM_CLASS_NM",
+      "2a) SUBSTAGE_IND: Add a column   SUBSTAGE_INDICATOR =Y if IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_INDDMDLINK_CORE_PIT . ITEM_CLASS_NM  in  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT where  SUBJECT_AREA_NM=' Item' and ENTITY_NM='Item' and BUSINESS_RULE_NM='PV_OPR_Substage' else populate 'N'. Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT  based on ITEM_ID and IPV_PLANT_CD=FROM_LOCATION_ID.",
+      "i. Non Substages: Fetch MIN( PV_ROUTE_CD)  at an ITEM_ID and IPV_PLANT_CD  (IFNULL use 'NA'), with  OPERATION_NBR = use distinct IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_TWELVE_TXT from metadata where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config' , COLUMN_VALUE_TWELVE_TXT='Transportation Schedule' ii. Substages:   PV_ROUTE_CD=4th part of V_DMD_INDDMDLINK_CORE_PIT .SUPPLY_METHOD, OPERATION_NBR  at an ITEM_ID and IPV_PLANT_CD Populate the SALES_ORDER_ID, SALES_ORDER_LINE_NBR, and SALES_ORDER_SCHEDULE_LINE_NBR from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_INDDMDLINK_CORE_PIT. ORDER_ID. For Forecast, populate the default value as 'NULL'.",
+      "2b) PV_CROSS_SITE_IND : Join Above results with (   ITEM_ID, IPV_PLANT_CD, PV_ROUTE_CD ,MAX(OPERATION_NBR) as OPERATION_NBR  FROM   PDH_COMMON_ANALYSIS.V_BRD_PRODUCTION_VERSION_CORE_PIT) based on ITEM ID and LOCATION_ID=IPV_PLANT_CD,PV_ROUTE_CD=4th part of V_DMD_INDDMDLINK_CORE_PIT .SUPPLY_METHOD when split using the '_' delimiter  . Fetch  for the corresponding OPERATION_NBR, PV_CROSS_SITE_IND",
+      "3) Get the FISCAL_YEAR_WORK_WEEK_NBR by joining above results with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR  based on CALENDAR_DT= PARENT_SUPPLY_SCHEDULED_DATE SCENARIO 1  [No Substages & Substages with No crosssite]: For V_DMD_INDDMDLINK_CORE_PIT.PARENT_SUPPLY_TYPE='1' and PV_CROSS_SITE_IND='N' Source=V_DMD_INDDMDLINK_CORE_PIT.SUPPLY_LOCATION_ID DEST=V_DMD_INDDMDLINK_CORE_PIT.PARENT_LOCATION_ID QTY= V_DMD_INDDMDLINK_CORE_PIT. SUPPLY_MET_QUANTITY SCHEDULE_ARRIVAL_DATE=V_DMD_INDDMDLINK_CORE_PIT.PARENT_SUPPLY_SCHEDULED_DATE FISCAL_YEAR_WORK_WEEK_NBR=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.FISCAL_YEAR_WORK_WEEK_NBR for the SCHEDULE_ARRIVAL_DT when joined on  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.CALENDAR_DT Populate PV_ROUTE_CD SCENARIO 2  [ Substages with  Cross Site]: For V_DMD_INDDMDLINK_CORE_PIT.PARENT_SUPPLY_TYPE in ('1','0') and PV_CROSS_SITE_IND='Y'",
+      "i.  RES: Join such records with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_DMD_RESLOADDETAIL_CORE_PIT where RES_LOCATION_ID= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_TWO_TXT where SUBJECT_AREA_NM='Schedule',        ENTITY_NM='PV' and BUSINESS_RULE_NM='Transportation_Schedule' and COLUMN_VALUE_TWO_TXT = 'Midstage_Locator'  based on ITEM_ID and SUPPLY_SEQUENCE_NUMBER. Fetch RES and STEPNUM column ii. CUMMULATIVE YIELD & YIELD: From IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT fetch PARAMETER_NM IN  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT where SUBJECT_AREA_NM='Schedule',        ENTITY_NM='Parameter' and BUSINESS_RULE_NM='Transportation Schedule'  and COLUMN_VALUE_TWO_TXT='ITM_LOC_PV_OPR'. Pivot the Parameter Names of Cummulative Yield AND Yield from Rows to columns. Join with above results  based on ITEM_ID, \tV_BRD_PRODUCTION_VERSION_CORE_PIT.IPV_PLANT_CD=V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT .PLANT_CD\t,\tV_BRD_PRODUCTION_VERSION_CORE_PIT.PV_ROUTE_CD=V_PRM_ITEM_LOC_PV_OPR_WORKWEEK_CORE_PIT .PV_ROUTE_CD, OPERATION_NBR= ROUND(RES.STEP_NUM) to the nearest 10s  and FISCAL_YEAR_WORK_WEEK_NBR iii.  Intransit TPT: Join above results with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_TRANSPORTATION_ROUTE_WORKWEEK_PARAMETER_CORE_PIT based on FROM_LOCATION_ID= IPV_PLANT_CD and   TO_LOCATION_ID=Parse the last 4 characters from V_DMD_RESLOADDETAIL_CORE_PIT .RES and FISCAL_YEAR_WORK_WEEK_NBR, where PARAMETER_NM=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_ONE_TXT and SUBJECT_AREA_NM='Schedule',        ENTITY_NM='Parameter' and BUSINESS_RULE_NM='Transportation Schedule'  and COLUMN_VALUE_TWO_TXT='INTRP_RT' Source=V_DMD_INDDMDLINK_CORE_PIT.SUPPLY_LOCATION_ID DEST=Parse the last 4 characters fromV_DMD_RESLOADDETAIL_CORE_PIT .RES QTY= V_DMD_INDDMDLINK_CORE_PIT. SUPPLY_MET_QUANTITY  /cum yield * yield SCHEDULE_ARRIVAL_DATE=DATEADD('DAY', IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_SP_TRANSPORTATION_ROUTE_WORKWEEK_PARAMETER_CORE_PIT.QTY  ,V_DMD_RESLOADDETAIL_CORE_PIT.START_DATE) FISCAL_YEAR_WORK_WEEK_NBR=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.FISCAL_YEAR_WORK_WEEK_NBR for the SCHEDULE_ARRIVAL_DT when joined on  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.CALENDAR_DT Populate PV_ROUTE_CD, V_DMD_RESLOADDETAIL_CORE_PIT.STEPNUM CROSS_SITE_IND='Y' UNION Source=Parse the last 4 characters fromV_DMD_RESLOADDETAIL_CORE_PIT .RES DEST=V_DMD_INDDMDLINK_CORE_PIT.PARENT_LOCATION_ID QTY= V_DMD_INDDMDLINK_CORE_PIT. SUPPLY_MET_QUANTITY SCHEDULE_ARRIVAL_DATE=V_DMD_INDDMDLINK_CORE_PIT.PARENT_SUPPLY_SCHEDULED_DATE FISCAL_YEAR_WORK_WEEK_NBR=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.FISCAL_YEAR_WORK_WEEK_NBR for the SCHEDULE_ARRIVAL_DT when joined on  IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.CALENDAR_DT Populate PV_ROUTE_CD, V_BRD_PRODUCTION_VERSION_CORE_PIT.OPERATION_NBR, For Forecast Order, concatenate the  V_DMD_INDDMDLINK_CORE_PIT.DEMAND_SEQUENCE_NUMBER+'_'+ V_DMD_INDDMDLINK_CORE_PIT.SUPPLY_SEQUENCE_NUMBER = REFERENCE_ORDER_ID",
+      "4. Join with CURRENT Table: Join the resuts  with IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_TRANSPORTATION_SCHEDULE_CORE_CURRENT based on ITEM_ID, SOURCE ,  DEST , SCHEDULE_ARRIVAL_DATE & DEMAND_TYPE. Update the QTY if the  SCHEDULE_ARRIVAL_DATE is outside the date from the frozen period based on the weeks specified in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_NINE_TXT where SUBJECT_AREA_NM='Schedule' and ENTITY_NM='Schedule' and BUSINESS_RULE_NM='Schedule_Config' and COLUMN_VALUE_ONE_TXT='Transportation_Schedule' for the corresponding ITEM_CLASS_NM in COLUMN_VALUE_EIGHT_TXT from the current date.",
+      "4a.Any values that were non-zero in previous runs must be reset to zero in accordance with the BY publishback.",
+      "4b. Even if BY publishes data for item classes falling within the frozen week, updates must not be performed for that timeframe. (The Frozen Week metadata has been updated based on R2 but it is subject to change). Compare the data with the IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_CORE_PIT_UI and update the QTY values for the items beyond the frozen time.",
+      "4c. Modify COMMENTS = IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THREE_TXT   where SubjectAreaNm = 'Schedule', EntityNm = 'Schedule', BusinessRuleNm = 'TransportationSch_Comments_Config'."
+     ]
+    },
+    {
+     "row": 300,
+     "text": "1. When planners update any data in the UI, validate using only the primary key, and update the corresponding values through custom time travel from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_CORE_PIT_UI  to the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE view.\nFor DEMAND_TYPE='Forecast' orders, update SALES_ORDER_ID, SALES_ORDER_LINE_NBR, SCHEDULE_LINE_NBR with REFERENCE_ORDER_ID For DEMAND_TYPE='Forecast' orders, update SALES_ORDER_ID, SALES_ORDER_LINE_NBR, SCHEDULE_LINE_NBR with REFERENCE_ORDER_ID",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_TRANSPORTATION_SCHEDULE_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "1. When planners update any data in the UI, validate using only the primary key, and update the corresponding values through custom time travel from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_CORE_PIT_UI  to the IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_SCH_TRANSPORTATION_SCHEDULE_STAGE view. For DEMAND_TYPE='Forecast' orders, update SALES_ORDER_ID, SALES_ORDER_LINE_NBR, SCHEDULE_LINE_NBR with REFERENCE_ORDER_ID For DEMAND_TYPE='Forecast' orders, update SALES_ORDER_ID, SALES_ORDER_LINE_NBR, SCHEDULE_LINE_NBR with REFERENCE_ORDER_ID"
+     ]
+    },
+    {
+     "row": 312,
+     "text": "No transformations are applicable; active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_SCH_TRANSPORTATION_SCHEDULE_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "No transformations are applicable; active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 324,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT",
+     "target_label": "Core PIT View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 340,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_CORE_PIT_UI",
+     "target_label": "UI Core PIT View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 353,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_UI_UPLOAD_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 366,
+     "text": "Union IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_UI_UPLOAD_CORE_PIT to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT\n\nFISCAL_YEAR_WORK_WEEK_NBR= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR. FISCAL_YEAR_WORK_WEEK_NBR when you join CALENDAR_DT with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_UI_UPLOAD_CORE_PIT. ARRIVAL_DATE",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "Union IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_UI_UPLOAD_CORE_PIT to IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT FISCAL_YEAR_WORK_WEEK_NBR= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR. FISCAL_YEAR_WORK_WEEK_NBR when you join CALENDAR_DT with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_UI_UPLOAD_CORE_PIT. ARRIVAL_DATE"
+     ]
+    }
+   ],
+   "extras": []
+  },
+  "UPI_TRANS_SCH_POR_PV_OPR": {
+   "blocks": [
+    {
+     "row": 74,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT",
+     "target_label": "Core PIT View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 102,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 114,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_IP_SCHEDULE_CORE_PIT",
+     "target_label": "Source",
+     "context": [
+      {
+       "label": "Note",
+       "text": "LOCATION_ID will be getting is IF plant code level."
+      }
+     ],
+     "missing_name": true,
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 134,
+     "text": "1. Join IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT ON ITEM_ID=PROC_ITEM_ID to convert PROC items to UPI items. Replace V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT. ITEM_ID with V_BRD_ITEM_MAPPING_CORE_PIT. ITEM_ID if a join is found else retain the ITEM_ID.  Make sure IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_BRD_SP_ITEM_MAPPING_CORE_PIT.CO_PRODUCT_IND='Y' filter is applied\n2. To derive the QTY, need to use PARAMETER name from metadata for corresponding item classes mentioned in metadata where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='ScheduleConfig', COLUMN_VALUE_ONE_TXT= 'BOM_IN_OUT_WW' and COLUMN_VALUE_TWO_TXT = ITEM_CLASS_NM, use the COLUMN_VALUE_THREE_TXT as Parameter in below logic to derive QTY\n  a) Join withIF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_MANUFACTURING_BILL_OF_MATERIAL_INPUT_OUTPUT_ITEM_WORKWEEK_TPA_BINSPLIT_CORE_PIT where OUTPUT_ITEM_ID =  ITEM_ID and PARAMETER_NM = Parameter and YEAR_WORK_WEEK_NBR=FISCAL_YEAR_WORK_WEEK_NBR\n  b) PARAMETER_QTY multiply with the corresponding PROC item qty, this will give the UPI item qty.\n  c) Use this QTY for the UPI item in the target table.\n3. For upi ITEM_CLASS F_FINISH and F_STACK_SI-> Lookup IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_IP_SCHEDULE_CORE_PIT based on ITEM_ID and FISCAL_YEAR_WORK_WEEK,  use the PLAN_QTY value for QTY column for the ITEM.\n4. If the OPERATION_NBR value is not available then populate the default value from meta data table where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config' and pass the Column_Value_Twelve_Txt as column value.\n5. Rest all columns will retain the values from PROC.\n6. Rest UPI items will be as it is.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_UPI_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT",
+     "target_label": "Expected Result",
+     "context": [
+      {
+       "label": "Note",
+       "text": "We shouldn't exlude any records, all UPI records will be retained and PROC records will be converted to UPI"
+      }
+     ],
+     "statements": [
+      "1. Join IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT ON ITEM_ID=PROC_ITEM_ID to convert PROC items to UPI items. Replace V_SCH_TRANSPORTATION_SCHEDULE_POR_PV_OPR_CORE_PIT. ITEM_ID with V_BRD_ITEM_MAPPING_CORE_PIT. ITEM_ID if a join is found else retain the ITEM_ID.  Make sure IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_BRD_SP_ITEM_MAPPING_CORE_PIT.CO_PRODUCT_IND='Y' filter is applied",
+      "2. To derive the QTY, need to use PARAMETER name from metadata for corresponding item classes mentioned in metadata where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='ScheduleConfig', COLUMN_VALUE_ONE_TXT= 'BOM_IN_OUT_WW' and COLUMN_VALUE_TWO_TXT = ITEM_CLASS_NM, use the COLUMN_VALUE_THREE_TXT as Parameter in below logic to derive QTY",
+      "a) Join withIF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_MANUFACTURING_BILL_OF_MATERIAL_INPUT_OUTPUT_ITEM_WORKWEEK_TPA_BINSPLIT_CORE_PIT where OUTPUT_ITEM_ID =  ITEM_ID and PARAMETER_NM = Parameter and YEAR_WORK_WEEK_NBR=FISCAL_YEAR_WORK_WEEK_NBR",
+      "b) PARAMETER_QTY multiply with the corresponding PROC item qty, this will give the UPI item qty.",
+      "c) Use this QTY for the UPI item in the target table.",
+      "3. For upi ITEM_CLASS F_FINISH and F_STACK_SI-> Lookup IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_IP_SCHEDULE_CORE_PIT based on ITEM_ID and FISCAL_YEAR_WORK_WEEK,  use the PLAN_QTY value for QTY column for the ITEM.",
+      "4. If the OPERATION_NBR value is not available then populate the default value from meta data table where Subject_Area_Nm='Schedule', Entity_Nm='Schedule', Business_Rule_Nm='Schedule_Config' and pass the Column_Value_Twelve_Txt as column value.",
+      "5. Rest all columns will retain the values from PROC.",
+      "6. Rest UPI items will be as it is."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

@@ -1,0 +1,287 @@
+{
+ "file": "9. CAPACITY DESIGNS/SUBSTRATE_CAPACITY_PDH_COMMON.xlsx",
+ "sheets": [
+  "Substrate_Core"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "Substrate_Core": {
+   "blocks": [
+    {
+     "row": 47,
+     "text": "1. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.\n2. If the numeric values exceed a length of 10, they should be rounded.\n3. If the planner enters a negative value, a valid error should be displayed in the UI.\n4. Planners should be able to enter a decimal value.\n5. The CAPACITY_GROUP value should not exceed a length of 40.",
+     "target": "UI_CAPACITY_SUBSTRATE",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "1. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.",
+      "2. If the numeric values exceed a length of 10, they should be rounded.",
+      "3. If the planner enters a negative value, a valid error should be displayed in the UI.",
+      "4. Planners should be able to enter a decimal value.",
+      "5. The CAPACITY_GROUP value should not exceed a length of 40."
+     ]
+    },
+    {
+     "row": 79,
+     "text": "1. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.\n2. If the numeric values exceed a length of 10, they should be rounded.\n3. If the planner enters a negative value, a valid error should be displayed in the UI.\n4. Planners should be able to enter a decimal value.\n5. The CAPACITY_GROUP value should not exceed a length of 40.",
+     "target": "UI_ITEM_CAPACITY_MAPPING",
+     "target_label": "Source",
+     "context": [
+      {
+       "label": "DQ",
+       "text": "Validate each ITEM against IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT.Bring only  the matching records. If any unmatched records show a error in UI."
+      }
+     ],
+     "statements": [
+      "1. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.",
+      "2. If the numeric values exceed a length of 10, they should be rounded.",
+      "3. If the planner enters a negative value, a valid error should be displayed in the UI.",
+      "4. Planners should be able to enter a decimal value.",
+      "5. The CAPACITY_GROUP value should not exceed a length of 40."
+     ]
+    },
+    {
+     "row": 91,
+     "text": "1. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.\n2. If the numeric values exceed a length of 10, they should be rounded.\n3. If the planner enters a negative value or zero, a valid error should be displayed in the UI.\n4. Planners should be able to enter a decimal value.\n5. The CAPACITY_GROUP value should not exceed a length of 40.",
+     "target": "UI_CONVERSION_FACTOR",
+     "target_label": "Source",
+     "context": [
+      {
+       "label": "DQ",
+       "text": "Validate each ITEM against IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT.Bring only  the matching records. If any unmatched records show a error in UI."
+      }
+     ],
+     "statements": [
+      "1. Special Character Validation: If the planner includes any special characters in the uploaded file, an error should be displayed in the UI, and the file should not be saved in the backend. This is in accordance with the BY-level restrictions on special characters.",
+      "2. If the numeric values exceed a length of 10, they should be rounded.",
+      "3. If the planner enters a negative value or zero, a valid error should be displayed in the UI.",
+      "4. Planners should be able to enter a decimal value.",
+      "5. The CAPACITY_GROUP value should not exceed a length of 40."
+     ]
+    },
+    {
+     "row": 103,
+     "text": "The data coming from UI will be unpivoted to create  FISCAL_YEAR_QUARTER with the quaters and PARAMETER_QTY with the value.\n\nSince this CAPACITY view contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_CAPACITY_SUBSTRATE_UI",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "The data coming from UI will be unpivoted to create  FISCAL_YEAR_QUARTER with the quaters and PARAMETER_QTY with the value. Since this CAPACITY view contains transactional data, there will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table."
+     ]
+    },
+    {
+     "row": 121,
+     "text": "There will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table.\t\nRenaming the column 'ITEM' as 'ITEM_ID'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_ITEM_CAPACITY_MAPPING_UI",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "There will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table. Renaming the column 'ITEM' as 'ITEM_ID'."
+     ]
+    },
+    {
+     "row": 133,
+     "text": "There will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table.\t\nRenaming the column 'ITEM' as 'ITEM_ID'.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_CONVERSION_FACTOR_UI",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "There will be no ACTIVE_IND used for data filtering. All data will be loaded from the source to the ROOT table by truncating the existing records in the table. Renaming the column 'ITEM' as 'ITEM_ID'."
+     ]
+    },
+    {
+     "row": 145,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CAPACITY_SUBSTRATE_UI",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 162,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 174,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_CAPACITY_MAPPING_UI",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 187,
+     "text": "We don't have any major transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CONVERSION_FACTOR_UI",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We don't have any major transformations"
+     ]
+    },
+    {
+     "row": 212,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR",
+     "target_label": "Horizon_Core",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 232,
+     "text": "1. Join the views IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CAPACITY_SUBSTRATE_UI and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_CAPACITY_MAPPING_UI using the CAPACITY_GROUP column as the join key. Fetch the ITEM_ID from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_CAPACITY_MAPPING_UI and all remaining columns from V_PRM_CAPACITY_SUBSTRATE_UI.\n\n2. The parameter data in the V_PRM_CAPACITY_SUBSTRATE_UI view is stored at the quarter level and needs to be converted to work week (WW) level using IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR.\nFor example: 2025Q1 contains 13 weeks, so the calculation would be 121.9/13 per week. (here 121.9 is the parameter_qty value).\n\n2A. Parse the FISCAL_YEAR_QUARTER column value from V_PRM_CAPACITY_SUBSTRATE_UI (e.g., \"2025Q1\") Extract components as: 2025 + Q + 1. Use the year portion (2025) as FISCAL_YEAR_NBR and use the quarter number (1) as FISCAL_QUARTER_NBR. \nQuery IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR with these parameters to fetch the corresponding FISCAL_YEAR_WORK_WEEK_NBR values. (or) \n2B. If the FISCAL_YEAR_QUARTER column value from V_PRM_CAPACITY_SUBSTRATE_UI (e.g., \"202501\") then pass this value as FISCAL_YEAR_QUARTER_NBR in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR and fetch the corresponding FISCAL_YEAR_WORK_WEEK_NBR values.\n\n3. We have to rename the CAPACITY_GROUP column as 'RESOURCE'.\n\n4. Define the column 'PLANT_CD' and 'RESOURCE_TYPE' in the stage layer and get the default value from metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config_Ext' and pass the ColumnValueSeventxt = 'VF_S' as PLANT_CD value and pass the ColumnValueEighttxt = 'SUB_RESOURCE' as RESOURCE_TYPE value and pass the ColumnValueSixtxt = 'UI' as SOURCE_SYSTEM_NM value.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_SUBSTRATE_ITEM_LOCATION_CAPACITY_WORKWEEK_STAGE",
+     "target_label": "Capacity Stage View",
+     "context": [],
+     "statements": [
+      "1. Join the views IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_CAPACITY_SUBSTRATE_UI and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_CAPACITY_MAPPING_UI using the CAPACITY_GROUP column as the join key. Fetch the ITEM_ID from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_ITEM_CAPACITY_MAPPING_UI and all remaining columns from V_PRM_CAPACITY_SUBSTRATE_UI.",
+      "2. The parameter data in the V_PRM_CAPACITY_SUBSTRATE_UI view is stored at the quarter level and needs to be converted to work week (WW) level using IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR. For example: 2025Q1 contains 13 weeks, so the calculation would be 121.9/13 per week. (here 121.9 is the parameter_qty value).",
+      "2A. Parse the FISCAL_YEAR_QUARTER column value from V_PRM_CAPACITY_SUBSTRATE_UI (e.g., \"2025Q1\") Extract components as: 2025 + Q + 1. Use the year portion (2025) as FISCAL_YEAR_NBR and use the quarter number (1) as FISCAL_QUARTER_NBR. Query IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR with these parameters to fetch the corresponding FISCAL_YEAR_WORK_WEEK_NBR values. (or)",
+      "2B. If the FISCAL_YEAR_QUARTER column value from V_PRM_CAPACITY_SUBSTRATE_UI (e.g., \"202501\") then pass this value as FISCAL_YEAR_QUARTER_NBR in IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_FINANCE_CALENDAR and fetch the corresponding FISCAL_YEAR_WORK_WEEK_NBR values.",
+      "3. We have to rename the CAPACITY_GROUP column as 'RESOURCE'.",
+      "4. Define the column 'PLANT_CD' and 'RESOURCE_TYPE' in the stage layer and get the default value from metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config_Ext' and pass the ColumnValueSeventxt = 'VF_S' as PLANT_CD value and pass the ColumnValueEighttxt = 'SUB_RESOURCE' as RESOURCE_TYPE value and pass the ColumnValueSixtxt = 'UI' as SOURCE_SYSTEM_NM value."
+     ]
+    },
+    {
+     "row": 263,
+     "text": "1. Define the column 'PLANT_CD' in the stage layer and get the default value from metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config_Ext', and use ColumnValueSeventxt = 'VF_S' as the PLANT_CD value and use ColumnValueSixtxt = 'UI' as the SOURCE_SYSTEM_NM value.\n\n2. Define the column 'PARAMETER_QTY' and derive the value from the formula 1/CONVERSION_FACTOR.\n\n3. Define the column 'PARAMETER_NM' in the stage layer and get the default value from metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config_Ext', ColumnValueOnetxt = 'Substrate_Parameter', and use ColumnValueTwotxt = 'CONSUMPTION_RATE' as the PARAMETER_NM value.\n\n4. Data Projection: Project the same values to FISCAL_YEAR_WORK_WEEK_NBR= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.FISCAL_YEAR_WORK_WEEK_NBR where HORIZON_CODE=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_FOURTEEN_TXT  where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config' and COLUMN_VALUE_ONE_TEXT='Substrate_Parameter'.\n\n5. At an ITEM_ID, PLANT_CD identify the last FISCAL_WORK_WEEK_NBR with PARAMETER_QTY and extend it to the rest of the horizon",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_SUBSTRATE_ITEM_LOCATION_CONSUMPTION_RATE_WORKWEEK_STAGE",
+     "target_label": "Trade Ratio Stage View",
+     "context": [],
+     "statements": [
+      "1. Define the column 'PLANT_CD' in the stage layer and get the default value from metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config_Ext', and use ColumnValueSeventxt = 'VF_S' as the PLANT_CD value and use ColumnValueSixtxt = 'UI' as the SOURCE_SYSTEM_NM value.",
+      "2. Define the column 'PARAMETER_QTY' and derive the value from the formula 1/CONVERSION_FACTOR.",
+      "3. Define the column 'PARAMETER_NM' in the stage layer and get the default value from metadata where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config_Ext', ColumnValueOnetxt = 'Substrate_Parameter', and use ColumnValueTwotxt = 'CONSUMPTION_RATE' as the PARAMETER_NM value.",
+      "4. Data Projection: Project the same values to FISCAL_YEAR_WORK_WEEK_NBR= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.FISCAL_YEAR_WORK_WEEK_NBR where HORIZON_CODE=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_FOURTEEN_TXT  where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config' and COLUMN_VALUE_ONE_TEXT='Substrate_Parameter'.",
+      "5. At an ITEM_ID, PLANT_CD identify the last FISCAL_WORK_WEEK_NBR with PARAMETER_QTY and extend it to the rest of the horizon"
+     ]
+    },
+    {
+     "row": 274,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_SUBSTRATE_ITEM_LOCATION_CONSUMPTION_RATE_WORKWEEK_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 286,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_SUBSTRATE_ITEM_LOCATION_CONSUMPTION_RATE_WORKWEEK_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 297,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_SUBSTRATE_ITEM_LOCATION_CONSUMPTION_RATE_WORKWEEK_CORE_PIT",
+     "target_label": "Common Analysis Core PIT",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 308,
+     "text": "Bring only the master data resource columns i.e.,ITEM_ID, RESOURCE, PLANT_CD and RESOURCE_TYPE from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_SUBSTRATE_ITEM_LOCATION_CAPACITY_WORKWEEK_STAGE.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_SUBSTRATE_ITEM_LOCATION_STAGE",
+     "target_label": "Master Data Stage",
+     "context": [],
+     "statements": [
+      "Bring only the master data resource columns i.e.,ITEM_ID, RESOURCE, PLANT_CD and RESOURCE_TYPE from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_SUBSTRATE_ITEM_LOCATION_CAPACITY_WORKWEEK_STAGE."
+     ]
+    },
+    {
+     "row": 339,
+     "text": "1. Bring the parameter related columns from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_SUBSTRATE_ITEM_LOCATION_CAPACITY_WORKWEEK_STAGE.\n 2. Data Projection: Project the same values to FISCAL_YEAR_WORK_WEEK_NBR= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.FISCAL_YEAR_WORK_WEEK_NBR where HORIZON_CODE=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THIRTEEN_TXT  where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config' and COLUMN_VALUE_ONE_TEXT='Substrate_Parameter'.\n3. At an ITEM_ID, PLANT_CD. RESOURCE_TYPE and RESOURCE LEVEL, identify the last FISCAL_WORK_WEEK_NBR, PARAMETER_NM with PARAMETER_QTY and extend it to the rest of the horizon",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_SUBSTRATE_ITEM_LOCATION_WORKWEEK_STAGE",
+     "target_label": "Parameter Data Stage",
+     "context": [],
+     "statements": [
+      "1. Bring the parameter related columns from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_SUBSTRATE_ITEM_LOCATION_CAPACITY_WORKWEEK_STAGE.",
+      "2. Data Projection: Project the same values to FISCAL_YEAR_WORK_WEEK_NBR= IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_CALENDAR_HORIZON_CORE.FISCAL_YEAR_WORK_WEEK_NBR where HORIZON_CODE=IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT.COLUMN_VALUE_THIRTEEN_TXT  where SubjectAreaNm = 'Parameter', EntityNm = 'Parameter', BusinessRuleNm = 'Parameter_Config' and COLUMN_VALUE_ONE_TEXT='Substrate_Parameter'.",
+      "3. At an ITEM_ID, PLANT_CD. RESOURCE_TYPE and RESOURCE LEVEL, identify the last FISCAL_WORK_WEEK_NBR, PARAMETER_NM with PARAMETER_QTY and extend it to the rest of the horizon"
+     ]
+    },
+    {
+     "row": 370,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_SUBSTRATE_ITEM_LOCATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 402,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_SUBSTRATE_ITEM_LOCATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 433,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_SUBSTRATE_ITEM_LOCATION_CORE_PIT",
+     "target_label": "Common Analysis Core PIT",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 464,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_SUBSTRATE_ITEM_LOCATION_WORKWEEK_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 496,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_PRM_SUBSTRATE_ITEM_LOCATION_WORKWEEK_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 527,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_PRM_SUBSTRATE_ITEM_LOCATION_WORKWEEK_CORE_PIT",
+     "target_label": "Common Analysis Core PIT",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

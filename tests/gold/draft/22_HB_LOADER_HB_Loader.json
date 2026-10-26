@@ -1,0 +1,299 @@
+{
+ "file": "22. HB LOADER/HB Loader.xlsx",
+ "sheets": [
+  "MARS_PDH_CELL_SUBCELL",
+  "Expected Results"
+ ],
+ "skipped": [],
+ "by_sheet": {
+  "MARS_PDH_CELL_SUBCELL": {
+   "blocks": [
+    {
+     "row": 421,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_ATD_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 433,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_CD_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 445,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_CR_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 457,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_KM_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 469,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_KM8_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 481,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_PG_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 493,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_VN_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 505,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_ATD_NON_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 517,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_CD_NON_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 529,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_CR_NON_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 541,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_KM_NON_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 553,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_KM8_NON_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 565,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_PG_NON_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 577,
+     "text": "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_VN_NON_PSG",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "Add a column called \"IMPORT_FLAG_IND\". Set the default value to Y"
+     ]
+    },
+    {
+     "row": 589,
+     "text": "After Unioning all the PSG Tables from 7 different Sites",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "After Unioning all the PSG Tables from 7 different Sites"
+     ]
+    },
+    {
+     "row": 602,
+     "text": "After Unioning all the NON_PSG Tables from different Sites",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE",
+     "target_label": "Stage",
+     "context": [],
+     "statements": [
+      "After Unioning all the NON_PSG Tables from different Sites"
+     ]
+    },
+    {
+     "row": 638,
+     "text": "Join SHOP_FLOOR_PRODUCT_ITEM_DSC from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE with SHOP_FLOOR_PRODUCT_NM from IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_BRD_SP_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT to bring out PLANNING_ITEM_ID.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "Join SHOP_FLOOR_PRODUCT_ITEM_DSC from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE with SHOP_FLOOR_PRODUCT_NM from IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_BRD_SP_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT to bring out PLANNING_ITEM_ID."
+     ]
+    },
+    {
+     "row": 652,
+     "text": "Concatenation of columns MFG_PKG_CODE, MFG_DEVICE_NAME, PS_REV, PS_STEP to create a new column \"PACKAGE_DEVICE_REVISION_STEP_TXT\"",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "Concatenation of columns MFG_PKG_CODE, MFG_DEVICE_NAME, PS_REV, PS_STEP to create a new column \"PACKAGE_DEVICE_REVISION_STEP_TXT\""
+     ]
+    },
+    {
+     "row": 665,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    },
+    {
+     "row": 677,
+     "text": "Join with IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_BRD_SP_PLANT_CODE_MAPPING_CORE_PIT on LOCATION_ID = LEGACY_PLANT_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE and bring out the relevant Plant Codes in LOCATION_ID column. Bring out the column DIE_CODE_NAME to the Stage view",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "Join with IF_SUPPLY_CHAIN.PDH_SUPPLY_PLANNING_XFRM.V_BRD_SP_PLANT_CODE_MAPPING_CORE_PIT on LOCATION_ID = LEGACY_PLANT_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE and bring out the relevant Plant Codes in LOCATION_ID column. Bring out the column DIE_CODE_NAME to the Stage view"
+     ]
+    },
+    {
+     "row": 691,
+     "text": "1) Load the data from MARS Oracle data base into IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.MARS_ATD_F_HB_PSG for source type PSG and into IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.MARS_ATD_HB_NON_PSG for source type NON_PSG. Repeat the same process for other sites.\n2) Transform into IF_SUPPLY_CHAIN.PDH_COMMON_SRC.MARS_ATD_F_HB_PSG for PSG and IF_SUPPLY_CHAIN.PDH_COMMON_SRC.MARS_ATD_F_HB_NON_PSG for NON PSG. Repeat the same process for other sites.\n3) Transform it again into XFRM Layer. IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MARS_ATD_F_HB_PSG for PSG and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MARS_ATD_F_HB_NON_PSG for NON PSG. Repeat the same process for other sites.\n4) Union all the XFRM Layer PSG data into the Stage view - IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE and the XFRM Layer Non PSG data into stage view - IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE. \n5) Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE with  PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where SUBJECT_AREA_NM= 'InboundMARS' and ENTITY_NM= 'HBLoader' AND BUSINESS_RULE_NM= 'HBLoaderSchema' AND ColumnLabelOneTxt = 'SourceType' AND ColumnLabelFourxt = 'LocationId'  AND ColumnLabelFourxt = 'ViewForSource' to create a column 'SOURCE_SYSTEM_NM' for PSG. Add a column \"MAIN_CELL_DESC\" and keep it as blank.\n6) Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE with  PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where SUBJECT_AREA_NM= 'InboundMARS' and ENTITY_NM= 'HBLoader' AND BUSINESS_RULE_NM= 'HBLoaderSchema' AND ColumnLabelOneTxt = 'SourceType' AND ColumnLabelFourxt = 'ViewForSource' to create a column 'SOURCE_SYSTEM_NM' for PSG.  Add a column \"MAIN_CELL_DESC\" and keep it as blank.\n7) For Import Flag, Join IMPORT_FLAG_IND from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE and IMPORT_FLAG_IND from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE with  PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where  ColumnLabelThreeTxt = 'ImportFlag' to toggle whether to import that site's data into the Stage view. If \"Y\" then bring the site's data in the stage view. If \"N\" then don't\n8) Join SHOP_FLOOR_PRODUCT_ITEM_DSC from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE with SHOP_FLOOR_PRODUCT_NM from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT to bring out PLANNING_ITEM_ID.\n9) Join PACKAGE_DEVICE_REVISION_STEP_TEXT from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE on concatenated PACKAGE_DEVICE_REVISION_STEP_TEXT (Concatenate columns MFG_PKG_CODE, MANUFACTURING_DEVICE_NAME,INTERNAL_REVISION, INTERNAL_STEPPING)  from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT to bring out ITEM_ID.\n10) Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT on ITEM_ID = PROC_ITEM_ID from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT to bring out UPI Items\n11) Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT on LOCATION_ID = MANUFACTURING_LOCATION_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE and bring out the relevant Manufacturing Codes in LOCATION_ID column\n12) Union IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE to have Stage view - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HB_LOADER_SUBCELL_CORE_STAGE\n13) Time Travel the Stage view to CORE_CURRENT and CORE_MEMORIES to form the CORE_PIT view - IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_SUBCELL_CORE_PIT\n14) For the Active_Ind column, by default the value is set to \"Y\". To identify inactive records, compare data between IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HB_LOADER_SUBCELL_CORE_CURRENT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_SUBCELL_CORE_STAGE. If a record is not found in the Current table, mark it as ‘N’ in the PIT view.",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "1) Load the data from MARS Oracle data base into IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.MARS_ATD_F_HB_PSG for source type PSG and into IF_SUPPLY_CHAIN.PDH_COMMON_SRC_BASE.MARS_ATD_HB_NON_PSG for source type NON_PSG. Repeat the same process for other sites.",
+      "2) Transform into IF_SUPPLY_CHAIN.PDH_COMMON_SRC.MARS_ATD_F_HB_PSG for PSG and IF_SUPPLY_CHAIN.PDH_COMMON_SRC.MARS_ATD_F_HB_NON_PSG for NON PSG. Repeat the same process for other sites.",
+      "3) Transform it again into XFRM Layer. IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MARS_ATD_F_HB_PSG for PSG and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_MARS_ATD_F_HB_NON_PSG for NON PSG. Repeat the same process for other sites.",
+      "4) Union all the XFRM Layer PSG data into the Stage view - IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE and the XFRM Layer Non PSG data into stage view - IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE.",
+      "5) Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE with  PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where SUBJECT_AREA_NM= 'InboundMARS' and ENTITY_NM= 'HBLoader' AND BUSINESS_RULE_NM= 'HBLoaderSchema' AND ColumnLabelOneTxt = 'SourceType' AND ColumnLabelFourxt = 'LocationId'  AND ColumnLabelFourxt = 'ViewForSource' to create a column 'SOURCE_SYSTEM_NM' for PSG. Add a column \"MAIN_CELL_DESC\" and keep it as blank.",
+      "6) Join IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE with  PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where SUBJECT_AREA_NM= 'InboundMARS' and ENTITY_NM= 'HBLoader' AND BUSINESS_RULE_NM= 'HBLoaderSchema' AND ColumnLabelOneTxt = 'SourceType' AND ColumnLabelFourxt = 'ViewForSource' to create a column 'SOURCE_SYSTEM_NM' for PSG.  Add a column \"MAIN_CELL_DESC\" and keep it as blank.",
+      "7) For Import Flag, Join IMPORT_FLAG_IND from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE and IMPORT_FLAG_IND from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE with  PDH_COMMON_ANALYSIS.V_CRR_BUSINESS_RULE_METADATA_DETAIL_CORE_PIT where  ColumnLabelThreeTxt = 'ImportFlag' to toggle whether to import that site's data into the Stage view. If \"Y\" then bring the site's data in the stage view. If \"N\" then don't",
+      "8) Join SHOP_FLOOR_PRODUCT_ITEM_DSC from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE with SHOP_FLOOR_PRODUCT_NM from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT to bring out PLANNING_ITEM_ID.",
+      "9) Join PACKAGE_DEVICE_REVISION_STEP_TEXT from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE on concatenated PACKAGE_DEVICE_REVISION_STEP_TEXT (Concatenate columns MFG_PKG_CODE, MANUFACTURING_DEVICE_NAME,INTERNAL_REVISION, INTERNAL_STEPPING)  from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT to bring out ITEM_ID.",
+      "10) Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT on ITEM_ID = PROC_ITEM_ID from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CHARACTERISTIC_DENORMALIZED_CORE_PIT to bring out UPI Items",
+      "11) Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANT_CODE_MAPPING_CORE_PIT on LOCATION_ID = MANUFACTURING_LOCATION_CD from IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE and bring out the relevant Manufacturing Codes in LOCATION_ID column",
+      "12) Union IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PSG_STAGE and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_NON_PSG_STAGE to have Stage view - IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HB_LOADER_SUBCELL_CORE_STAGE",
+      "13) Time Travel the Stage view to CORE_CURRENT and CORE_MEMORIES to form the CORE_PIT view - IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_SUBCELL_CORE_PIT",
+      "14) For the Active_Ind column, by default the value is set to \"Y\". To identify inactive records, compare data between IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HB_LOADER_SUBCELL_CORE_CURRENT and IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_SUBCELL_CORE_STAGE. If a record is not found in the Current table, mark it as ‘N’ in the PIT view."
+     ]
+    },
+    {
+     "row": 693,
+     "text": "Adding Active Indicator Column.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_HB_LOADER_SUBCELL_CORE_STAGE",
+     "target_label": "Stage View",
+     "context": [],
+     "statements": [
+      "Adding Active Indicator Column."
+     ]
+    },
+    {
+     "row": 707,
+     "text": "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_HB_LOADER_SUBCELL_CORE_CURRENT",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled, leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 721,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_HB_LOADER_SUBCELL_CORE_MEMORIES",
+     "target_label": "TimeTravel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load, current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 734,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_HB_LOADER_SUBCELL_CORE_PIT",
+     "target_label": "Core Pit",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": [
+    {
+     "row": 679,
+     "kind": "note",
+     "text": "Note Conversion will be MANUFACTURING_LOCATION_CD to  PLANT_CD"
+    }
+   ]
+  },
+  "Expected Results": {
+   "blocks": [
+    {
+     "row": 43,
+     "text": "2. We look at the view name, for example for IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_MARS_ATD_RETURN_TO_DIE_PRIORITY_PARAMETER_ROOT, we refer to what PLANT_CD ATD maps to, which is 1004.\n              ATD gives PLANT_CD = '1004'\n              CD gives PLANT_CD = '1008'\n              CR gives PLANT_CD = '1007'\n              KM gives PLANT_CD = '1015'\n              KM8 gives PLANT_CD = '1021'\n              PG gives PLANT_CD = '\n              VN gives PLANT_CD = '1011'",
+     "target": null,
+     "target_label": null,
+     "context": [],
+     "statements": [
+      "2. We look at the view name, for example for IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_PRM_MARS_ATD_RETURN_TO_DIE_PRIORITY_PARAMETER_ROOT, we refer to what PLANT_CD ATD maps to, which is 1004. ATD gives PLANT_CD = '1004' CD gives PLANT_CD = '1008' CR gives PLANT_CD = '1007' KM gives PLANT_CD = '1015' KM8 gives PLANT_CD = '1021' PG gives PLANT_CD = ' VN gives PLANT_CD = '1011'"
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}

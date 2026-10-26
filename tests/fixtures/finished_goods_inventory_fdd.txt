@@ -1,0 +1,15 @@
+Initial Load	In the SUPPLY ANALYSIS Master data, we don't have a ACTIVE_IND to filter the records so all data will be loaded from the source to the ROOT table by truncating the existing records in the table.
+Source	IF_SUPPLY_CHAIN.ENHANCED_INVENTORY_ANALYSIS.FINISHED_GOODS_INVENTORY
+Transformation	We don't have any major transformation now.
+Root Table	PDH_COMMON_XFRM_BASE.T_INV_FINISHED_GOODS_INVENTORY_ROOT
+Transformation	We don't have any major transformation now.
+Root View	PDH_COMMON_XFRM.V_INV_FINISHED_GOODS_INVENTORY_ROOT
+Transformation	Active records will be time-traveled. On each master load, current table data moves to memories table.
+Time Travel	PDH_COMMON_XFRM_BASE.T_INV_FINISHED_GOODS_INVENTORY_CORE_CURRENT
+Transformation	Active records will be time-traveled. On each master load, current table data moves to memories table.
+	PDH_COMMON_XFRM_BASE.T_INV_FINISHED_GOODS_INVENTORY_CORE_MEMORIES
+Transformation	We don't have any major transformation now.
+Common_Analysis View	PDH_COMMON_ANALYSIS.V_INV_FINISHED_GOODS_INVENTORY_CORE_PIT
+Transformation	"
+1.) Proc Item identification for ITEM_ID: Join PDH_COMMON_ANALYSIS.V_INV_FINISHED_GOODS_INVENTORY_CORE_PIT with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT on ITEM_ID If Join is found and PROC_ITEM_ID = NULL Then retain the ITEM_ID from source (PDH_COMMON_ANALYSIS.V_INV_FINISHED_GOODS_INVENTORY_CORE_PIT) If Join is found and PROC_ITEM_ID != NULL Then use PROC_ITEM_ID (from IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_MAPPING_CORE_PIT) 2.) Aggregating Quantity at PROC level: UNRESTRICTED_STOCK_QTY = Aggregate UNRESTRICTED_STOCK_QTY on PROC_ITEM_ID level, INTRANSIT_STOCK_QTY = Aggregate INTRANSIT_STOCK_QTY on PROC_ITEM_ID level, UNAVAILABLE_STOCK_QTY = Aggregate UNAVAILABLE_STOCK_QTY on PROC_ITEM_ID level GROUP BY ITEM_ID, PLANT_CD for above aggregation of quantities Note: We re-aggregate and update the above quantities at a PROC_ITEM_ID level as they were previously aggregated at UPI_ITEM_ID level"
+Hybrid View	PDH_COMMON_ANALYSIS.V_INV_HYBRID_FINISHED_GOODS_INVENTORY_CORE_PIT

@@ -1,0 +1,89 @@
+{
+ "file": "17. SHOP_FLOOR TO UPI ITEM MAPPING/ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_PDH_COMMON.xlsx",
+ "sheets": [
+  "SHP_FLR_UPI_ITEM_MAPPING_v2"
+ ],
+ "skipped": [
+  {
+   "sheet": "SHP_FLR_UPI_ITEM_MAPPING_v1",
+   "why": "older version of SHP_FLR_UPI_ITEM_MAPPING_v2"
+  }
+ ],
+ "by_sheet": {
+  "SHP_FLR_UPI_ITEM_MAPPING_v2": {
+   "blocks": [
+    {
+     "row": 66,
+     "text": "No Transformations",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT",
+     "target_label": "Source",
+     "context": [],
+     "statements": [
+      "No Transformations"
+     ]
+    },
+    {
+     "row": 78,
+     "text": "Only bring only active records i.e. DELETE_IND ='FALSE'",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_ROOT",
+     "target_label": "Root Table",
+     "context": [],
+     "statements": [
+      "Only bring only active records i.e. DELETE_IND ='FALSE'"
+     ]
+    },
+    {
+     "row": 91,
+     "text": "We will have only active records in this view",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM.V_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_ROOT",
+     "target_label": "Root View",
+     "context": [],
+     "statements": [
+      "We will have only active records in this view"
+     ]
+    },
+    {
+     "row": 103,
+     "text": "Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT based on ITEM_ID from source and PLANNING_ITEM_ID from root table to get OWNER_CD column.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_STAGE",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "Join with IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_ITEM_CORE_PIT based on ITEM_ID from source and PLANNING_ITEM_ID from root table to get OWNER_CD column."
+     ]
+    },
+    {
+     "row": 115,
+     "text": "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_CURRENT",
+     "target_label": "Time Travel",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. All active records will be time-traveled leaving only current date records in the below table."
+     ]
+    },
+    {
+     "row": 127,
+     "text": "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_XFRM_BASE.T_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_MEMORIES",
+     "target_label": "",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now. Active records will be time-traveled. On each master load current table data moves to memories table."
+     ]
+    },
+    {
+     "row": 139,
+     "text": "We don't have any major transformation now.",
+     "target": "IF_SUPPLY_CHAIN.PDH_COMMON_ANALYSIS.V_BRD_PLANNING_ITEM_SHOP_FLOOR_PRODUCT_ASSOCIATION_CORE_PIT",
+     "target_label": "Common_Analysis Core",
+     "context": [],
+     "statements": [
+      "We don't have any major transformation now."
+     ]
+    }
+   ],
+   "extras": []
+  }
+ }
+}
